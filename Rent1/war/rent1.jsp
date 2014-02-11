@@ -1,3 +1,11 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.google.appengine.api.users.User"%>
+<%@ page import="com.google.appengine.api.users.UserService"%>
+<%@ page import="com.google.appengine.api.users.UserServiceFactory"%>
+
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <head>
 <meta charset="utf-8">
 <title>RENT1</title>
@@ -96,7 +104,7 @@
 	top: 17px;
 	width: 15px;
 	top: 8px\9;
-	right: 7px\9
+	right: 7px\9
 }
 
 .fb_dialog_mobile .fb_dialog_close_icon {
@@ -475,8 +483,8 @@ body.fb_hidden {
 
 .fb_connect_bar_container_ie6 {
 	position: absolute;
-	top: expression(document.compatMode == "CSS1Compat" ? 
-		document.documentElement.scrollTop + "px" : body.scrollTop + "px")
+	top: expression(document.compatMode == "CSS1Compat" ?  
+		 document.documentElement.scrollTop + "px" : body.scrollTop + "px")
 }
 
 .fb_connect_bar {
@@ -595,12 +603,20 @@ body.fb_hidden {
 
 	<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
-
+			<%
+				UserService userService = UserServiceFactory.getUserService();
+				User user = userService.getCurrentUser();
+				if (user != null) {
+					pageContext.setAttribute("user", user);
+			%>
 			<ul class="nav pull-right logout">
-				<li><a href="http://logout@rent1demo.lexcorp.ca"><i
+				<li><a
+					href="<%=userService.createLogoutURL(request.getRequestURI())%>"><i
 						class="icon icon-signout"></i> Log Out</a></li>
 			</ul>
-
+			<%
+				}
+			%>
 			<div class="container">
 				<a href="/" class="logo"><img src="img/logo.png"></a>
 				<div class="nav-collapse collapse">
@@ -622,8 +638,20 @@ body.fb_hidden {
 
 				<div class="nav-collapse collapse pull-right">
 					<ul class="nav">
-						<li><a href="#">SIGN UP</a></li>
-						<li><a href="#">LOG IN</a></li>
+						<%
+							if (user != null) {
+						%>
+						<li><a href="#">WELCOME ${fn:escapeXml(user.nickname)}! ,</a></li>
+						<%
+							} else {
+						%>
+						<li><a
+							href="<%=userService.createLoginURL(request.getRequestURI())%>">SIGN
+								IN</a></li>
+						<%
+							}
+						%>
+						<!--li><a href="#">LOG IN</a></li-->
 						<li class="dropdown"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#">HELP <b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -664,7 +692,7 @@ body.fb_hidden {
 					<!-- <button id="submit" class="btn btn-primary" type="submit" href="/search.html">
                 <i class="icon icon-search"></i> Search
             </button> -->
-					<a class="btn btn-primary" href="/search.html"><i
+					<a class="btn btn-primary" href="/search.jsp"><i
 						class="icon icon-search"></i> Search</a>
 				</fieldset>
 			</form>
@@ -674,8 +702,9 @@ body.fb_hidden {
 		<div class="row cta">
 			<div class="container">
 				<h1>The best selection, the best prices, anywhere.</h1>
-				<p>Rent1 is an online marketplace for heavy equipment and construction tool rentals 
-				that showcases available offerings by rental companies in various geographic areas.</p>
+				<p>Rent1 is an online marketplace for heavy equipment and
+					construction tool rentals that showcases available offerings by
+					rental companies in various geographic areas.</p>
 			</div>
 		</div>
 
@@ -798,7 +827,7 @@ body.fb_hidden {
 			<div class="span3">
 				<img src="img/rent1-logo-gray.png" class="logo">
 				<p>
-					Copyright © 2013 RENT1.<br> All rights reserved.
+					Copyright Â© 2013 RENT1.<br> All rights reserved.
 				</p>
 				<div
 					fb-iframe-plugin-query="app_id=272672346204724&amp;href=http%3A%2F%2Fwww.test.com%2F&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=50"
