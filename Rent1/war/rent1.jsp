@@ -703,7 +703,7 @@ body.fb_hidden {
 						<span class="icon-map-marker"></span>
 					</div>
 					<div class="rentstart wrap span2">
-						<input id="datepicker" name="rentstart" placeholder="Start Date"
+						<input id="rentstart" name="rentstart" placeholder="Start Date"
 							type="text"> <span class="icon-calendar"></span>
 					</div>
 					<div class="rentend wrap span2">
