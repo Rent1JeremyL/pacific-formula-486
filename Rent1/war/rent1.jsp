@@ -17,6 +17,12 @@
 <!-- <link rel="stylesheet" href="css/bootstrap-responsive.css"> -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
+<link type="text/css" rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+
+<script
+	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+<script src="js/search_bar.js"></script>
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -548,7 +554,7 @@ body.fb_hidden {
 }
 </style>
 </head>
-<body>
+<body onload="initialize_locate()">
 
 	<div class=" fb_reset" id="fb-root">
 		<div
@@ -671,22 +677,37 @@ body.fb_hidden {
 			<h3>Rent from over 1,421 cities across North America.</h3>
 			<form class="form-horizontal find-equipment well">
 				<fieldset>
-					<div class="rental-wrap wrap span3">
+					<!--div class="rental-wrap wrap span3">
 						<input id="rental" name="rental"
 							placeholder="What are you renting?" type="text"> <span
 							class="icon-wrench"></span>
+					</div-->
+					<div class="rental-wrap wrap span3">
+						<div class="custom-select-container">
+							<select id="rental" name="rental" class="search-option small">
+								<option value="1">Backhoes</option>
+								<option value="2">Bulldosers</option>
+								<option value="3">Excavators</option>
+								<option value="4">Forklifts</option>
+								<option value="5">Pressure Washers</option>
+								<option value="6">Pumps</option>
+							</select>
+						</div>
 					</div>
 					<div class="location-wrap wrap span3">
 						<input id="location" name="location"
-							placeholder="Where do you need it?" type="text"> <span
-							class="icon-map-marker"></span>
+							placeholder="Where do you need it?" onFocus="geolocate()"
+							type="text">
+						<p id="enter_location_error_message" class="bad"
+							style="display: none;">Please set location</p>
+						<span class="icon-map-marker"></span>
 					</div>
 					<div class="rentstart wrap span2">
-						<input id="rentstart" name="rentstart" placeholder="29-06-2013"
+						<input id="datepicker" name="rentstart" placeholder="Start Date"
 							type="text"> <span class="icon-calendar"></span>
 					</div>
 					<div class="rentend wrap span2">
-						<input id="rentend" name="rentend" placeholder="29-06-2013"
+						<input id="rentend" name="rentend" placeholder="End Date"
 							type="text"> <span class="icon-calendar"></span>
 					</div>
 					<!-- <button id="submit" class="btn btn-primary" type="submit" href="/search.html">
