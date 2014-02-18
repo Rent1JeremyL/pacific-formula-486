@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	
+	<bean id="dbconRent1_dev" class="com.rent1.utils.SimpleDataSource" >
+		<property name="driverClass" value="com.mysql.jdbc.Driver" ></property>
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/rent1" ></property>
+		<property name="username" value="APP_WEB_RENT1" ></property>
+		<property name="password" value="APP_WEB_RENT1" ></property>
+	</bean>
+
+	<bean id="dbconRent1_prod" class="com.rent1.utils.SimpleDataSource" >
+		<property name="DriverClass" value="com.mysql.jdbc.GoogleDriver" ></property>
+		<property name="Url" value="jdbc:google:mysql://your-project-id:your-instance-name/rent1" ></property>
+		<property name="Username" value="APP_WEB_RENT1" ></property>
+		<property name="Password" value="APP_WEB_RENT1" ></property>
+	</bean>
+	
+</beans>

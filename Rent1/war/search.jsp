@@ -1,8 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="java.util.List"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page import="com.google.appengine.api.users.User"%>
 <%@ page import="com.google.appengine.api.users.UserService"%>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory"%>
+<%@ page import="com.rent1.dao.ProductDao"%>
+<%@ page import="com.rent1.entity.Product"%>
 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
@@ -16,9 +19,11 @@
 <meta content="" name="author">
 
 <link rel="stylesheet" href="css/bootstrap.css">
-<!-- <link rel="stylesheet" href="css/bootstrap-responsive.css"> -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/rent1.css">
+
+<script src="js/search_bar.js"></script>
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -28,8 +33,13 @@
 <link rel="icon" type="image/png" href="favicon.ico">
 
 </head>
-<body>
+<body onload="initialize_sbar()">
+	<%
+		ProductDao dao = ProductDao.INSTANCE;
 
+			List<Product> prods = new ArrayList<Product>();
+			prods = dao.listProducts();
+	%>
 	<div id="fb-root"></div>
 	<script>
 		(function(d, s, id) {
@@ -47,9 +57,9 @@
 		<div class="navbar-inner">
 			<%
 				UserService userService = UserServiceFactory.getUserService();
-				User user = userService.getCurrentUser();
-				if (user != null) {
-					pageContext.setAttribute("user", user);
+									User user = userService.getCurrentUser();
+									if (user != null) {
+										pageContext.setAttribute("user", user);
 			%>
 			<ul class="nav pull-right logout">
 				<li><a
@@ -112,18 +122,29 @@
 		<div class="container">
 			<div class="row search-horizontal">
 				<div class="span12">
-					<form class="form-horizontal find-equipment gray-box">
+					<form class="form-horizontal find-equipment gray-box" method='POST'
+						action='/search'>
 						<fieldset>
 							<div class="rental-wrap wrap span3">
-								<input id="rental" name="rental"
-									placeholder="What are you renting?"
-									value="Earthmoving Equipment" type="text"> <span
-									class="icon-wrench"></span>
+								<div class="custom-select-container">
+									<select id="rental" name="rental" class="search-option small">
+										<option value="1">Backhoes</option>
+										<option value="2">Bulldosers</option>
+										<option value="3">Excavators</option>
+										<option value="4">Forklifts</option>
+										<option value="5">Pressure Washers</option>
+										<option value="6">Pumps</option>
+										<option value="7">Skid Steer</option>
+									</select>
+								</div>
 							</div>
 							<div class="location-wrap wrap span3">
 								<input id="location" name="location"
-									placeholder="Where do you need it?" value="Vancouver, BC"
-									type="text"> <span class="icon-map-marker"></span>
+									placeholder="Where do you need it?" onFocus="geolocate()"
+									type="text">
+								<p id="enter_location_error_message" class="bad"
+									style="display: none;">Please set location</p>
+								<span class="icon-map-marker"></span>
 							</div>
 							<div class="rentstart wrap span2">
 								<input id="rentstart" name="rentstart" placeholder="Start Date"
@@ -133,8 +154,9 @@
 								<input id="rentend" name="rentend" placeholder="End Date"
 									type="text"> <span class="icon-calendar"></span>
 							</div>
-							<a class="btn btn-primary" href="/search.jsp"><i
-								class="icon icon-search"></i> Search</a>
+							<button id="submit" class="btn btn-primary" type="submit">
+								<i class="icon icon-search"></i> Search
+							</button>
 						</fieldset>
 					</form>
 				</div>
@@ -196,24 +218,29 @@
 
 				<div class="span9">
 					<div class="pad10 gray-box">
-						834 results with <a href="#">100 popular sellers</a>
+						<%=prods.size() %> results  <!-- with <a href="#">100 popular sellers</a>
 						<button class="btn pull-right pull-up-5">
 							<i class="icon icon-share"></i> SHARE
-						</button>
+						</button-->
 					</div>
 
 					<ul class="search-view">
+						<%
+							for (Product prd : prods) {
+						%>
 						<li class="product"><a href="#" class="thumb pull-left"><img
-								src="img/product-thumb.jpg" /></a>
+								src="<%=prd.getThumbImg()%>" /></a>
 
 							<div class="pull-left summary">
 								<div class="title">
-									<a href="product.html"><h4>John Deere 320D Skid Steer</h4></a>
+									<a href="<%=prd.getCompanyPage()%>" target="_blank">
+										<h4><%=prd.getBrand()+" "+prd.getProductName()%></h4>
+									</a>
 								</div>
 								<div class="location">Vancouver, BC</div>
 								<div class="brand">
 									<a class="brand-thumb pull-left" href="#"><img
-										src="img/brand/john-deere.jpg" /></a>
+										src="<%=prd.getBrandImg()%>" /></a>
 									<div class="spec">
 										<strong>Size:</strong> 126" x 70" x 115"<br /> <strong>Weight:</strong>
 										6,435 lb (2,919 kg)
@@ -250,335 +277,9 @@
 									</tr>
 								</table>
 							</div></li>
-						<li class="product"><a href="#" class="thumb pull-left"><img
-								src="img/bobcat-thumb.jpg" /></a>
-
-							<div class="pull-left summary">
-								<div class="title">
-									<a href="product.html"><h4>Bobcat S205</h4></a>
-								</div>
-								<div class="location">Vancouver, BC</div>
-								<div class="brand">
-									<a class="brand-thumb pull-left" href="#"><img
-										src="img/brand/bobcat.jpg" /></a>
-									<div class="spec">
-										<strong>Size:</strong> 126" x 70" x 115"<br /> <strong>Weight:</strong>
-										6,435 lb (2,919 kg)
-									</div>
-								</div>
-							</div>
-
-							<div class="pull-right info">
-								<div class="price">
-									<sup class="symbol">$</sup> <span class="amount">240</span> <sup
-										class="currency">CAD</sup>
-								</div>
-								<span class="rate">Per Day</span> <a href="#" class="more"
-									data-toggle="collapse" data-target="#more-pricing-2">More
-									Pricing <i class="icon icon-double-angle-right"></i>
-								</a>
-							</div>
-
-							<div id="more-pricing-2" class="collapse">
-								<table class="table table-bordered">
-									<tr>
-										<th>Daily</th>
-										<th>Weekly</th>
-										<th>Monthly</th>
-										<td rowspan="2"
-											style="width: 160px; text-align: center; padding-top: 15px;">
-											<a href="#" class="btn btn-primary btn-large">Rent Now</a>
-										</td>
-									</tr>
-									<tr>
-										<td>$240</td>
-										<td>$1200</td>
-										<td>$3800</td>
-									</tr>
-								</table>
-							</div></li>
-						<li class="product"><a href="#" class="thumb pull-left"><img
-								src="img/product-thumb.jpg" /></a>
-
-							<div class="pull-left summary">
-								<div class="title">
-									<a href="product.html"><h4>John Deere 320D Skid Steer</h4></a>
-								</div>
-								<div class="location">Vancouver, BC</div>
-								<div class="brand">
-									<a class="brand-thumb pull-left" href="#"><img
-										src="img/brand/john-deere.jpg" /></a>
-									<div class="spec">
-										<strong>Size:</strong> 126" x 70" x 115"<br /> <strong>Weight:</strong>
-										6,435 lb (2,919 kg)
-									</div>
-								</div>
-							</div>
-
-							<div class="pull-right info">
-								<div class="price">
-									<sup class="symbol">$</sup> <span class="amount">240</span> <sup
-										class="currency">CAD</sup>
-								</div>
-								<span class="rate">Per Day</span> <a href="#" class="more"
-									data-toggle="collapse" data-target="#more-pricing-1">More
-									Pricing <i class="icon icon-double-angle-right"></i>
-								</a>
-							</div>
-
-							<div id="more-pricing-1" class="collapse">
-								<table class="table table-bordered">
-									<tr>
-										<th>Daily</th>
-										<th>Weekly</th>
-										<th>Monthly</th>
-										<td rowspan="2"
-											style="width: 160px; text-align: center; padding-top: 15px;">
-											<a href="#" class="btn btn-primary btn-large">Rent Now</a>
-										</td>
-									</tr>
-									<tr>
-										<td>$240</td>
-										<td>$1200</td>
-										<td>$3800</td>
-									</tr>
-								</table>
-							</div></li>
-						<li class="product"><a href="#" class="thumb pull-left"><img
-								src="img/bobcat-thumb.jpg" /></a>
-
-							<div class="pull-left summary">
-								<div class="title">
-									<a href="product.html"><h4>Bobcat S205</h4></a>
-								</div>
-								<div class="location">Vancouver, BC</div>
-								<div class="brand">
-									<a class="brand-thumb pull-left" href="#"><img
-										src="img/brand/bobcat.jpg" /></a>
-									<div class="spec">
-										<strong>Size:</strong> 126" x 70" x 115"<br /> <strong>Weight:</strong>
-										6,435 lb (2,919 kg)
-									</div>
-								</div>
-							</div>
-
-							<div class="pull-right info">
-								<div class="price">
-									<sup class="symbol">$</sup> <span class="amount">240</span> <sup
-										class="currency">CAD</sup>
-								</div>
-								<span class="rate">Per Day</span> <a href="#" class="more"
-									data-toggle="collapse" data-target="#more-pricing-2">More
-									Pricing <i class="icon icon-double-angle-right"></i>
-								</a>
-							</div>
-
-							<div id="more-pricing-2" class="collapse">
-								<table class="table table-bordered">
-									<tr>
-										<th>Daily</th>
-										<th>Weekly</th>
-										<th>Monthly</th>
-										<td rowspan="2"
-											style="width: 160px; text-align: center; padding-top: 15px;">
-											<a href="#" class="btn btn-primary btn-large">Rent Now</a>
-										</td>
-									</tr>
-									<tr>
-										<td>$240</td>
-										<td>$1200</td>
-										<td>$3800</td>
-									</tr>
-								</table>
-							</div></li>
-						<li class="product"><a href="#" class="thumb pull-left"><img
-								src="img/product-thumb.jpg" /></a>
-
-							<div class="pull-left summary">
-								<div class="title">
-									<a href="product.html"><h4>John Deere 320D Skid Steer</h4></a>
-								</div>
-								<div class="location">Vancouver, BC</div>
-								<div class="brand">
-									<a class="brand-thumb pull-left" href="#"><img
-										src="img/brand/john-deere.jpg" /></a>
-									<div class="spec">
-										<strong>Size:</strong> 126" x 70" x 115"<br /> <strong>Weight:</strong>
-										6,435 lb (2,919 kg)
-									</div>
-								</div>
-							</div>
-
-							<div class="pull-right info">
-								<div class="price">
-									<sup class="symbol">$</sup> <span class="amount">240</span> <sup
-										class="currency">CAD</sup>
-								</div>
-								<span class="rate">Per Day</span> <a href="#" class="more"
-									data-toggle="collapse" data-target="#more-pricing-1">More
-									Pricing <i class="icon icon-double-angle-right"></i>
-								</a>
-							</div>
-
-							<div id="more-pricing-1" class="collapse">
-								<table class="table table-bordered">
-									<tr>
-										<th>Daily</th>
-										<th>Weekly</th>
-										<th>Monthly</th>
-										<td rowspan="2"
-											style="width: 160px; text-align: center; padding-top: 15px;">
-											<a href="#" class="btn btn-primary btn-large">Rent Now</a>
-										</td>
-									</tr>
-									<tr>
-										<td>$240</td>
-										<td>$1200</td>
-										<td>$3800</td>
-									</tr>
-								</table>
-							</div></li>
-						<li class="product"><a href="#" class="thumb pull-left"><img
-								src="img/bobcat-thumb.jpg" /></a>
-
-							<div class="pull-left summary">
-								<div class="title">
-									<a href="product.html"><h4>Bobcat S205</h4></a>
-								</div>
-								<div class="location">Vancouver, BC</div>
-								<div class="brand">
-									<a class="brand-thumb pull-left" href="#"><img
-										src="img/brand/bobcat.jpg" /></a>
-									<div class="spec">
-										<strong>Size:</strong> 126" x 70" x 115"<br /> <strong>Weight:</strong>
-										6,435 lb (2,919 kg)
-									</div>
-								</div>
-							</div>
-
-							<div class="pull-right info">
-								<div class="price">
-									<sup class="symbol">$</sup> <span class="amount">240</span> <sup
-										class="currency">CAD</sup>
-								</div>
-								<span class="rate">Per Day</span> <a href="#" class="more"
-									data-toggle="collapse" data-target="#more-pricing-2">More
-									Pricing <i class="icon icon-double-angle-right"></i>
-								</a>
-							</div>
-
-							<div id="more-pricing-2" class="collapse">
-								<table class="table table-bordered">
-									<tr>
-										<th>Daily</th>
-										<th>Weekly</th>
-										<th>Monthly</th>
-										<td rowspan="2"
-											style="width: 160px; text-align: center; padding-top: 15px;">
-											<a href="#" class="btn btn-primary btn-large">Rent Now</a>
-										</td>
-									</tr>
-									<tr>
-										<td>$240</td>
-										<td>$1200</td>
-										<td>$3800</td>
-									</tr>
-								</table>
-							</div></li>
-						<li class="product"><a href="#" class="thumb pull-left"><img
-								src="img/product-thumb.jpg" /></a>
-
-							<div class="pull-left summary">
-								<div class="title">
-									<a href="product.html"><h4>John Deere 320D Skid Steer</h4></a>
-								</div>
-								<div class="location">Vancouver, BC</div>
-								<div class="brand">
-									<a class="brand-thumb pull-left" href="#"><img
-										src="img/brand/john-deere.jpg" /></a>
-									<div class="spec">
-										<strong>Size:</strong> 126" x 70" x 115"<br /> <strong>Weight:</strong>
-										6,435 lb (2,919 kg)
-									</div>
-								</div>
-							</div>
-
-							<div class="pull-right info">
-								<div class="price">
-									<sup class="symbol">$</sup> <span class="amount">240</span> <sup
-										class="currency">CAD</sup>
-								</div>
-								<span class="rate">Per Day</span> <a href="#" class="more"
-									data-toggle="collapse" data-target="#more-pricing-1">More
-									Pricing <i class="icon icon-double-angle-right"></i>
-								</a>
-							</div>
-
-							<div id="more-pricing-1" class="collapse">
-								<table class="table table-bordered">
-									<tr>
-										<th>Daily</th>
-										<th>Weekly</th>
-										<th>Monthly</th>
-										<td rowspan="2"
-											style="width: 160px; text-align: center; padding-top: 15px;">
-											<a href="#" class="btn btn-primary btn-large">Rent Now</a>
-										</td>
-									</tr>
-									<tr>
-										<td>$240</td>
-										<td>$1200</td>
-										<td>$3800</td>
-									</tr>
-								</table>
-							</div></li>
-						<li class="product"><a href="#" class="thumb pull-left"><img
-								src="img/bobcat-thumb.jpg" /></a>
-
-							<div class="pull-left summary">
-								<div class="title">
-									<a href="product.html"><h4>Bobcat S205</h4></a>
-								</div>
-								<div class="location">Vancouver, BC</div>
-								<div class="brand">
-									<a class="brand-thumb pull-left" href="#"><img
-										src="img/brand/bobcat.jpg" /></a>
-									<div class="spec">
-										<strong>Size:</strong> 126" x 70" x 115"<br /> <strong>Weight:</strong>
-										6,435 lb (2,919 kg)
-									</div>
-								</div>
-							</div>
-
-							<div class="pull-right info">
-								<div class="price">
-									<sup class="symbol">$</sup> <span class="amount">240</span> <sup
-										class="currency">CAD</sup>
-								</div>
-								<span class="rate">Per Day</span> <a href="#" class="more"
-									data-toggle="collapse" data-target="#more-pricing-2">More
-									Pricing <i class="icon icon-double-angle-right"></i>
-								</a>
-							</div>
-
-							<div id="more-pricing-2" class="collapse">
-								<table class="table table-bordered">
-									<tr>
-										<th>Daily</th>
-										<th>Weekly</th>
-										<th>Monthly</th>
-										<td rowspan="2"
-											style="width: 160px; text-align: center; padding-top: 15px;">
-											<a href="#" class="btn btn-primary btn-large">Rent Now</a>
-										</td>
-									</tr>
-									<tr>
-										<td>$240</td>
-										<td>$1200</td>
-										<td>$3800</td>
-									</tr>
-								</table>
-							</div></li>
+						<%
+							}
+						%>
 					</ul>
 				</div>
 
