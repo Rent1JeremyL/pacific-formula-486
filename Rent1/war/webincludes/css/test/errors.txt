@@ -1,0 +1,23 @@
+ReferenceError: Can't find variable: gapi
+
+  https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en.XRY3JMZg4gk.O/m=auth/exm=plusone/rt=j/sv=1/d=1/ed=1/am=IQ/rs=AItRSTPoMDNZYsbhLrpsdslX9ONNmyeJqw/cb=gapi.loaded_1:1
+ReferenceError: Can't find variable: gapi
+
+  https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en.XRY3JMZg4gk.O/m=plusone/rt=j/sv=1/d=1/ed=1/am=IQ/rs=AItRSTPoMDNZYsbhLrpsdslX9ONNmyeJqw/cb=gapi.loaded_0:1
+TypeError: 'undefined' is not a function (evaluating '$('#rentstart').datepicker()')
+
+  http://pacific-formula-486.appspot.com/webincludes/js/rent1.js:19 in initialize_sbar
+  http://pacific-formula-486.appspot.com/index.jsp:36 in onload
+Unable to post message to http://rent1demo.lexcorp.ca. Recipient has origin http://pacific-formula-486.appspot.com.
+
+ReferenceError: Can't find variable: gapi
+
+  https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en.XRY3JMZg4gk.O/m=auth/exm=plusone/rt=j/sv=1/d=1/ed=1/am=IQ/rs=AItRSTPoMDNZYsbhLrpsdslX9ONNmyeJqw/cb=gapi.loaded_1:1
+ReferenceError: Can't find variable: gapi
+
+  https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en.XRY3JMZg4gk.O/m=plusone/rt=j/sv=1/d=1/ed=1/am=IQ/rs=AItRSTPoMDNZYsbhLrpsdslX9ONNmyeJqw/cb=gapi.loaded_0:1
+TypeError: 'undefined' is not a function (evaluating '$('#rentstart').datepicker()')
+
+  http://pacific-formula-486.appspot.com/webincludes/js/rent1.js:19 in initialize_sbar
+  http://pacific-formula-486.appspot.com/index.jsp:36 in onload
+Unable to post message to http://rent1demo.lexcorp.ca. Recipient has origin http://pacific-formula-486.appspot.com.

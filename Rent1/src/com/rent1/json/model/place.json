@@ -1,0 +1,28 @@
+[
+	{
+	"place_id":"98154730",
+	"licence":"Data \u00a9 OpenStreetMap contributors, ODbL 1.0. http:\/\/www.openstreetmap.org\/copyright",
+	"osm_type":"relation",
+	"osm_id":"1384967",
+	"boundingbox":[
+		"49.0020790100098",
+		"49.2208251953125",
+		"-122.957168579102",
+		"-122.679107666016"
+		],
+	"lat":"49.1850834",
+	"lon":"-122.8446549",
+	"display_name":"Surrey, Greater Vancouver Regional District, British Columbia, Canada",
+	"class":"boundary",
+	"type":"administrative",
+	"importance":0.85845141871174,
+	"icon":"http:\/\/nominatim.openstreetmap.org\/images\/mapicons\/poi_boundary_administrative.p.20.png",
+	"address":{
+		"city":"Surrey",
+		"county":"Greater Vancouver Regional District",
+		"state":"British Columbia",
+		"country":"Canada",
+		"country_code":"ca"
+		}
+	}
+]

@@ -1,10 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ page import="java.util.List"%>
-<%@ page import="com.google.appengine.api.users.User"%>
-<%@ page import="com.google.appengine.api.users.UserService"%>
-<%@ page import="com.google.appengine.api.users.UserServiceFactory"%>
-
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page import="com.rent1.entity.User"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.rent1.reference.CategoryFactory"%>
+<%@page import="com.rent1.reference.Category"%>
+<%@page import="java.util.List"%>
 
 <head>
 <meta charset="utf-8">
@@ -13,31 +12,44 @@
 <meta content="" name="description">
 <meta content="" name="author">
 
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/rent1.css">
+<link rel="stylesheet" href="webincludes/css/bootstrap.css">
+<link rel="stylesheet" href="webincludes/css/style.css">
+<link rel="stylesheet" href="webincludes/css/font-awesome.min.css">
+<link rel="stylesheet" href="webincludes/css/rent1.css">
 
+<!-- START [Ajax Datepicker] -->
 <link rel="stylesheet"
-	href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.9.1.js"></script>
-<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/ui-darkness/jquery-ui.css">
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+<!-- END [Ajax Datepicker] -->
 
+<!-- START [Gooogle Map Engine] -->
 <link type="text/css" rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
 <script
 	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
-<script src="js/search_bar.js"></script>
+<!-- END [Gooogle Map Engine] -->
+
+<script src="webincludes/js/rent1.js"></script>
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
+      <script src="webincludes/js/html5shiv.js"></script>
     <![endif]-->
-
 <link rel="icon" type="image/png" href="favicon.ico">
 </head>
-<body onload="initialize_sbar()">
-
+<body>
+	<script type='text/javascript'>
+		$(document).ready(function() {
+			initialize_sbar();
+			$('#datepicker').datepicker();
+			$('#rentend').datepicker();
+			$("#datepicker").datepicker("setDate", new Date);
+		});
+	</script>
 	<div class=" fb_reset" id="fb-root">
 		<div
 			style="position: absolute; top: -10000px; height: 0px; width: 0px;">
@@ -88,58 +100,72 @@
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
 
-
 	<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<%
-				UserService userService = UserServiceFactory.getUserService();
-				User user = userService.getCurrentUser();
+				CategoryFactory cf = CategoryFactory.getInstance();
+				ArrayList<Category> catagories = cf.getCatagories();
+				User user = null;
+				user = (User) session.getAttribute("user");
 				if (user != null) {
-					pageContext.setAttribute("user", user);
 			%>
 			<ul class="nav pull-right logout">
-				<li><a
-					href="<%=userService.createLogoutURL(request.getRequestURI())%>"><i
-						class="icon icon-signout"></i> Log Out</a></li>
+				<li><a href="/logout"><i class="icon icon-signout"></i> Log
+						Out</a></li>
 			</ul>
 			<%
 				}
 			%>
 			<div class="container">
-				<a href="/" class="logo"><img src="img/logo.png"></a>
+				<a href="/" class="logo"><img src="/webincludes/img/logo.png"></a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li class="dropdown"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#">BROWSE <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="test.html">Aerial Work Platforms</a></li>
-								<li><a href="#">Air Compressors &amp; Air Tools</a></li>
-								<li><a href="#">Compaction</a></li>
-								<li><a href="#">Forklifts &amp; Material Handling</a></li>
-								<li><a href="#">Light Towers &amp; Generators</a></li>
+								<%
+									for ( Category cata : catagories){
+								%>
+								<li><a href="template.jsp"><%=cata%></a></li>
+								<%
+									}
+								%>
 							</ul></li>
 					</ul>
 				</div>
-				<!--/.nav-collapse -->
-
-				<a href="#" class="btn btn-brown pull-right">LIST YOUR STORE</a>
-
+				<%
+					if (user == null) {
+				%>
+				<a href="/register" class="btn btn-primary pull-right"
+					style="margin: 1em">Create Account</a>
+				<%
+					}
+				%><a href="#" class="btn btn-brown pull-right" style="margin: 1em">LIST
+					YOUR STORE</a>
 				<div class="nav-collapse collapse pull-right">
 					<ul class="nav">
 						<%
 							if (user != null) {
 						%>
-						<li><a href="#">WELCOME ${fn:escapeXml(user.nickname)}! ,</a></li>
+						<li class="dropdown"><a data-toggle="dropdown"
+							class="dropdown-toggle"> WELCOME <%=user.getNickName()%>!, <b
+								class="caret"></b>
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href="/">Home</a></li>
+								<li><a href="/profile">Profile</a></li>
+								<li><a href="#">Orders</a></li>
+							</ul></li>
 						<%
 							} else {
 						%>
-						<li><a
-							href="<%=userService.createLoginURL(request.getRequestURI())%>">SIGN
-								IN</a></li>
+						<li>
+							<!-- href="userService.createLoginURL(request.getRequestURI())" -->
+							<a href="/login">SIGN IN</a>
+						</li>
 						<%
 							}
 						%>
-						<!--li><a href="#">LOG IN</a></li-->
 						<li class="dropdown"><a data-toggle="dropdown"
 							class="dropdown-toggle" href="#">HELP <b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -157,23 +183,20 @@
 		<div class="container">
 			<h1>Find your equipment.</h1>
 			<h3>Rent from over 1,421 cities across North America.</h3>
-			<form class="form-horizontal find-equipment well" method='POST' action='/search'>
+			<form class="form-horizontal find-equipment well" method='POST'
+				action='/search'>
 				<fieldset>
-					<!--div class="rental-wrap wrap span3">
-						<input id="rental" name="rental"
-							placeholder="What are you renting?" type="text"> <span
-							class="icon-wrench"></span>
-					</div-->
 					<div class="rental-wrap wrap span3">
 						<div class="custom-select-container">
 							<select id="rental" name="rental" class="search-option small">
-								<option value="1">Backhoes</option>
-								<option value="2">Bulldosers</option>
-								<option value="3">Excavators</option>
-								<option value="4">Forklifts</option>
-								<option value="5">Pressure Washers</option>
-								<option value="6">Pumps</option>
-								<option value="7">Skid Steer</option>
+								<%
+									for ( Category cata : catagories){
+									int x=catagories.indexOf(cata)+1;
+								%>
+								<option value="<%=cf.getIndex(cata)%>"><%=cata%></option>
+								<%
+									}
+								%>
 							</select>
 						</div>
 					</div>
@@ -185,20 +208,17 @@
 							style="display: none;">Please set location</p>
 						<span class="icon-map-marker"></span>
 					</div>
-					<div class="rentstart wrap span2">
-						<input id="rentstart" name="rentstart" placeholder="Start Date"
-							type="text" class="srchDatePicker"> <span
-							class="icon-calendar"></span>
+					<div class="wrap span2">
+						<input id="datepicker" name="rentstart" placeholder="Start Date"
+							type="text"><span class="icon-calendar"></span>
 					</div>
-					<div class="rentend wrap span2">
-						<input id="rentend" name="rentend" placeholder="End Date"
-							type="text" class="srchDatePicker"> <span
-							class="icon-calendar"></span>
+					<div class="wrap span2">
+						<input id="datepicker" name="rentend" placeholder="End Date"
+							type="text"><span class="icon-calendar"></span>
 					</div>
-					<button id="submit" class="btn btn-primary" type="submit" >
-                <i class="icon icon-search"></i> Search </button>
-					<!-- a class="btn btn-primary" href="/search.jsp"><i
-						class="icon icon-search"></i> Search</a-->
+					<button id="submit" class="btn btn-primary" type="submit">
+						<i class="icon icon-search"></i> Search
+					</button>
 				</fieldset>
 			</form>
 		</div>
@@ -224,27 +244,31 @@
 			</div>
 			<div class="row categories">
 				<div class="span4">
+					<%
+						int size = catagories.size();
+						int half = size /2;
+						List<Category> list1 = catagories.subList(0, half);
+						List<Category> list2 = catagories.subList(half, size);
+					%>
 					<ul>
-						<li><a href="#">Aerial Work Platforms</a></li>
-						<li><a href="#">Air Compressors &amp; Air Tools</a></li>
-						<li><a href="#">Compaction</a></li>
-						<li><a href="#">Concrete &amp; Masonry</a></li>
-						<li><a href="#">Earthmoving Equipment</a></li>
-						<li><a href="#">Forklifts &amp; Material Handling</a></li>
-						<li><a href="#">Light Towers &amp; Generators</a></li>
-						<li><a href="#">Plumbing &amp; Pipes</a></li>
+						<%
+							for(Category cata1 : list1){
+						%>
+						<li><a href="#"><%=cata1%></a></li>
+						<%
+							}
+						%>
 					</ul>
 				</div>
 				<div class="span4">
 					<ul>
-						<li><a href="#">Plumbing &amp; Pipes</a></li>
-						<li><a href="#">Power &amp; HVAC</a></li>
-						<li><a href="#">Power Tools &amp; Surveying</a></li>
-						<li><a href="#">Pressure Washers &amp; Pumps</a></li>
-						<li><a href="#">Surface Preparation</a></li>
-						<li><a href="#">Trench Safety &amp; Shoring</a></li>
-						<li><a href="#">Vehicles &amp; Traffic Control</a></li>
-						<li><a href="#">Welders</a></li>
+						<%
+							for(Category cata2 : list2){
+						%>
+						<li><a href="#"><%=cata2%></a></li>
+						<%
+							}
+						%>
 					</ul>
 				</div>
 				<div class="span2">
@@ -279,7 +303,7 @@
 			<div class="equipment wrap">
 				<div class="container">
 					<img class="equipment-selection"
-						src="img/biggest-equipment-selection.png">
+						src="/webincludes/img/biggest-equipment-selection.png">
 					<div class="text">
 						<h2>Biggest equipment selection in the world.</h2>
 						<p>Itaque earum rerum hic tenetur a sapiente delectus. Ut enim
@@ -300,13 +324,14 @@
 							sunt in culpa qui officia deserunt mollitia. Architecto beatae
 							vitae dicta sunt explicabo.</p>
 					</div>
-					<img class="competitive-pricing" src="img/competitive-pricing.png">
+					<img class="competitive-pricing"
+						src="/webincludes/img/competitive-pricing.png">
 				</div>
 			</div>
 			<div class="platform wrap">
 				<div class="container">
 					<img class="quickest-simplest-platform"
-						src="img/quickest-simplest-platform.png">
+						src="/webincludes/img/quickest-simplest-platform.png">
 					<div class="text">
 						<h2>The quickest &amp; simplest platform to manage all your
 							rental needs.</h2>
@@ -330,7 +355,7 @@
 
 		<div class="row">
 			<div class="span3">
-				<img src="img/rent1-logo-gray.png" class="logo">
+				<img src="/webincludes/img/rent1-logo-gray.png" class="logo">
 				<p>
 					Copyright Â© 2013 RENT1.<br> All rights reserved.
 				</p>
@@ -405,7 +430,7 @@
   ================================================== -->
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script src="webincludes/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		(function() {
 			var po = document.createElement('script');

@@ -8,7 +8,8 @@ import java.sql.Statement;
 import org.apache.commons.logging.impl.Log4JLogger;
 
 public class SQLUtils {
-	private static Log4JLogger log = new Log4JLogger(SQLUtils.class.getName());
+	private static final Log4JLogger log = new Log4JLogger(
+			SQLUtils.class.getName());
 
 	public static void closeQuietly(Connection connection) {
 		try {
