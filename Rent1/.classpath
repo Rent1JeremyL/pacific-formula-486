@@ -7,11 +7,10 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Objectify"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/google-httpclient"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Gson"/>
-	<classpathentry kind="var" path="MAVEN_REPO/spring/jars/spring-2.5.6.jar"/>
-	<classpathentry kind="var" path="MAVEN_REPO/log4j/jars/log4j-1.2.15.jar"/>
-	<classpathentry kind="var" path="MAVEN_REPO/commons-logging/jars/commons-logging-1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Tools/Lombok/lombok.jar"/>
-	<classpathentry kind="lib" path="C:/Tools/apache/commons-codec-1.9.jar"/>
-	<classpathentry kind="lib" path="C:/Tools/apache/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/lombok.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/log4j-1.2.15.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

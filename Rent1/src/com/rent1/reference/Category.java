@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class Category implements Comparable<Category> {
+	//TODO Organize in Primary and Secondary and update lists
 	// Primary Categories
 	public static final String PC_EARTHMOVING = "Earthmoving Equipment";
 	public static final String PC_AERIAL_LIFT = "Aerial & Lift Equipment";

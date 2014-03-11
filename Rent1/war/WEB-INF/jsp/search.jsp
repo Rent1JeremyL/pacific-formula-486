@@ -256,11 +256,12 @@
 
 							<div class="pull-right info">
 								<div class="price">
+								<%String[] defRates=prd.getPricePlan().getDefaultRateValues(2); %>
 									<sup class="symbol"><%=prd.getPricePlan().getCurrencySymbol()%></sup> 
-									<span class="amount"><%=prd.getPricePlan().getRateDefault()%></span> 
+									<span class="amount"><%=defRates[1]%></span> 
 									<sup class="currency"><%=prd.getPricePlan().getCurrencyCode()%></sup>
 								</div>
-								<span class="rate"><%=prd.getPricePlan().getDefaultType()%></span> <a href="#" class="more"
+								<span class="rate"><%=defRates[0]%></span> <a href="#" class="more"
 									data-toggle="collapse" data-target="#more-pricing-1">More
 									Pricing <i class="icon icon-double-angle-right"></i>
 								</a>

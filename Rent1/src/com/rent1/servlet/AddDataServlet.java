@@ -36,23 +36,26 @@ public class AddDataServlet extends HttpServlet {
 		pp.setRateDaily(240);
 		pp.setRateWeekly(1200);
 		pp.setRateMonthly(3800);
-		pp.setDefaultType("Per Day");
-		pp.setRateDefault(pp.getRateDaily());
 
 		Place here = null;
 		switch (ValidationUtils.randInt(1, 5)) {
 		case 1:
 			here = PlaceDao.INSTANCE.getPlaceByRegoin("Surrey", "BC", "Canada");
+			break;
 		case 2:
 			here = PlaceDao.INSTANCE.getPlaceByRegoin("Delta", "BC", "Canada");
+			break;
 		case 3:
 			here = PlaceDao.INSTANCE.getPlaceByRegoin("Vancouver", "BC",
 					"Canada");
+			break;
 		case 4:
 			here = PlaceDao.INSTANCE
 					.getPlaceByRegoin("Langley", "BC", "Canada");
+			break;
 		case 5:
 			here = PlaceDao.INSTANCE.getPlaceByRegoin("Hope", "BC", "Canada");
+			break;
 		}
 
 		for (DefaultProduct pd : prods) {

@@ -3,6 +3,7 @@ package com.rent1.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
@@ -13,6 +14,7 @@ import com.rent1.json.model.OpenStreetMap;
 @Cache
 @Entity
 @NoArgsConstructor
+@ToString(exclude = { "id", "latitude", "longtitude" }, includeFieldNames = true)
 public class Place {
 	@Id
 	@Getter

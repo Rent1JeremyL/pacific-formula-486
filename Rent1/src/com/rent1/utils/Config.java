@@ -1,9 +1,9 @@
 package com.rent1.utils;
-
+/*
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
+*/
 public class Config {
-	private ClassPathXmlApplicationContext context = null;
+/*	private ClassPathXmlApplicationContext context = null;
 	private static Config uniqueInstance = null;
 
 	protected ClassPathXmlApplicationContext getSpringBeanFactory() {
@@ -23,5 +23,5 @@ public class Config {
 		}
 
 		return uniqueInstance;
-	}
+	}*/
 }

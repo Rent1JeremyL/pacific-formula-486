@@ -13,15 +13,15 @@ public enum ProductDao {
 	INSTANCE;
 
 	public List<DefaultProduct> getProducts() {
-		List<DefaultProduct> prods = ofy().load().type(DefaultProduct.class).list();
+		List<DefaultProduct> prods = ofy().load().type(DefaultProduct.class)
+				.list();
 
 		return prods;
 	}
 
 	public List<DefaultProduct> getProductsByCategory(String category) {
 		List<DefaultProduct> prods = ofy().load().type(DefaultProduct.class)
-		.filter("category ==", category)
-		.list();
+				.filter("category", category).list();
 
 		return prods;
 	}
@@ -31,20 +31,28 @@ public enum ProductDao {
 		return prod;
 	}
 
-	public DefaultProduct addProductLinkProductDetail(final DefaultProduct prod, final ProductDetail pDet) {
-		DefaultProduct p = ofy().transact(new Work<DefaultProduct>() {
-		    public DefaultProduct run() {
-		    	Key<DefaultProduct> pk = ofy().save().entity(prod).now();
-		        pDet.setProductKey(pk);
-		        ofy().save().entity(pDet).now();
-		        prod.setProductDetail(pDet);
-		        ofy().save().entity(prod).now();
-		        return prod;
-		    }
+	/**
+	 * Add a DefaultProduct and link one to one with ProductDetail
+	 * 
+	 * @param prod
+	 * @param pDet
+	 * @return the product with links
+	 */
+	public DefaultProduct addProductLinkProductDetail(
+			final DefaultProduct prod, final ProductDetail pDet) {
+		ofy().transact(new Work<DefaultProduct>() {
+			public DefaultProduct run() {
+				Key<DefaultProduct> pk = ofy().save().entity(prod).now();
+				pDet.setProductKey(pk);
+				ofy().save().entity(pDet).now();
+				prod.setProductDetail(pDet);
+				ofy().save().entity(prod).now();
+				return prod;
+			}
 		});
-		return p;
+		return prod;
 	}
-	
+
 	public int getProductCount() {
 		return ofy().load().type(DefaultProduct.class).count();
 	}
