@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.impl.Log4JLogger;
+import org.apache.log4j.Logger;
 
 import com.rent1.dao.PlaceDao;
 import com.rent1.dao.ProductDao;
@@ -20,8 +20,8 @@ import com.rent1.reference.Specification;
 
 @SuppressWarnings("serial")
 public class PreLoadDataServlet extends HttpServlet {
-	private static final Log4JLogger log = new Log4JLogger(
-			PreLoadDataServlet.class.getName());
+	private static final Logger log = Logger.getLogger(
+			PreLoadDataServlet.class);
 
 	@SuppressWarnings("static-access")
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)

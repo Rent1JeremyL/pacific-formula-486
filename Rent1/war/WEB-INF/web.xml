@@ -30,6 +30,15 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>registerCompany</servlet-name>
+		<servlet-class>com.rent1.servlet.CreateCompanyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>registerCompany</servlet-name>
+		<url-pattern>/doRegCompany</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>doLogin</servlet-name>
 		<servlet-class>com.rent1.servlet.LoginServlet</servlet-class>
 	</servlet>
@@ -49,7 +58,7 @@
 
 	<servlet>
 		<servlet-name>register</servlet-name>
-		<jsp-file>/WEB-INF/jsp/register.jsp</jsp-file>
+		<jsp-file>/WEB-INF/jsp/usr/register.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>register</servlet-name>
@@ -67,7 +76,7 @@
 
 	<servlet>
 		<servlet-name>profile</servlet-name>
-		<jsp-file>/WEB-INF/jsp/profile.jsp</jsp-file>
+		<jsp-file>/WEB-INF/jsp/usr/profile.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>profile</servlet-name>
@@ -91,7 +100,25 @@
 		<servlet-name>preLoad</servlet-name>
 		<url-pattern>/load</url-pattern>
 	</servlet-mapping>
-	
+
+	<servlet>
+		<servlet-name>popupCompanyReg</servlet-name>
+		<servlet-class>com.rent1.servlet.PreCompanyRegServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>popupCompanyReg</servlet-name>
+		<url-pattern>/check_company</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>companyRegister</servlet-name>
+		<jsp-file>/WEB-INF/jsp/comp/register_company.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>companyRegister</servlet-name>
+		<url-pattern>/register_comp</url-pattern>
+	</servlet-mapping>
+			
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>

@@ -2,16 +2,16 @@ package com.rent1.dao;
 
 import static com.rent1.service.OfyService.ofy;
 
-import org.apache.commons.logging.impl.Log4JLogger;
+import org.apache.log4j.Logger;
 
 import com.rent1.entity.Place;
 import com.rent1.service.LongLatService;
 
 /**
- * The {@code PlaceDao} class is the generic interface to the
- * DB or Datastore.
+ * The {@code PlaceDao} class is the generic interface to the DB or Datastore.
  * 
- * <p>Copyright © 2014 RENT1.COM
+ * <p>
+ * Copyright © 2014 RENT1.COM
  * 
  * @author Jeremy Leeder
  */
@@ -20,9 +20,9 @@ public enum PlaceDao {
 	 * Static reference to the {@code PlaceDao}
 	 */
 	INSTANCE;
-	
-	private static final Log4JLogger log = new Log4JLogger(
-			PlaceDao.class.getName());
+
+	private static final Logger log = Logger.getLogger(PlaceDao.class);
+
 	/**
 	 * Add a place
 	 * 
@@ -35,8 +35,7 @@ public enum PlaceDao {
 	}
 
 	/**
-	 * Get a place from DB if missing query Long/Lat Service
-	 * and add to DB
+	 * Get a place from DB if missing query Long/Lat Service and add to DB
 	 * 
 	 * @param city
 	 * @param state
@@ -44,19 +43,18 @@ public enum PlaceDao {
 	 * @return a fully qualified place
 	 */
 	public Place getPlaceByRegoin(String city, String state, String country) {
-		Place p = ofy().load().type(Place.class)
-				.filter("city", city)
-				.filter("state", state)
-				.filter("country", country)
-				.first().now();
+		Place p = ofy().load().type(Place.class).filter("city", city)
+				.filter("state", state).filter("country", country).first()
+				.now();
 
 		if (p == null) {
-			log.debug("The region "+city+", "+state+" was not found. Adding a new Place.");
+			log.debug("The region " + city + ", " + state
+					+ " was not found. Adding a new Place.");
 			p = LongLatService.createPlace(city, state, country);
 			if (p != null) {
 				// Save it
 				addPlace(p);
-				log.debug("Added Place["+p.toString()+"]");
+				log.debug("Added Place[" + p.toString() + "]");
 			}
 		}
 		return p;

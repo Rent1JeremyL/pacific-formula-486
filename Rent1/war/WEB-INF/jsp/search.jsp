@@ -49,82 +49,8 @@
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
 
-	<header class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<%
-			CategoryFactory cf = CategoryFactory.getInstance();
-			ArrayList<Category> catagories = cf.getCatagories();
-			User user = null;
-			user = (User) session.getAttribute("user");
-			if (user != null) {
-			%>
-			<ul class="nav pull-right logout">
-				<li><a href="/logout"><i class="icon icon-signout"></i> Log
-						Out</a></li>
-			</ul>
-			<%
-				}
-			%>
-			<div class="container">
-				<a href="/" class="logo"><img src="/webincludes/img/logo.png"></a>
-				<div class="nav-collapse collapse">
-					<ul class="nav">
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle" href="#">BROWSE <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="test.html">Aerial Work Platforms</a></li>
-								<li><a href="#">Air Compressors &amp; Air Tools</a></li>
-								<li><a href="#">Compaction</a></li>
-								<li><a href="#">Forklifts &amp; Material Handling</a></li>
-								<li><a href="#">Light Towers &amp; Generators</a></li>
-							</ul></li>
-					</ul>
-				</div>
-				<%
-					if (user == null) {
-				%>
-				<a href="/register" class="btn btn-primary pull-right"
-					style="margin: 1em">Create Account</a>
-				<%
-					}
-				%><a href="#" class="btn btn-brown pull-right" style="margin: 1em">LIST
-					YOUR STORE</a>
-				<div class="nav-collapse collapse pull-right">
-					<ul class="nav">
-						<%
-							if (user != null) {
-						%>
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle"> WELCOME <%=user.getNickName()%>!, <b
-								class="caret"></b>
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="/">Home</a></li>
-								<li><a href="/profile">Profile</a></li>
-								<li><a href="#">Orders</a></li>
-							</ul></li>
-						<%
-							} else {
-						%>
-						<li>
-							<!-- href="userService.createLoginURL(request.getRequestURI())" -->
-							<a href="/login">SIGN IN</a>
-						</li>
-						<%
-							}
-						%>
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle" href="#">HELP <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Frequently Asked Questions</a></li>
-								<li><a href="#">Support</a></li>
-							</ul></li>
-					</ul>
-				</div>
-				<!--/.nav-collapse -->
-			</div>
-		</div>
-	</header>
+<%@include file='/header.jsp' %>
+
 	<div class="content">
 		<div class="container">
 			<div class="row search-horizontal">

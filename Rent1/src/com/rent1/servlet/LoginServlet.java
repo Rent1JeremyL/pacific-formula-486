@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.impl.Log4JLogger;
+import org.apache.log4j.Logger;
 
 import com.rent1.dao.UserDao;
 import com.rent1.entity.User;
@@ -15,8 +15,10 @@ import com.rent1.utils.ValidationUtils;
 
 @SuppressWarnings("serial")
 public class LoginServlet extends HttpServlet {
-	private static final Log4JLogger log = new Log4JLogger(
-			LoginServlet.class.getName());
+	private static final String HTTP_MAIN = "/login";
+	
+	private static final Logger log = Logger.getLogger(LoginServlet.class
+			.getName());
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -30,18 +32,18 @@ public class LoginServlet extends HttpServlet {
 					"Please enter a valid email address.");
 			log.debug("Not a valid email address");
 			// get back to login.jsp page using forward
-			req.getRequestDispatcher("/login").forward(req, resp);
+			req.getRequestDispatcher(HTTP_MAIN).forward(req, resp);
 			return;
 		} else if (ValidationUtils.isStringBlank(password)) {
 			req.setAttribute("errorMessage", "Your password is invalid.");
 			// get back to login.jsp page using forward
-			req.getRequestDispatcher("/login").forward(req, resp);
+			req.getRequestDispatcher(HTTP_MAIN).forward(req, resp);
 			return;
 		} else if (newUser == null) {
 			req.setAttribute("errorMessage",
 					"This email address is not registered.");
 			// get back to login.jsp page using forward
-			req.getRequestDispatcher("/login").forward(req, resp);
+			req.getRequestDispatcher(HTTP_MAIN).forward(req, resp);
 			return;
 		} else if (newUser.authenticatePassword(password)) {
 			// Logon success
@@ -51,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			req.setAttribute("errorMessage", "Your password is invalid.");
 			// get back to login.jsp page using forward
-			req.getRequestDispatcher("/login").forward(req, resp);
+			req.getRequestDispatcher(HTTP_MAIN).forward(req, resp);
 			return;
 		}
 	}

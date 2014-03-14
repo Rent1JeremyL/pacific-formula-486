@@ -7,13 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.impl.Log4JLogger;
+import org.apache.log4j.Logger;
 
 @SuppressWarnings("serial")
 public class LogoutServlet extends HttpServlet {
 	@SuppressWarnings("unused")
-	private static final Log4JLogger log = new Log4JLogger(
-			LogoutServlet.class.getName());
+	private static final Logger log = Logger.getLogger(
+			LogoutServlet.class);
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {

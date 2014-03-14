@@ -5,11 +5,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.apache.commons.logging.impl.Log4JLogger;
+import org.apache.log4j.Logger;
 
+/**
+ * 
+ * @author Jeremy Leeder
+ * @deprecated
+ */
 public class SQLUtils {
-	private static final Log4JLogger log = new Log4JLogger(
-			SQLUtils.class.getName());
+	private static final Logger log = Logger
+			.getLogger(SQLUtils.class);
 
 	public static void closeQuietly(Connection connection) {
 		try {

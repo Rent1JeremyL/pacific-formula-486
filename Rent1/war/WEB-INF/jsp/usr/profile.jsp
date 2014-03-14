@@ -31,64 +31,14 @@
 </script>
 </head>
 <body>
+<%@include file='/header.jsp' %>
 	<%
-		User user = null;
-		user = (User) session.getAttribute("user");
 		// Protected JSP - Leave now
 		if (user == null) {
 			request.getRequestDispatcher("denied.html").forward(request, response);
 			return;
 		}
 	%>
-	<header class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<%
-				if (user != null) {
-			%>
-			<ul class="nav pull-right logout">
-				<li><a href="/logout"><i class="icon icon-signout"></i> Log
-						Out</a></li>
-			</ul>
-			<%
-				}
-			%>
-			<div class="container">
-				<a href="/" class="logo"><img src="/webincludes/img/logo.png"></a>
-				<div class="nav-collapse collapse pull-right">
-					<ul class="nav">
-						<%
-							if (user != null) {
-						%>
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle"> WELCOME <%=user.getNickName()%>!, <b
-								class="caret"></b>
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="/">Home</a></li>
-								<li><a href="/profile">Profile</a></li>
-								<li><a href="#">Orders</a></li>
-							</ul></li>
-						<%
-							} else {
-						%>
-						<li>
-							<!-- href="userService.createLoginURL(request.getRequestURI())" -->
-							<a href="/login">SIGN IN</a>
-						</li>
-						<%
-							}
-						%>
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle" href="#">HELP <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Frequently Asked Questions</a></li>
-								<li><a href="#">Support</a></li>
-							</ul></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</header>
 	<div id="profile" class="profile_box_inset"
 		style="background-color: #EEEEEE">
 		<form action="/save-profile" method="post">

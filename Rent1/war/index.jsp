@@ -1,9 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="com.rent1.entity.User"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.rent1.reference.CategoryFactory"%>
-<%@page import="com.rent1.reference.Category"%>
-<%@page import="java.util.List"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="com.rent1.reference.CategoryFactory"%>
+<%@ page import="com.rent1.reference.Category"%>
+<%@ page import="java.util.List"%>
+<%@ page import="org.apache.commons.lang.StringUtils"%>
 
 <head>
 <meta charset="utf-8">
@@ -100,84 +101,7 @@
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
 
-	<header class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<%
-				CategoryFactory cf = CategoryFactory.getInstance();
-				ArrayList<Category> catagories = cf.getCatagories();
-				User user = null;
-				user = (User) session.getAttribute("user");
-				if (user != null) {
-			%>
-			<ul class="nav pull-right logout">
-				<li><a href="/logout"><i class="icon icon-signout"></i> Log
-						Out</a></li>
-			</ul>
-			<%
-				}
-			%>
-			<div class="container">
-				<a href="/" class="logo"><img src="/webincludes/img/logo.png"></a>
-				<div class="nav-collapse collapse">
-					<ul class="nav">
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle" href="#">BROWSE <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<%
-									for ( Category cata : catagories){
-								%>
-								<li><a href="template.jsp"><%=cata%></a></li>
-								<%
-									}
-								%>
-							</ul></li>
-					</ul>
-				</div>
-				<%
-					if (user == null) {
-				%>
-				<a href="/register" class="btn btn-primary pull-right"
-					style="margin: 1em">Create Account</a>
-				<%
-					}
-				%><a href="#" class="btn btn-brown pull-right" style="margin: 1em">LIST
-					YOUR STORE</a>
-				<div class="nav-collapse collapse pull-right">
-					<ul class="nav">
-						<%
-							if (user != null) {
-						%>
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle"> WELCOME <%=user.getNickName()%>!, <b
-								class="caret"></b>
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="/">Home</a></li>
-								<li><a href="/profile">Profile</a></li>
-								<li><a href="#">Orders</a></li>
-							</ul></li>
-						<%
-							} else {
-						%>
-						<li>
-							<!-- href="userService.createLoginURL(request.getRequestURI())" -->
-							<a href="/login">SIGN IN</a>
-						</li>
-						<%
-							}
-						%>
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle" href="#">HELP <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Frequently Asked Questions</a></li>
-								<li><a href="#">Support</a></li>
-							</ul></li>
-					</ul>
-				</div>
-				<!--/.nav-collapse -->
-			</div>
-		</div>
-	</header>
+<%@include file='/header.jsp' %>
 
 	<div class="jumbotron masthead home bg-img">
 		<div class="container">
@@ -191,7 +115,7 @@
 							<select id="rental" name="rental" class="search-option small">
 								<%
 									for ( Category cata : catagories){
-									int x=catagories.indexOf(cata)+1;
+									    int x=catagories.indexOf(cata)+1;
 								%>
 								<option value="<%=cf.getIndex(cata)%>"><%=cata%></option>
 								<%
@@ -441,9 +365,6 @@
 			s.parentNode.insertBefore(po, s);
 		})();
 	</script>
-
-
-
 	<iframe
 		style="width: 1px; height: 1px; position: absolute; top: -100px;"
 		src="https://accounts.google.com/o/oauth2/postmessageRelay?parent=http%3A%2F%2Frent1demo.lexcorp.ca#rpctoken=775803882&amp;forcesecure=1"

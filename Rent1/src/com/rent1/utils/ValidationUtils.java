@@ -1,6 +1,8 @@
 package com.rent1.utils;
 
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ValidationUtils {
 
@@ -32,13 +34,22 @@ public class ValidationUtils {
 
 	public static int randInt(int min, int max) {
 
-	    // Usually this can be a field rather than a method variable
-	    Random rand = new Random();
+		// Usually this can be a field rather than a method variable
+		Random rand = new Random();
 
-	    // nextInt is normally exclusive of the top value,
-	    // so add 1 to make it inclusive
-	    int randomNum = rand.nextInt((max - min) + 1) + min;
+		// nextInt is normally exclusive of the top value,
+		// so add 1 to make it inclusive
+		int randomNum = rand.nextInt((max - min) + 1) + min;
 
-	    return randomNum;
+		return randomNum;
+	}
+
+	public static boolean isPhoneNumber(String phone) {
+		Pattern pat = Pattern.compile("(\\d{3}-){1,2}\\d{4}");
+		Matcher matcher = pat.matcher(phone);
+		if (matcher.matches()) {
+			return true;
+		}
+		return false;
 	}
 }

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.impl.Log4JLogger;
+import org.apache.log4j.Logger;
 
 import com.rent1.dao.UserDao;
 import com.rent1.entity.User;
@@ -15,8 +15,8 @@ import com.rent1.entity.User;
 @SuppressWarnings("serial")
 public class SaveProfileServlet extends HttpServlet {
 	@SuppressWarnings("unused")
-	private static final Log4JLogger log = new Log4JLogger(
-			SaveProfileServlet.class.getName());
+	private static final Logger log = Logger.getLogger(SaveProfileServlet.class
+			.getName());
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -25,7 +25,7 @@ public class SaveProfileServlet extends HttpServlet {
 		String firstName = req.getParameter("prof-first");
 		String lastName = req.getParameter("prof-last");
 
-		User user = (User) req.getSession().getAttribute("user");
+		User user = User.getUserSession(req);
 		user.setNickName(nickName);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);

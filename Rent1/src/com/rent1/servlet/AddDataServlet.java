@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.impl.Log4JLogger;
+import org.apache.log4j.Logger;
 
 import com.rent1.dao.PlaceDao;
 import com.rent1.dao.ProductDao;
 import com.rent1.dao.RentalProductDao;
+import com.rent1.entity.DefaultProduct;
 import com.rent1.entity.Place;
 import com.rent1.entity.PricePlan;
-import com.rent1.entity.DefaultProduct;
 import com.rent1.entity.RentalProduct;
 import com.rent1.utils.ValidationUtils;
 
 @SuppressWarnings("serial")
 public class AddDataServlet extends HttpServlet {
-	private static final Log4JLogger log = new Log4JLogger(
-			AddDataServlet.class.getName());
+	private static final Logger log = Logger.getLogger(
+			AddDataServlet.class);
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {

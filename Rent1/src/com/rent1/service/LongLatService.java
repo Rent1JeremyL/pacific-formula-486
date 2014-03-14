@@ -1,7 +1,7 @@
 package com.rent1.service;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.impl.Log4JLogger;
+import org.apache.log4j.Logger;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
@@ -20,8 +20,8 @@ import com.rent1.json.model.BoundingBox;
 import com.rent1.json.model.OpenStreetMap;
 
 public class LongLatService {
-	private static final Log4JLogger log = new Log4JLogger(
-			LongLatService.class.getName());
+	private static final Logger log = Logger.getLogger(LongLatService.class
+			.getName());
 
 	private static final String GEOCODE_REQUEST_URL = "http://nominatim.openstreetmap.org/search?";
 
@@ -31,13 +31,14 @@ public class LongLatService {
 	private static final String DETAILS = "&addressdetails=1";
 
 	static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
-/**
- * 
- * @param city
- * @param state
- * @param country
- * @return a full place with longitude and latitude
- */
+
+	/**
+	 * 
+	 * @param city
+	 * @param state
+	 * @param country
+	 * @return a full place with longitude and latitude
+	 */
 	public static Place createPlace(String city, String state, String country) {
 		HttpRequestFactory requestFactory = HTTP_TRANSPORT
 				.createRequestFactory();

@@ -17,65 +17,9 @@
 <link rel="icon" type="image/png" href="favicon.ico">
 </head>
 <body>
-	<%
-		User user = null;
-		user = (User) session.getAttribute("user");
-	%>
-	<header class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<%
-				if (user != null) {
-			%>
-			<ul class="nav pull-right logout">
-				<li><a href="/logout"><i class="icon icon-signout"></i> Log
-						Out</a></li>
-			</ul>
-			<%
-				}
-			%>
-			<div class="container">
-				<a href="/" class="logo"><img src="/webincludes/img/logo.png"></a>
-				<div class="nav-collapse collapse pull-right">
-					<ul class="nav">
-						<%
-							if (user != null) {
-						%>
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle"> WELCOME <%=user.getNickName()%>!, <b
-								class="caret"></b>
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="/">Home</a></li>
-								<li><a href="/profile">Profile</a></li>
-								<li><a href="#">Orders</a></li>
-							</ul></li>
-						<%
-							} else {
-						%>
-						<li>
-							<!-- href="userService.createLoginURL(request.getRequestURI())" -->
-							<a href="/login">SIGN IN</a>
-						</li>
-						<%
-							}
-						%>
-						<ul class="dropdown-menu">
-							<li><a href="/">Home</a></li>
-							<li><a href="/profile">Profile</a></li>
-							<li><a href="#">Orders</a></li>
-						</ul>
-						</li>
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle" href="#">HELP <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Frequently Asked Questions</a></li>
-								<li><a href="#">Support</a></li>
-							</ul></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</header>
+
+<%@include file='/header.jsp' %>
+
 	<p>Just a template</p>
 	<footer class="container">
 		<div class="row">
