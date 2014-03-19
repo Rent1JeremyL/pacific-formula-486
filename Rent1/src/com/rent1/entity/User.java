@@ -19,6 +19,7 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Serialize;
+import com.rent1.dao.CompanyDao;
 import com.rent1.dao.NoticeDao;
 import com.rent1.dao.UserDao;
 import com.rent1.utils.EncryptUtils;
@@ -65,9 +66,12 @@ public class User implements Serializable {
 	@Index
 	@Getter
 	@Setter
-	private Key<Company> company;
+	private Key<Company> companyKey;
 	@Ignore
 	private List<Notice> notices;
+	@Ignore
+	@Setter
+	private Company company;
 
 	public static User registerNewUser(String email, String pass)
 			throws Exception {
@@ -133,5 +137,14 @@ public class User implements Serializable {
 			}
 		}
 		return this.notices;
+	}
+	
+	public Company getCompany(){
+		if(getCompanyKey() == null){
+			return null;
+		}else if(this.company == null){
+			company = CompanyDao.INSTANCE.getCompanyByKey(getCompanyKey());
+		}
+		return company;
 	}
 }

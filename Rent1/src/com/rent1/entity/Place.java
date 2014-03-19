@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
@@ -67,5 +68,9 @@ public class Place {
 		this.country = oSM.getAddress().getCountry();
 
 		this.state = state;
+	}
+
+	public Key<Place> getKey() {
+		return Key.create(Place.class, id);
 	}
 }

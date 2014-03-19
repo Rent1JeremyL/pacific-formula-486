@@ -25,7 +25,7 @@ public class PreCompanyRegServlet extends HttpServlet {
 					"Please login before trying to create a company.");
 			log.debug("Not logged in during Company Registration.");
 		}
-		req.getRequestDispatcher("/register_comp").forward(req, resp);
+		req.getRequestDispatcher("/register/company").forward(req, resp);
 		return;
 	}
 }

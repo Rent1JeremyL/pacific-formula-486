@@ -31,7 +31,8 @@ public class SaveProfileServlet extends HttpServlet {
 		user.setLastName(lastName);
 
 		user = UserDao.INSTANCE.updateUser(user);
-		req.getSession().setAttribute("user", user);
+		//TODO Sent a serialization bug do to ignore fields
+		//req.getSession().setAttribute("user", user);
 
 		resp.sendRedirect("/profile");
 		return;

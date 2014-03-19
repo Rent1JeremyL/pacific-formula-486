@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
 <head>
-<link rel="stylesheet" href="webincludes/css/style.css">
-<link rel="stylesheet" href="webincludes/css/font-awesome.min.css">
-<link rel="stylesheet" href="webincludes/css/rent1.css">
+<link rel="stylesheet" href="/webincludes/css/style.css">
+<link rel="stylesheet" href="/webincludes/css/font-awesome.min.css">
+<link rel="stylesheet" href="/webincludes/css/rent1.css">
 
-<link rel="stylesheet" href="webincludes/css/production-uri.css">
-<link rel="stylesheet" href="webincludes/css/lightboxes-uri.css">
+<link rel="stylesheet" href="/webincludes/css/production-uri.css">
+<link rel="stylesheet" href="/webincludes/css/lightboxes-uri.css">
 </head>
 <body>
 	<div id="fb-root"></div>
@@ -22,7 +22,7 @@
 						<div id="lightbox-header">
 							<h2 class="title">Sign Up for RENT1</h2>
 						</div>
-						<form action="/doRegister" method="POST">
+						<form action="/register/add/user" method="POST">
 							<div id="lightbox-content" style="max-height: 450px;">
 								<div class="lightbox-content-block">
 									<div id="signup-stage-signup" class="signup-stage">
@@ -43,24 +43,24 @@
 										<div class="control-group">
 											<div style="color: #FF0000;">${errorMessage}</div>
 											<div class="controls">
-												<label class="placeholder-text" for="signup-email">Email
+												<label class="placeholder-text" for="signup-email">*Email
 													Address</label> <input id="signup-email" class="input-box-text"
-													name="signup-email" type="text">
+													name="signup-email" type="email" required>
 											</div>
 										</div>
 										<div class="control-group">
 											<div class="controls">
-												<label class="placeholder-text" for="signup-password1">Password</label>
+												<label class="placeholder-text" for="signup-password1">*Password</label>
 												<input id="signup-password1" name="signup-password1"
-													class="signup-text placeholder-input" type="password">
+													class="signup-text placeholder-input" type="password" required>
 											</div>
 										</div>
 										<div class="control-group">
 											<div class="controls">
-												<label class="placeholder-text" for="signup-password1">Confirm
+												<label class="placeholder-text" for="signup-password1">*Confirm
 													Password</label> <input id="signup-password2"
 													name="signup-password2"
-													class="signup-text placeholder-input" type="password">
+													class="signup-text placeholder-input" type="password" required>
 											</div>
 										</div>
 										<div id="signup-user-type" class="btn-group"></div>
@@ -86,10 +86,5 @@
 		<div id="stage" class="theme"></div>
 		<div id="player-wrapper" class="queue-closed"></div>
 	</div>
-	<div id="sidebar"></div>
-	<script type="text/javascript"></script>
-	<div id="swfWrapper"></div>
-	<div id="tooltip-helper-text-sizing"
-		style="z-index: -1; position: absolute; left: -50000px;"></div>
 </body>
 </html>

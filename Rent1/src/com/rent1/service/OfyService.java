@@ -14,6 +14,7 @@ import com.rent1.entity.PricePlan;
 import com.rent1.entity.ProductDetail;
 import com.rent1.entity.RentalProduct;
 import com.rent1.entity.User;
+import com.rent1.entity.group.CompanyGroup;
 
 public class OfyService {
 	private static final Logger log = Logger.getLogger(OfyService.class
@@ -31,8 +32,10 @@ public class OfyService {
 		factory().register(RentalProduct.class);
 		factory().register(User.class);
 
+		factory().register(CompanyGroup.class);
+
 		long millis = System.currentTimeMillis() - time;
-		log.info("Registration took " + millis + " millis");
+		log.info("Registration took " + millis + " ms");
 	}
 
 	public static Objectify ofy() {

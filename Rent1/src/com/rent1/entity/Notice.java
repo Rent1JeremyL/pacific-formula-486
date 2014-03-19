@@ -1,5 +1,7 @@
 package com.rent1.entity;
 
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,6 +39,11 @@ public class Notice {
 	@Getter
 	@Setter
 	private String message;
+	@Getter
+	@Setter
+	private boolean read = false;
+	@Getter
+	private Date createDate = new Date();
 
 	public static Notice newCompanyAlert(Company comp, User user) {
 		Notice note = new Notice();

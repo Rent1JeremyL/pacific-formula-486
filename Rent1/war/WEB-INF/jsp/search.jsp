@@ -14,19 +14,19 @@
 <meta content="" name="description">
 <meta content="" name="author">
 
-<link rel="stylesheet" href="webincludes/css/bootstrap.css">
-<link rel="stylesheet" href="webincludes/css/style.css">
-<link rel="stylesheet" href="webincludes/css/font-awesome.min.css">
-<link rel="stylesheet" href="webincludes/css/rent1.css">
+<link rel="stylesheet" href="/webincludes/css/bootstrap.css">
+<link rel="stylesheet" href="/webincludes/css/style.css">
+<link rel="stylesheet" href="/webincludes/css/font-awesome.min.css">
+<link rel="stylesheet" href="/webincludes/css/rent1.css">
 
-<script src="webincludes/js/rent1.js"></script>
+<script src="/webincludes/js/rent1.js"></script>
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
-      <script src="webincludes/js/html5shiv.js"></script>
+      <script src="/webincludes/js/html5shiv.js"></script>
     <![endif]-->
 
-<link rel="icon" type="image/png" href="favicon.ico">
+<link rel="icon" type="image/png" href="/favicon.ico">
 
 </head>
 <body onload="initialize_sbar()">
@@ -49,7 +49,7 @@
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
 
-<%@include file='/header.jsp' %>
+<%@include file='/WEB-INF/jsp/header.jsp' %>
 
 	<div class="content">
 		<div class="container">
@@ -60,7 +60,7 @@
 						<fieldset>
 							<div class="rental-wrap wrap span3">
 								<div class="custom-select-container">
-									<select id="rental" name="rental" class="search-option small">
+									<select id="rental" name="rental" style="margin-top: 3px;">
 										<%
 											for ( Category cata : catagories){
 												int x=catagories.indexOf(cata)+1;
@@ -96,7 +96,6 @@
 				</div>
 			</div>
 			<div class="row">
-
 				<aside class="span3">
 					<section class="block filters">
 						<h4>Categories</h4>
@@ -158,20 +157,22 @@
 
 					<ul class="search-view">
 						<%
-							for (RentalProduct prd : prods) {
+						int prodId = 0;	
+						for (RentalProduct prd : prods) {
+								prodId++;
 						%>
-						<li class="product"><a href="#" class="thumb pull-left"><img
+						<li class="product-<%=prodId %>"><a href="#" class="thumb pull-left"><img
 								src="<%=prd.getThumbImg()%>" /></a>
 
 							<div class="pull-left summary">
 								<div class="title">
-									<a href="<%=prd.getCompanyHref()%>" target="_blank">
+									<a href="<%=prd.getCompanyHref()%>">
 										<h4><%=prd.getMake()+" "+prd.getModelName()+" "+prd.getCategory()%></h4>
 									</a>
 								</div>
 								<div class="location"><%=prd.getCity()+", "+prd.getState()%></div>
 								<div class="brand">
-									<a class="brand-thumb pull-left" href="#"><img
+									<a class="brand-thumb pull-left" href="<%=prd.getCompanyHref()%>" target="_blank"><img
 										src="<%=prd.getMakeImg()%>" /></a>
 									<div class="spec">
 										<strong><%=prd.getSpecs().getPrimarySpecType()%></strong> <%=prd.getSpecs().getPrimarySpecValue()%><br> 
@@ -187,13 +188,13 @@
 									<span class="amount"><%=defRates[1]%></span> 
 									<sup class="currency"><%=prd.getPricePlan().getCurrencyCode()%></sup>
 								</div>
-								<span class="rate"><%=defRates[0]%></span> <a href="#" class="more"
-									data-toggle="collapse" data-target="#more-pricing-1">More
+								<span class="rate"><%=defRates[0]%></span> <a href="#product-<%=prodId %>" class="more"
+									data-toggle="collapse" data-target="#more-pricing-<%=prodId %>">More
 									Pricing <i class="icon icon-double-angle-right"></i>
 								</a>
 							</div>
 
-							<div id="more-pricing-1" class="collapse">
+							<div id="more-pricing-<%=prodId %>" class="collapse">
 								<table class="table table-bordered">
 									<tr>
 										<th>Daily</th>
@@ -287,7 +288,7 @@
   ================================================== -->
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="webincludes/js/bootstrap.min.js"></script>
+	<script src="/webincludes/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		(function() {
 			var po = document.createElement('script');

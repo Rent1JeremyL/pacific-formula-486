@@ -2,6 +2,10 @@ package com.rent1.dao;
 
 import static com.rent1.service.OfyService.ofy;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.apache.log4j.Logger;
 
 import com.googlecode.objectify.Key;
@@ -45,7 +49,7 @@ public enum UserDao {
 	}
 
 	public User linkCompany(final User user, Company comp) {
-		user.setCompany(comp.getKey());
+		user.setCompanyKey(comp.getKey());
 		final Notice note = Notice.newCompanyAlert(comp, user);
 
 		ofy().transact(new Work<User>() {
@@ -61,5 +65,11 @@ public enum UserDao {
 
 	public User getUserByKey(Key<User> userKey) {
 		return ofy().load().key(userKey).now();
+	}
+
+	public List<User> getUsersByKeys(Set<Key<User>> memberKeys) {
+		Map<Key<User>, User> users = ofy().load().keys(memberKeys);
+		users.values();
+		return (List<User>) users.values();
 	}
 }

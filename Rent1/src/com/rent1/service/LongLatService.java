@@ -23,7 +23,7 @@ public class LongLatService {
 	private static final Logger log = Logger.getLogger(LongLatService.class
 			.getName());
 
-	private static final String GEOCODE_REQUEST_URL = "http://nominatim.openstreetmap.org/search?";
+	private static final String GEOCODE_REQUEST_URL = "http://nominatim.openstreetmap.org/search?q=";
 
 	private static final String REF_EMAIL = "&email=rent1gae@gmail.com";
 	private static final String FORMAT = "&format=json";
@@ -47,14 +47,16 @@ public class LongLatService {
 		address.append(city + "+").append(state + "+").append(country);
 
 		try {
-			StringBuilder urlBuilder = new StringBuilder(GEOCODE_REQUEST_URL);
+			StringBuilder urlBuilder = new StringBuilder();
 			if (StringUtils.isNotBlank(address.toString())) {
-				urlBuilder.append("q=").append(address.toString());
+				urlBuilder.append(address.toString());
 				urlBuilder.append(FORMAT).append(LIMIT);
 				urlBuilder.append(DETAILS).append(REF_EMAIL);
 			}
-
-			GenericUrl url = new GenericUrl(urlBuilder.toString());
+			String urlString = GEOCODE_REQUEST_URL
+					+ urlBuilder.toString().replace(' ', '+');
+			
+			GenericUrl url = new GenericUrl(urlString);
 			HttpRequest request = requestFactory.buildGetRequest(url);
 
 			HttpResponse resp = request.execute();

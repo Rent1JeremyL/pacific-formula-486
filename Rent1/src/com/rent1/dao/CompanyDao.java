@@ -2,6 +2,7 @@ package com.rent1.dao;
 
 import static com.rent1.service.OfyService.ofy;
 
+import com.googlecode.objectify.Key;
 import com.rent1.entity.Company;
 
 public enum CompanyDao {
@@ -29,5 +30,9 @@ public enum CompanyDao {
 
 	public void deleteCompany(Company company){
 		ofy().delete().entity(company).now();
+	}
+
+	public Company getCompanyByKey(Key<Company> companyKey) {
+		return ofy().load().key(companyKey).now();
 	}
 }

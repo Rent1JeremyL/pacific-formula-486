@@ -10,7 +10,7 @@
 		<div class="navbar-inner">
 			<%
 				CategoryFactory cf = CategoryFactory.getInstance();
-				ArrayList<Category> catagories = cf.getCatagories();
+				ArrayList<Category> catagories = cf.getPrimaryCatagories();
 				User user = null;
 				user = User.getUserSession(request);
 				if (user != null) {
@@ -45,8 +45,8 @@
 				<a href="/register" class="btn btn-primary pull-right"
 					style="margin: 1em">Create Account</a>
 				<%
-					}else if(user != null && user.getCompany() == null){
-				%><a href="/check_company" class="btn btn-brown pull-right"
+					}else if(user != null && user.getCompanyKey() == null){
+				%><a href="/company/check" class="btn btn-brown pull-right"
 					style="margin: 1em">LIST YOUR COMPANY</a>
 				<%
 					}
@@ -61,7 +61,7 @@
 								class="caret"></b>
 						</a>
 							<ul class="dropdown-menu">
-<%if(user.getCompany() != null) { %><li><a href="/company">Company</a></li><%} %>
+<%if(user.getCompanyKey() != null) { %><li><a href="/company">Company</a></li><%} %>
 								<li><a href="/">Home</a></li>
 								<li><a href="#">Orders</a></li>
 								<li><a href="/profile">Profile</a></li>

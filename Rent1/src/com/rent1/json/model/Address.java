@@ -6,6 +6,8 @@ import lombok.Getter;
 
 @NoArgsConstructor
 public class Address {
+	@Getter@Setter private String house_number;
+	@Getter@Setter private String road;
 	@Getter@Setter private String city;
 	@Getter@Setter private String town;
 	@Getter@Setter private String suburb;
@@ -13,4 +15,5 @@ public class Address {
 	@Getter@Setter private String state;
 	@Getter@Setter private String country;
 	@Getter@Setter private String country_code;
+	@Getter@Setter private String postcode;
 }

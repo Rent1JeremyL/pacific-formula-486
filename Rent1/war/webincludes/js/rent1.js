@@ -41,8 +41,7 @@ function fillInAddress() {
 	 * document.getElementById(addressType).value = val; } }
 	 */
 	// var address = '';
-	// if (place.address_components) {
-	if (1 == 1) {
+	 if (place.address_components) {
 		var val = place.address_components[0];
 		document.getElementById("loc_city").value = 'Hellow W';
 	}
@@ -75,3 +74,31 @@ function servletPost(xx) {
 	return false;
 }
 // [END Web.xml Servlet re-direct]
+
+//[START Show/Hide by Id]
+function toggle_visibility(id) {
+	var e = document.getElementById(id);
+	if (e.style.display == 'block')
+		e.style.display = 'none';
+	else
+		e.style.display = 'block';
+}
+//[END Show/Hide by Id]
+
+//[START Link Primary and Secondary Categories]
+function populateSecCategory(priElemId, secElemId){
+	
+	var index = document.getElementById( priElemId ).selectedIndex;				
+	var stateElement = document.getElementById( secElemId );
+			
+	stateElement.length=0;
+	stateElement.options[0] = new Option('Select Category','');
+									
+	var state_arr = secArray[index].split("|");
+
+	for (var i=0; i<state_arr.length; i++) {
+		stateElement.options[stateElement.length] = new Option(state_arr[i],state_arr[i]);
+	}
+	stateElement.selectedIndex = 0;
+}
+//[END]

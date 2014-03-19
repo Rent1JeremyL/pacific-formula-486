@@ -2,6 +2,9 @@ package com.rent1.dao;
 
 import static com.rent1.service.OfyService.ofy;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
@@ -16,13 +19,16 @@ public enum ProductDao {
 		List<DefaultProduct> prods = ofy().load().type(DefaultProduct.class)
 				.list();
 
+		Collections.sort(prods);
 		return prods;
 	}
 
 	public List<DefaultProduct> getProductsByCategory(String category) {
 		List<DefaultProduct> prods = ofy().load().type(DefaultProduct.class)
 				.filter("category", category).list();
-
+		
+		Collections.sort(prods);
+		
 		return prods;
 	}
 

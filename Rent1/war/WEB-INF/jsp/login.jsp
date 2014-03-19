@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
 <head>
-<link rel="stylesheet" href="webincludes/css/style.css">
-<link rel="stylesheet" href="webincludes/css/font-awesome.min.css">
-<link rel="stylesheet" href="webincludes/css/rent1.css">
+<link rel="stylesheet" href="/webincludes/css/style.css">
+<link rel="stylesheet" href="/webincludes/css/font-awesome.min.css">
+<link rel="stylesheet" href="/webincludes/css/rent1.css">
 
-<link rel="stylesheet" href="webincludes/css/production-uri.css">
-<link rel="stylesheet" href="webincludes/css/lightboxes-uri.css">
+<link rel="stylesheet" href="/webincludes/css/production-uri.css">
+<link rel="stylesheet" href="/webincludes/css/lightboxes-uri.css">
 </head>
 <body>
 	<div id="fb-root"></div>
@@ -22,7 +22,7 @@
 						<div id="lightbox-header">
 							<h2 class="title">Welcome back to RENT1</h2>
 						</div>
-						<form action="/doLogin" method="POST">
+						<form action="/login/user" method="POST">
 						<div id="lightbox-content" style="max-height: 350px;">
 							<div class="lightbox-content-block">
 								<div id="signup-stage-signup" class="signup-stage">

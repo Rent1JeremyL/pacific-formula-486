@@ -19,7 +19,7 @@ public class CreateCompanyServlet extends HttpServlet {
 	private static final Logger log = Logger
 			.getLogger(CreateCompanyServlet.class);
 
-	private static final String HTTP_MAIN = "/register_comp";
+	private static final String HTTP_MAIN = "/register/company";
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {

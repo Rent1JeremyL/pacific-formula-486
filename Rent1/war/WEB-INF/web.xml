@@ -26,25 +26,34 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>doRegister</servlet-name>
-		<url-pattern>/doRegister</url-pattern>
+		<url-pattern>/register/add/user</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>registerCompany</servlet-name>
+		<servlet-name>doRegisterCompany</servlet-name>
 		<servlet-class>com.rent1.servlet.CreateCompanyServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>registerCompany</servlet-name>
-		<url-pattern>/doRegCompany</url-pattern>
+		<servlet-name>doRegisterCompany</servlet-name>
+		<url-pattern>/register/add/company</url-pattern>
 	</servlet-mapping>
-	
+
+	<servlet>
+		<servlet-name>doRegisterOffice</servlet-name>
+		<servlet-class>com.rent1.servlet.CreateOfficeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>doRegisterOffice</servlet-name>
+		<url-pattern>/register/add/office</url-pattern>
+	</servlet-mapping>
+		
 	<servlet>
 		<servlet-name>doLogin</servlet-name>
 		<servlet-class>com.rent1.servlet.LoginServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>doLogin</servlet-name>
-		<url-pattern>/doLogin</url-pattern>
+		<url-pattern>/login/user</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -84,6 +93,24 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>companytMain</servlet-name>
+		<jsp-file>/WEB-INF/jsp/comp/company_main.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>companytMain</servlet-name>
+		<url-pattern>/company</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>addOffice</servlet-name>
+		<jsp-file>/WEB-INF/jsp/comp/add_office.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>addOffice</servlet-name>
+		<url-pattern>/company/add/office</url-pattern>
+	</servlet-mapping>
+		
+	<servlet>
 		<servlet-name>addData</servlet-name>
 		<servlet-class>com.rent1.servlet.AddDataServlet</servlet-class>
 	</servlet>
@@ -107,7 +134,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>popupCompanyReg</servlet-name>
-		<url-pattern>/check_company</url-pattern>
+		<url-pattern>/company/check</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -116,7 +143,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>companyRegister</servlet-name>
-		<url-pattern>/register_comp</url-pattern>
+		<url-pattern>/register/company</url-pattern>
 	</servlet-mapping>
 			
 	<welcome-file-list>

@@ -15,7 +15,7 @@ import com.rent1.reference.Specification;
 @Entity
 @Cache
 @NoArgsConstructor
-public class DefaultProduct implements Product{
+public class DefaultProduct implements Product, Comparable<DefaultProduct>{
 	@Id
 	@Getter
 	@Setter
@@ -34,6 +34,7 @@ public class DefaultProduct implements Product{
 	private String category = "";
 	@Getter
 	@Setter
+	@Index
 	private String modelName = "";
 	@Getter
 	@Setter
@@ -57,4 +58,15 @@ public class DefaultProduct implements Product{
 	public void setProductDetail(ProductDetail pDet) {
 		this.productDetail = Ref.create(pDet);
 	}
+	
+	@Override
+	public String toString(){
+		return make+", "+modelName;
+	}
+
+	@Override
+	public int compareTo(DefaultProduct other) {
+		return this.toString().compareTo(other.toString());
+	}
+	
 }

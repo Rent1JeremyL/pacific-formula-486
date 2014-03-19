@@ -33,4 +33,5 @@ public interface Product {
 	
 	public ProductDetail getProductDetail();
 	public void setProductDetail(ProductDetail pDet);
+	
 }

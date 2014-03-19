@@ -1,8 +1,5 @@
 package com.rent1.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +11,7 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.rent1.dao.CompanyDao;
 import com.rent1.dao.UserDao;
+import com.rent1.entity.group.CompanyGroup;
 
 @Entity
 @Cache
@@ -33,13 +31,13 @@ public class Company {
 	private String email;
 	@Getter
 	@Setter
-	private Set<Key<User>> users;
+	private Key<CompanyGroup> companyGroup;
 	@Getter
 	@Setter
 	private String phoneNumber;
 	@Getter
 	@Setter
-	private String faxNumber;
+	private String faxNumber = "";
 
 	public static Company registerCompany(String name, String email,
 			String phone, User user) {
@@ -47,14 +45,13 @@ public class Company {
 		comp.setEmail(email);
 		comp.setName(name);
 		comp.setPhoneNumber(phone);
-		Set<Key<User>> users = new HashSet<Key<User>>();
-		users.add(user.getKey());
-		comp.setUsers(users);
 		CompanyDao.INSTANCE.addCompany(comp);
 		try {
 			UserDao.INSTANCE.linkCompany(user, comp);
+			comp.setCompanyGroup(CompanyGroup.createGroup(name, user));
+			CompanyDao.INSTANCE.addCompany(comp);
 		} catch (Exception e) {
-			//roll back
+			// roll back
 			CompanyDao.INSTANCE.deleteCompany(comp);
 		}
 		return comp;
