@@ -31,47 +31,20 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 4569996182825475350L;
 	private static final Logger log = Logger.getLogger(User.class);
 
-	@Id
-	@Getter
-	@Setter
-	private Long id;
+	@Id @Getter @Setter private Long id;
 
-	@Index
-	@Getter
-	@Setter
-	private Long googleId = null;
-	@Getter
-	@Setter
-	private String nickName;
-	@Index
-	@Getter
-	@Setter
-	private String email;
-	@Getter
-	@Setter
-	private byte[] password;
-	@Getter
-	@Setter
-	private byte[] salt;
-	@Getter
-	@Setter
-	private String firstName = "";
-	@Getter
-	@Setter
-	private String lastName = "";
-	@Index
-	@Getter
-	@Setter
-	private boolean active = false;
-	@Index
-	@Getter
-	@Setter
-	private Key<Company> companyKey;
-	@Ignore
-	private List<Notice> notices;
-	@Ignore
-	@Setter
-	private Company company;
+	@Index @Getter @Setter private Long googleId = null;
+	@Getter @Setter private String nickName;
+	@Index @Getter @Setter private String email;
+	@Getter @Setter private byte[] password;
+	@Getter @Setter private byte[] salt;
+	@Getter @Setter private String firstName = "";
+	@Getter @Setter private String lastName = "";
+	@Index @Getter @Setter private boolean active = false;
+	@Index @Getter @Setter private Key<Company> companyKey;
+	@Ignore private List<Notice> notices;
+	@Ignore @Setter private Company company;
+	@Index @Getter @Setter private boolean verified = false;
 
 	public static User registerNewUser(String email, String pass)
 			throws Exception {
@@ -138,11 +111,11 @@ public class User implements Serializable {
 		}
 		return this.notices;
 	}
-	
-	public Company getCompany(){
-		if(getCompanyKey() == null){
+
+	public Company getCompany() {
+		if (getCompanyKey() == null) {
 			return null;
-		}else if(this.company == null){
+		} else if (this.company == null) {
 			company = CompanyDao.INSTANCE.getCompanyByKey(getCompanyKey());
 		}
 		return company;

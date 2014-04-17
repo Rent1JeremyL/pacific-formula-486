@@ -2,69 +2,28 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
+
+	<!-- ################# -->
+	<!-- ## JSP Pages ## -->
+	<!-- ################# -->
 	<servlet>
-		<servlet-name>search</servlet-name>
-		<servlet-class>com.rent1.servlet.SearchProductServlet</servlet-class>
+		<servlet-name>doSearch</servlet-name>
+		<jsp-file>/WEB-INF/jsp/search.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>search</servlet-name>
-		<url-pattern>/search</url-pattern>
+		<servlet-name>doSearch</servlet-name>
+		<url-pattern>/results</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>saveProfile</servlet-name>
-		<servlet-class>com.rent1.servlet.SaveProfileServlet</servlet-class>
+		<servlet-name>doShowProduct</servlet-name>
+		<jsp-file>/WEB-INF/jsp/detail.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>saveProfile</servlet-name>
-		<url-pattern>/save-profile</url-pattern>
+		<servlet-name>doShowProduct</servlet-name>
+		<url-pattern>/product</url-pattern>
 	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>doRegister</servlet-name>
-		<servlet-class>com.rent1.servlet.CreateAccountServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>doRegister</servlet-name>
-		<url-pattern>/register/add/user</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>doRegisterCompany</servlet-name>
-		<servlet-class>com.rent1.servlet.CreateCompanyServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>doRegisterCompany</servlet-name>
-		<url-pattern>/register/add/company</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>doRegisterOffice</servlet-name>
-		<servlet-class>com.rent1.servlet.CreateOfficeServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>doRegisterOffice</servlet-name>
-		<url-pattern>/register/add/office</url-pattern>
-	</servlet-mapping>
-		
-	<servlet>
-		<servlet-name>doLogin</servlet-name>
-		<servlet-class>com.rent1.servlet.LoginServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>doLogin</servlet-name>
-		<url-pattern>/login/user</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>logout</servlet-name>
-		<servlet-class>com.rent1.servlet.LogoutServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>logout</servlet-name>
-		<url-pattern>/logout</url-pattern>
-	</servlet-mapping>
-
+	
 	<servlet>
 		<servlet-name>register</servlet-name>
 		<jsp-file>/WEB-INF/jsp/usr/register.jsp</jsp-file>
@@ -109,7 +68,92 @@
 		<servlet-name>addOffice</servlet-name>
 		<url-pattern>/company/add/office</url-pattern>
 	</servlet-mapping>
-		
+
+	<servlet>
+		<servlet-name>companyRegister</servlet-name>
+		<jsp-file>/WEB-INF/jsp/comp/register_company.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>companyRegister</servlet-name>
+		<url-pattern>/register/company</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- ################ -->
+	<!-- ## Servlets ## -->
+	<!-- ################ -->
+	<servlet>
+		<servlet-name>showProduct</servlet-name>
+		<servlet-class>com.rent1.servlet.ShowProductServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showProduct</servlet-name>
+		<url-pattern>/detail/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>search</servlet-name>
+		<servlet-class>com.rent1.servlet.SearchProductServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>search</servlet-name>
+		<url-pattern>/search</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>saveProfile</servlet-name>
+		<servlet-class>com.rent1.servlet.SaveProfileServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>saveProfile</servlet-name>
+		<url-pattern>/save-profile</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>doRegister</servlet-name>
+		<servlet-class>com.rent1.servlet.CreateAccountServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>doRegister</servlet-name>
+		<url-pattern>/register/add/user</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>doRegisterCompany</servlet-name>
+		<servlet-class>com.rent1.servlet.CreateCompanyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>doRegisterCompany</servlet-name>
+		<url-pattern>/register/add/company</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>doRegisterOffice</servlet-name>
+		<servlet-class>com.rent1.servlet.CreateOfficeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>doRegisterOffice</servlet-name>
+		<url-pattern>/register/add/office</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>doLogin</servlet-name>
+		<servlet-class>com.rent1.servlet.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>doLogin</servlet-name>
+		<url-pattern>/login/user</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>logout</servlet-name>
+		<servlet-class>com.rent1.servlet.LogoutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>logout</servlet-name>
+		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>addData</servlet-name>
 		<servlet-class>com.rent1.servlet.AddDataServlet</servlet-class>
@@ -137,19 +181,10 @@
 		<url-pattern>/company/check</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<servlet-name>companyRegister</servlet-name>
-		<jsp-file>/WEB-INF/jsp/comp/register_company.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>companyRegister</servlet-name>
-		<url-pattern>/register/company</url-pattern>
-	</servlet-mapping>
-			
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
 
+	<!-- ################# -->
+	<!-- ## Error Codes ## -->
+	<!-- ################# -->
 	<error-page>
 		<exception-type>404</exception-type>
 		<location>/404error.html</location>
@@ -160,6 +195,9 @@
 		<location>/404error.html</location>
 	</error-page>
 
+	<!-- ############### -->
+	<!-- ## Objectify ## -->
+	<!-- ############### -->
 	<filter>
 		<filter-name>ObjectifyFilter</filter-name>
 		<filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
@@ -168,4 +206,9 @@
 		<filter-name>ObjectifyFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>

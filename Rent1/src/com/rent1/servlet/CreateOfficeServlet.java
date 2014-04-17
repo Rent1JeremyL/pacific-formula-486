@@ -50,7 +50,7 @@ public class CreateOfficeServlet extends HttpServlet {
 			return;
 		}
 
-		req.getRequestDispatcher("/company#cTab2").forward(req, resp);
+		req.getRequestDispatcher("/company").forward(req, resp);
 		return;
 	}
 }

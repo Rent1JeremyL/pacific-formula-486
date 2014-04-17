@@ -1,5 +1,6 @@
 package com.rent1.entity;
 
+import java.io.Serializable;
 import java.util.Currency;
 import java.util.Locale;
 
@@ -14,7 +15,9 @@ import com.googlecode.objectify.annotation.Id;
 @Entity
 @Cache
 @NoArgsConstructor
-public class PricePlan {
+public class PricePlan implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	public static final String HOUR = "Hourly";
 	public static final String DAY = "Daily";
 	public static final String WEEK = "Weekly";

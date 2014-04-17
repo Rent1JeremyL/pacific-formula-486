@@ -1,5 +1,7 @@
 package com.rent1.entity;
 
+import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +13,9 @@ import com.googlecode.objectify.annotation.Parent;
 
 @Entity
 @NoArgsConstructor
-public class ProductDetail {
+public class ProductDetail implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Getter
 	@Setter

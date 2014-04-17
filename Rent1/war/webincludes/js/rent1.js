@@ -102,3 +102,9 @@ function populateSecCategory(priElemId, secElemId){
 	stateElement.selectedIndex = 0;
 }
 //[END]
+
+//[START Change Image on Click]
+function changeImage(elem, image) {
+    document.getElementById(elem).src = image;
+}
+//[END]

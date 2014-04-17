@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.rent1.dao.PlaceDao;
-import com.rent1.dao.ProductDao;
+import com.rent1.dao.DefaultProductDao;
 import com.rent1.entity.DefaultProduct;
 import com.rent1.entity.ProductDetail;
 import com.rent1.reference.Category;
@@ -29,7 +29,7 @@ public class PreLoadDataServlet extends HttpServlet {
 		createSomeProducts();
 
 		// Preload some Places
-		long timeout = 2000;
+		long timeout = 1100;
 		PrintWriter out = resp.getWriter();
 		try {
 			out.println("Loading Surrey");
@@ -60,7 +60,7 @@ public class PreLoadDataServlet extends HttpServlet {
 
 	private void createSomeProducts() {
 		log.debug("Creating some data....");
-		List<DefaultProduct> prods = ProductDao.INSTANCE.getProducts();
+		List<DefaultProduct> prods = DefaultProductDao.INSTANCE.getProducts();
 
 		if (prods.size() == 0) {
 			// Product 1
@@ -71,8 +71,9 @@ public class PreLoadDataServlet extends HttpServlet {
 			pd.setModelName("320D");
 			pd.setCategory(Category.SKID_STEER);
 			pd.setProductImg("/webincludes/img/brand/jdeere/320d-ss.jpg");
-			pd.setCompanyHref("http://www.deere.com/wps/dcom/en_US/products/equipment/skid_steers/320d/320d.page");
-
+			//pd.setCompanyHref("http://www.deere.com/wps/dcom/en_US/products/equipment/skid_steers/320d/320d.page");
+			pd.createSearchStrings();
+			
 			ProductDetail pDet1 = new ProductDetail();
 			pDet1.setDescription("The redesigned 320D Skid Steer incorporates a roomier operator station, "
 					+ "a quieter pressurized cab with best-in-class visibility, and a curved-glass swing-out door."
@@ -83,7 +84,7 @@ public class PreLoadDataServlet extends HttpServlet {
 			spec1.setPrimarySpecType(Specification.TRACK_WIDTH);
 			spec1.setPrimarySpecValue("63 in (w/o bucket)");
 			pd.setSpecs(spec1);
-			ProductDao.INSTANCE.addProductLinkProductDetail(pd, pDet1);
+			DefaultProductDao.INSTANCE.addProductLinkProductDetail(pd, pDet1);
 
 			// Product 2
 			DefaultProduct pd2 = new DefaultProduct();
@@ -93,8 +94,9 @@ public class PreLoadDataServlet extends HttpServlet {
 			pd2.setModelName("S205");
 			pd2.setCategory(Category.SKID_STEER);
 			pd2.setProductImg("/webincludes/img/brand/bcat/s205-ss.jpg");
-			pd2.setCompanyHref("http://www.bobcat.com/loaders/models/skidsteer/s205");
-
+			//pd2.setCompanyHref("http://www.bobcat.com/loaders/models/skidsteer/s205");
+			pd2.createSearchStrings();
+			
 			ProductDetail pDet2 = new ProductDetail();
 			pDet2.setDescription("The redesigned 320D Skid Steer incorporates a roomier operator station, "
 					+ "a quieter pressurized cab with best-in-class visibility, and a curved-glass swing-out door."
@@ -105,7 +107,7 @@ public class PreLoadDataServlet extends HttpServlet {
 			spec2.setPrimarySpecType(Specification.TRACK_WIDTH);
 			spec2.setPrimarySpecValue("68 in");
 			pd2.setSpecs(spec2);
-			ProductDao.INSTANCE.addProductLinkProductDetail(pd2, pDet2);
+			DefaultProductDao.INSTANCE.addProductLinkProductDetail(pd2, pDet2);
 		}
 	}
 }

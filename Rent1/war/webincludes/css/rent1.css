@@ -665,11 +665,12 @@ button,input,textarea {
 	background: none repeat scroll 0% 0% #EFEFEF;
 	padding: 3px;
 	border-radius: 3px;
-	margin: 0px 0px 15px; float : left;
+	margin: 0px 0px 15px;
+	float: left;
 	width: 715px;
 }
 
-.boxed-group >h3,.boxed-group .heading {
+.boxed-group>h3,.boxed-group .heading {
 	background-color: #E0E0E0;
 	background-image: linear-gradient(#FAFAFA, #E0E0E0);
 	background-repeat: repeat-x;
@@ -711,7 +712,8 @@ button,input,textarea {
 	background: none repeat scroll 0% 0% #EFEFEF;
 	padding: 6px;
 	border-radius: 3px;
-	margin: 10px 0px 0px 3px; float : left;
+	margin: 10px 0px 0px 3px;
+	float: left;
 	width: 200px;
 }
 
@@ -733,7 +735,7 @@ button,input,textarea {
 	font-size: 13px;
 }
 
-.boxed-menu >h3,.boxed-menu .heading {
+.boxed-menu>h3,.boxed-menu .heading {
 	background-color: #E0E0E0;
 	background-image: linear-gradient(#FAFAFA, #E0E0E0);
 	background-repeat: repeat-x;
@@ -787,4 +789,100 @@ button,input,textarea {
 
 .data_input_right {
 	margin-left: 30px;
+}
+
+.box_outset {
+	-webkit-box-shadow: -8px 6px 5px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow: -8px 6px 5px 0px rgba(50, 50, 50, 0.75);
+	box-shadow: -8px 6px 5px 0px rgba(50, 50, 50, 0.75);
+}
+
+.det_table_price {
+	border-collapse: collapse;
+	border: 1px solid #807057;
+	background-color: #968466;
+	box-shadow: 0 1px 0 #AC9978 inset;
+	text-align: center;
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.35);
+	border-spacing: 0;
+	font-size: 16px;
+	font-weight: bold;
+	width: inherit;
+	font-family: Helvetica,Arial,sans-serif;
+}
+
+.price_box {
+	border: 2px solid #D4D4D4;
+}
+
+.det_table_price td {
+	color: #FECD08;
+	border: 1px solid #807057;
+	text-align: center;
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.35);
+}
+
+.det_table_price th {
+	color: #FFFFFF;
+	border: 1px solid #807057;
+}
+
+.honor {
+	color: #404041;
+	float: right;
+	font-family: "Oswald", sans-serif;
+	font-size: 16px;
+	padding: 5px;
+	padding-top: 10px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.title_green {
+	color: #15AF95;
+}
+
+.det_table_spec {
+	font-size: 14px;	
+}
+
+.det_table_spec td {
+	background-color: #F2F2F2;
+	border: 1px solid #D4D4D4 !important;
+}
+
+.det_table_spec td,th {
+	padding: 4px 8px;
+	vertical-align: middle;
+}
+
+.det_table_spec tr:nth-child(2n+2) td {
+	background-color: #FFFFFF;
+}
+
+.delivery {
+	color: #FFFFFF;
+	text-align: left;
+	font-size: 14px;
+	margin: 7px 0 0 5px;
+}
+
+.ul_dashed {
+	border-bottom: 1px dashed #D4D4D4;
+	padding: 5px;
+	margin: 5px;
+	text-indent: 5px;
+	text-align: left;
+	color: grey
+}
+
+.det_container {
+	width: 960px;
+	background: white;
+	top: -30px;
+	position: relative;
+	margin-left: 150px;
+}
+.img_border{
+	border: 1px solid #D4D4D4;
 }

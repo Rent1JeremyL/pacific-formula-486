@@ -1,4 +1,4 @@
-<%@page import="com.rent1.dao.ProductDao"%>
+<%@page import="com.rent1.dao.DefaultProductDao"%>
 <%@page import="com.rent1.entity.DefaultProduct"%>
 <%@page import="com.rent1.dao.OfficeDao"%>
 <%@page import="com.rent1.entity.Company"%>
@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="/webincludes/css/font-awesome.min.css">
 <link rel="stylesheet" href="/webincludes/css/rent1.css">
 <!-- START Tab Content -->
-<link rel="stylesheet" href="/webincludes/css/tabcontent.css">
+<link rel="stylesheet" href="/webincludes/css/tabcontent1.css">
 <script src="/webincludes/js/tabcontent.js"></script>
 <!-- END Tab Content -->
 
@@ -73,19 +73,22 @@
 			</h3>
 		</div>
 		<br>
+			<%
+				List<Office> offices = OfficeDao.INSTANCE.getOfficesByCompany(comp);
+			%>
 		<ul class="tabs" data-persist="true">
 			<li><a href="#cTab1">Company Information</a></li>
 			<li><a href="#cTab2">Office Information</a></li>
+			<% if (offices.size() != 0 ){ %>
 			<li><a href="#cTab3">Equipment</a></li>
+			<%} %>
 			<li><a href="#view4">Orders</a></li>
 			<li><a href="#view5">Members</a></li>
 		</ul>
 		<div class="control-group tabcontents profile_box_left">
-			<%
-				List<Office> offices = OfficeDao.INSTANCE.getOfficesByCompany(comp);
-			%>
 			<%@include file='/WEB-INF/jsp/comp/cmain_tab1.jsp'%>
 			<%@include file='/WEB-INF/jsp/comp/cmain_tab2.jsp'%>
+			<% if (offices.size() != 0 ){ %>
 			<div id="cTab3">
 				<div class="row">
 					<aside class="span3">
@@ -186,6 +189,7 @@
 					</div>
 				</div>
 			</div>
+			<%} %>
 		</div>
 	</div>
 	<%@include file='/WEB-INF/jsp/footer.jsp'%>

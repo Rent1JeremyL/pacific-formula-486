@@ -1,0 +1,53 @@
+/* Tab Content - menucool.com */
+ul.tabs {
+	margin: 0;
+	font-size: 0;
+	list-style-type: none;
+	text-align: left;
+	/*set to left, center, or right to align the tabs as desired*/
+}
+
+ul.tabs li {
+	display: inline;
+	margin: 0; /*no distance between tabs*/
+	background: White;
+}
+
+ul.tabs li a {
+	font: normal 16px Verdana;
+	text-decoration: none;
+	position: relative;
+	padding: 7px 22px 0px 22px;
+	margin-bottom: 7px;
+	color: #000;
+	outline: none;
+	background: White;
+}
+
+
+
+ul.tabs li a:hover {
+	color: #000;
+	background: white;
+}
+
+ul.tabs li.selected a,ul.tabs li.selected a:hover {
+	top: 0px;
+	font-weight: normal;
+	background: #f2f2f2;	
+	color: #000;
+	border: 1px solid #CCC;
+	border-bottom: 1px solid #f2f2f2;
+}
+
+ul.tabs li.selected a:hover {
+	text-decoration: none;
+}
+
+div.tabcontents {
+	border: 1px solid #CCC;
+	padding: 30px 10px;
+	background: #f2f2f2;
+	color: black;
+	margin-right: 10px;
+}

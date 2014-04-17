@@ -48,19 +48,17 @@
 		});
 	</script>
 <%@include file='/WEB-INF/jsp/header.jsp' %>
-<!-- javascript create Category variables =============== -->
+<!-- ======== javascript create AutoComplete by Categories ======== -->
 <script>
-	var secArray = new Array();
-	<%
-	int i=1;
-	for(Category cata : catagories){
-		String secArray = CategoryFactory.getInstance().getSecondayCatagoriesToJS(cata);
-	%>
-		secArray[<%=i%>]="<%=secArray%>";
-	<%
-		i++;
-	}
-	%>
+<%
+String secCatas = CategoryFactory.getInstance().getAllSecondayCatagoriesToJSArray();
+%>
+$(function() {
+	var availableTags = [<%=secCatas%>];
+	$( "#rental" ).autocomplete({
+		source: availableTags
+	});
+});
 </script>
 	<div class="jumbotron masthead home bg-img">
 		<div class="container">
@@ -70,35 +68,22 @@
 				action='/search'>
 				<fieldset>
 					<div class="rental-wrap wrap span3">
-							<select id="category1" name="category1" onChange="populateSecCategory('category1', 'category2')"
-								class="small" style="margin-top: 3px;">
-								<option value="">Select Category</option>
-								<%
-									for ( Category cata : catagories){
-									    int x=catagories.indexOf(cata)+1;
-								%>
-								<option value="<%=cata%>"><%=cata%></option>
-								<%
-									}
-								%>
-							</select>
-							<select id="category2" name="category2" class="small">
-								<option value="">Select Category</option>
-							</select>
+ 			            <input id="rental" name="rental" placeholder="What are you renting?" type="text" required>
+						<span class="icon-wrench"></span>
 					</div>
 					<div class="location-wrap wrap span3">
 						<input id="location" name="location"
 							placeholder="Where do you need it?" onFocus="geolocate()"
-							type="text">
+							type="text" required>
 						<span class="icon-map-marker"></span>
 					</div>
 					<div class="wrap span2">
 						<input id="rentstart" name="rentstart" placeholder="Start Date"
-							type="text"><span class="icon-calendar"></span>
+							type="text" required><span class="icon-calendar"></span>
 					</div>
 					<div class="wrap span2">
 						<input id="rentend" name="rentend" placeholder="End Date"
-							type="text"><span class="icon-calendar"></span>
+							type="text" required><span class="icon-calendar"></span>
 					</div>				
 					<button id="submit" class="btn btn-primary" type="submit">
 						<i class="icon icon-search"></i> Search

@@ -49,7 +49,7 @@ public enum PlaceDao {
 
 		if (p == null) {
 			log.debug("The region " + city + ", " + state
-					+ " was not found. Adding a new Place.");
+					+ " was not found. Trying to add a new Place via OSM.");
 			p = LongLatService.createPlace(city, state, country);
 			if (p != null) {
 				// Save it

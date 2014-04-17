@@ -12,8 +12,7 @@ public class CategoryFactory {
 	private static CategoryFactory ecInstance = null;
 
 	private Map<Category, ArrayList<Category>> categoryMap = null;
-	@Getter
-	private ArrayList<Category> primaryCatagories;
+	@Getter private ArrayList<Category> primaryCatagories;
 
 	private CategoryFactory() {
 		categoryMap = new HashMap<Category, ArrayList<Category>>();
@@ -56,6 +55,29 @@ public class CategoryFactory {
 		return seconday;
 	}
 
+	/**
+	 * Print a pipe delimited string for a JS array
+	 * 
+	 * @param primary
+	 * @return ex. "Skid Steer","Excavator"
+	 */
+	public String getAllSecondayCatagoriesToJSArray() {
+		String jScript = "";
+		for (Category prime : primaryCatagories) {
+			ArrayList<Category> secondaries = categoryMap.get(prime);
+			for (Category cata : secondaries) {
+				jScript = jScript.concat("'"+cata.toString() + "',");
+			}
+		}
+		return jScript.substring(0, (jScript.length() - 1));
+	}
+
+	/**
+	 * Print a pipe delimited string for a JS array
+	 * 
+	 * @param primary
+	 * @return ex. "Skid Steer|Excavator"
+	 */
 	public String getSecondayCatagoriesToJS(Category primary) {
 		ArrayList<Category> secondaries = categoryMap.get(primary);
 		String jScript = "";

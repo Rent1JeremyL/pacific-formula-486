@@ -2,69 +2,46 @@ package com.rent1.entity;
 
 import static com.rent1.service.OfyService.ofy;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import com.beoui.geocell.GeocellManager;
-import com.beoui.geocell.model.Point;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Ref;
+import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Load;
 import com.rent1.reference.Specification;
+import com.rent1.utils.GeoUtils;
 
 @Entity
 @NoArgsConstructor
-public class RentalProduct implements Product {
-	@Id
-	@Getter
-	@Setter
-	private Long id;
+@Cache
+public class RentalProduct implements Product, Serializable {
+	private static final long serialVersionUID = 1L;
 
-	@Index
-	@Getter
-	@Setter
-	private String category = "";
-	@Load
-	private Ref<Product> product;
-	@Index
-	@Getter
-	List<String> geoCells;
-	@Getter
-	@Setter
-	private String city = "";
-	@Getter
-	@Setter
-	private String state = "";
-	@Getter
-	@Setter
-	private String country = "";
-	@Getter
-	@Setter
-	@Index
-	private Key<Office> office;
-	@Index
-	@Getter
-	@Setter
-	private Key<Company> company;
-	@Load
-	private Ref<PricePlan> pricePlan;
-	@Getter
-	@Setter
-	private String attachments = "";
-	@Getter
-	@Setter
-	@Index
-	private boolean available = true;
-	@Getter
-	@Setter
-	private Date bookingEnds;
+	@Id @Getter @Setter private Long id;
+
+	@Index @Getter @Setter private String category = "";
+	@Load private Ref<Product> product;
+	@Index @Getter List<String> geoCells;
+	@Getter @Setter private String city = "";
+	@Getter @Setter private String state = "";
+	@Getter @Setter private String country = "";
+	@Index @Getter @Setter private Key<Office> office;
+	@Index @Getter @Setter private Key<Company> company;
+	@Load private Ref<PricePlan> pricePlan;
+	@Getter @Setter private String attachments = "";
+	@Index @Getter @Setter private boolean available = true;
+	@Getter @Setter private Date bookingEnds;
+	@Index @Getter private Set<String> searchStrings;
 
 	public PricePlan getPricePlan() {
 		return pricePlan.get();
@@ -82,22 +59,16 @@ public class RentalProduct implements Product {
 	private void setProduct(Product prod) {
 		this.product = Ref.create(prod);
 		this.category = prod.getCategory();
+		this.searchStrings = prod.getSearchStrings();
 	}
 
 	public RentalProduct(Product prod) {
 		setProduct(prod);
 	}
 
-	private List<String> calculateGeoCells(double lat, double lon) {
-		Point p = new Point(lat, lon);
-		List<String> cells = GeocellManager.generateGeoCell(p);
-
-		return cells;
-	}
-
 	public void setGeoRegion(Place place) {
-		this.geoCells = calculateGeoCells(place.getLatitude(),
-				place.getLongtitude());
+		this.geoCells = GeoUtils.calculateGeoCells(place.getLatitude(),
+				place.getLongitude());
 		this.city = place.getCity();
 		this.state = place.getState();
 		this.country = place.getCountry();
@@ -105,6 +76,16 @@ public class RentalProduct implements Product {
 
 	public String getMake() {
 		return getProduct().getMake();
+	}
+
+	public String getWebTitle() {
+		return getMake() + " " + getModelName() + " " + getCategory();
+	}
+
+	public String getWebPage() {
+		String page = getMake() + "-" + getModelName();
+		page = page.replace(" ", "-");
+		return page;
 	}
 
 	/**
@@ -164,15 +145,8 @@ public class RentalProduct implements Product {
 	}
 
 	public String getCompanyHref() {
-		return getProduct().getCompanyHref();
-	}
-
-	/**
-	 * Do not use, does nothing
-	 * 
-	 * @deprecated
-	 */
-	public void setCompanyHref(String companyHref) {
+		String page = getWebPage();
+		return "/detail/" + id + "/" + page;
 	}
 
 	public Specification getSpecs() {

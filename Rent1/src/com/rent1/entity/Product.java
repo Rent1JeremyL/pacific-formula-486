@@ -1,9 +1,11 @@
 package com.rent1.entity;
 
+import java.util.Set;
+
 import com.rent1.reference.Specification;
 
 public interface Product {
-	
+
 	public Long getId();
 	public void setId(Long id);
 
@@ -26,12 +28,16 @@ public interface Product {
 	public void setThumbImg(String thumbImg);
 
 	public String getCompanyHref();
-	public void setCompanyHref(String companyHref);
 
 	public Specification getSpecs();
 	public void setSpecs(Specification specs);
 	
 	public ProductDetail getProductDetail();
 	public void setProductDetail(ProductDetail pDet);
+	
+	public Set<String> getSearchStrings();
+	
+	public String getWebTitle();
+	public String getWebPage();
 	
 }

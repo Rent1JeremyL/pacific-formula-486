@@ -1,15 +1,59 @@
 package com.rent1.utils;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.apache.log4j.Logger;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.core.LowerCaseFilter;
+import org.apache.lucene.analysis.standard.StandardTokenizer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.apache.lucene.util.Version;
+
+import com.google.common.collect.Sets;
 
 /**
  * Some tools for working with strings. Named so as not to conflict with apache
  * commons StringUtils.
  */
 public class StringUtils2 {
+	private static final Logger log = Logger.getLogger(StringUtils2.class);
+
+	/**
+	 * Uses lucene tokenizer to create a set of lowercase token words
+	 * 
+	 * @throws Exception
+	 */
+	public static Set<String> tokenize(String input) throws Exception {
+		try {
+
+			TokenStream tok = new StandardTokenizer(Version.LUCENE_47,
+					new StringReader(input));
+			tok = new LowerCaseFilter(Version.LUCENE_47, tok);
+
+			Set<String> result = Sets.newHashSet();
+
+			CharTermAttribute termAttr = (CharTermAttribute) tok
+					.addAttribute(CharTermAttribute.class);
+
+			tok.reset();
+			while (tok.incrementToken()) {
+				String term = termAttr.toString();
+				result.add(term);
+			}
+			tok.close();
+
+			return result;
+		} catch (IOException ex) {
+			log.error(ex.getMessage());
+			throw new Exception(ex);
+		}
+	}
+
 	/**
 	 * Returns a trimmed string or null if trimming produces an empty string.
 	 * Also produces null if input is null.

@@ -1,14 +1,15 @@
 package com.rent1.json.model;
 
 /**
- * Represents a viewport.
+ * Represents a viewport for a Nominatim Bounding Box.
+.
  * 
  * <pre>
  * "boundingbox": [
- * "48.1190567016602",
- * "48.1191635131836",
- * "-1.6499342918396",
- * "-1.64988231658936"
+ * 		"49.0020790100098", //south
+ * 		"49.2208251953125", //north
+ * 		"-122.957168579102", //west
+ * 		"-122.679107666016" //east
  * ],
  * </pre>
  * 
