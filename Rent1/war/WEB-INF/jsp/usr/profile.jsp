@@ -1,4 +1,3 @@
-<%@page import="com.google.appengine.api.datastore.Transaction"%>
 <%@page contentType="text/html;charset=UTF-8" language="java"%>
 <%@page import="com.rent1.entity.User"%>
 <%@page import="com.rent1.dao.UserDao"%>
@@ -20,7 +19,7 @@
 <script src="//code.jquery.com/jquery-1.9.1.js"></script>
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script src="/webincludes/js/bootstrap.min.js"></script>
-<!-- ================================================== -->	
+<!-- ================================================== -->
 <script type='text/javascript'>
 	function editPass(on) {
 		if (on == 1) {
@@ -42,112 +41,119 @@
 </script>
 </head>
 <body>
-<%@include file='/WEB-INF/jsp/header.jsp' %>
+	<%@include file='/WEB-INF/jsp/header.jsp'%>
 	<%
 		// Protected JSP - Leave now
 		if (user == null) {
-			request.getRequestDispatcher("denied.html").forward(request, response);
+			request.getRequestDispatcher("denied.html").forward(request,
+					response);
 			return;
 		}
 	%>
-	<div id="profile" class="profile_box_inset"
-		style="background-color: #EEEEEE">
-		<form action="/save-profile" method="post">
-			<div class="section-title_h">
-				<h3 id="h3-name">
-					<%=user.getNickName()%>'s Profile
-				</h3>
-			</div>
-			<div class="section-title_h">
-				<h4
-					class="blocksubhead subsectionhead userprof_headers userprof_headers_border">Basic
-					Information</h4>
-			</div>
-			<div class="control-group">
-				<dl>
-					<dt class="prof_h1_left">Email Address:</dt>
-					<dd class="prof_input_right">
-						<input id="signup-email" name="signup-email"
-							class="input-large placeholder-input has-text" type="text"
-							disabled="disabled" value="<%=user.getEmail()%>">
-					</dd>
-				</dl>
-				<dl>
-					<dt class="prof_h1_left">Nickname:</dt>
-					<dd class="prof_input_right">
-						<input id="prof-nickname" name="prof-nickname" class="input-large"
-							type="text" value="<%=user.getNickName()%>" required>
-					</dd>
-				</dl>
-				<%
-					// Allow password edits only if not linked to Google	
-					if (user.getGoogleId() == null) {
-				%>
-				<div id="view-pass" class="control" style="display: block;">
-					<dl>
-						<dt class="prof_h1_left">
-							Password: <a onclick="editPass(1)" style="font-weight: normal">
-								change </a>
-						</dt>
-						<dd class="prof_input_right">
-							<input id="prof-pass" name="prof-pass"
-								class="input-large placeholder-input has-text" type="password"
-								disabled="disabled" value="********">
-						</dd>
-					</dl>
+	<div class ="content" style="background: #D8D8D8; color: black;">
+	<div class="jumbotron home bg-img"></div>
+	<div class="det_container box_outset ">
+		<div id="profile" class="profile_box_inset"
+			style="background-color: #EEEEEE">
+			<form action="/save-profile" method="post">
+				<div class="section-title_h">
+					<h3 id="h3-name">
+						<%=user.getNickName()%>'s Profile
+					</h3>
 				</div>
-				<div id="change-pass" class="control" style="display: none;">
-					<dl>
-						<dt class="prof_h1_left">
-							*Password: <a onclick="editPass(0)" style="font-weight: normal">
-								cancel </a>
-						</dt>
-						<dd class="prof_input_right">
-							<input id="edit-pass" name="edit-pass"
-								class="input-large placeholder-input has-text" type="password"
-								value="">
-						</dd>
-					</dl>
-					<dl>
-						<dt class="prof_h1_left">*New:</dt>
-						<dd class="prof_input_right">
-							<input id="edit-pass-new" name="edit-pass-new"
-								class="input-large placeholder-input has-text" type="password"
-								value="">
-						</dd>
-					</dl>
-					<dl>
-						<dt class="prof_h1_left">*Confirm:</dt>
-						<dd class="prof_input_right">
-							<input id="edit-pass-con" name="edit-pass-con"
-								class="input-large placeholder-input has-text" type="password"
-								value="">
-						</dd>
-					</dl>
+				<div class="section-title_h">
+					<h4
+						class="blocksubhead subsectionhead userprof_headers userprof_headers_border">Basic
+						Information</h4>
 				</div>
-				<%
-					}
-				%><dl>
-					<dt class="prof_h1_left">First Name:</dt>
-					<dd class="prof_input_right">
-						<input id="prof-first" name="prof-first"
-							class="input-large placeholder-input has-text" type="text"
-							value="<%=user.getFirstName()%>"></input>
-					</dd>
-				</dl>
-				<dl>
-					<dt class="prof_h1_left">Last Name:</dt>
-					<dd class="prof_input_right">
-						<input id="prof-last" name="prof-last"
-							class="input-large placeholder-input has-text" type="text"
-							value="<%=user.getLastName()%>"></input>
-					</dd>
-				</dl>
-				<button id="saveBtn" class="btn btn-primary right"
-					style="margin-left: 180px;" type="submit">Save Changes</button>
-			</div>
-			<br>
-		</form>
+				<div class="control-group">
+					<dl>
+						<dt class="prof_h1_left">Email Address:</dt>
+						<dd class="prof_input_right">
+							<input id="signup-email" name="signup-email"
+								class="input-large placeholder-input has-text" type="text"
+								disabled="disabled" value="<%=user.getEmail()%>">
+						</dd>
+					</dl>
+					<dl>
+						<dt class="prof_h1_left">Nickname:</dt>
+						<dd class="prof_input_right">
+							<input id="prof-nickname" name="prof-nickname"
+								class="input-large" type="text" value="<%=user.getNickName()%>"
+								required>
+						</dd>
+					</dl>
+					<%
+						// Allow password edits only if not linked to Google	
+						if (user.getGoogleId() == null) {
+					%>
+					<div id="view-pass" class="control" style="display: block;">
+						<dl>
+							<dt class="prof_h1_left">
+								Password: <a onclick="editPass(1)" style="font-weight: normal">
+									change </a>
+							</dt>
+							<dd class="prof_input_right">
+								<input id="prof-pass" name="prof-pass"
+									class="input-large placeholder-input has-text" type="password"
+									disabled="disabled" value="********">
+							</dd>
+						</dl>
+					</div>
+					<div id="change-pass" class="control" style="display: none;">
+						<dl>
+							<dt class="prof_h1_left">
+								*Password: <a onclick="editPass(0)" style="font-weight: normal">
+									cancel </a>
+							</dt>
+							<dd class="prof_input_right">
+								<input id="edit-pass" name="edit-pass"
+									class="input-large placeholder-input has-text" type="password"
+									value="">
+							</dd>
+						</dl>
+						<dl>
+							<dt class="prof_h1_left">*New:</dt>
+							<dd class="prof_input_right">
+								<input id="edit-pass-new" name="edit-pass-new"
+									class="input-large placeholder-input has-text" type="password"
+									value="">
+							</dd>
+						</dl>
+						<dl>
+							<dt class="prof_h1_left">*Confirm:</dt>
+							<dd class="prof_input_right">
+								<input id="edit-pass-con" name="edit-pass-con"
+									class="input-large placeholder-input has-text" type="password"
+									value="">
+							</dd>
+						</dl>
+					</div>
+					<%
+						}
+					%><dl>
+						<dt class="prof_h1_left">First Name:</dt>
+						<dd class="prof_input_right">
+							<input id="prof-first" name="prof-first"
+								class="input-large placeholder-input has-text" type="text"
+								value="<%=user.getFirstName()%>"></input>
+						</dd>
+					</dl>
+					<dl>
+						<dt class="prof_h1_left">Last Name:</dt>
+						<dd class="prof_input_right">
+							<input id="prof-last" name="prof-last"
+								class="input-large placeholder-input has-text" type="text"
+								value="<%=user.getLastName()%>"></input>
+						</dd>
+					</dl>
+					<button id="saveBtn" class="btn btn-primary right"
+						style="margin-left: 180px;" type="submit">Save Changes</button>
+				</div>
+				<br>
+			</form>
+		</div>
 	</div>
-<%@include file='/WEB-INF/jsp/footer.jsp' %>
+	</div>
+	<%@include file='/WEB-INF/jsp/footer.jsp'%>
 </body>

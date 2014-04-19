@@ -78,10 +78,16 @@ public class RentalProduct implements Product, Serializable {
 		return getProduct().getMake();
 	}
 
+	/**
+	 * Get a space separated title for a HTML Title Page
+	 */
 	public String getWebTitle() {
 		return getMake() + " " + getModelName() + " " + getCategory();
 	}
 
+	/**
+	 * Get a HTML safe - separated string Web Page path
+	 */
 	public String getWebPage() {
 		String page = getMake() + "-" + getModelName();
 		page = page.replace(" ", "-");

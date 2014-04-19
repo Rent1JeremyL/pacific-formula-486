@@ -45,151 +45,164 @@
 	<%@include file='/WEB-INF/jsp/header.jsp'%>
 	<%
 		// Protected JSP - Leave now
-		if (user == null) {
-			request.getRequestDispatcher("denied.html").forward(request,
-			response);
-			return;
-		}
-		Company comp = user.getCompany();
+			if (user == null) {
+		request.getRequestDispatcher("denied.html").forward(request,
+		response);
+		return;
+			}
+			Company comp = user.getCompany();
 	%>
-<!-- javascript create Category variables =============== -->
-<script>
+	<!-- javascript create Category variables =============== -->
+	<script>
 	var secArray = new Array();
-	<%
-	int i=1;
+	<%int i=1;
 	for(Category cata : catagories){
-		String secArray = CategoryFactory.getInstance().getSecondayCatagoriesToJS(cata);
-	%>
-		secArray[<%=i%>]="<%=secArray%>";
-	<%
-		i++;
-	}
-	%>
-</script>	
-	<div id="profile" style="background-color: #EEEEEE">
-		<div class="section-title_h">
-			<h3 id="h3-name">
-				<%=comp.getName()%>
-			</h3>
-		</div>
-		<br>
-			<%
-				List<Office> offices = OfficeDao.INSTANCE.getOfficesByCompany(comp);
-			%>
-		<ul class="tabs" data-persist="true">
-			<li><a href="#cTab1">Company Information</a></li>
-			<li><a href="#cTab2">Office Information</a></li>
-			<% if (offices.size() != 0 ){ %>
-			<li><a href="#cTab3">Equipment</a></li>
-			<%} %>
-			<li><a href="#view4">Orders</a></li>
-			<li><a href="#view5">Members</a></li>
-		</ul>
-		<div class="control-group tabcontents profile_box_left">
-			<%@include file='/WEB-INF/jsp/comp/cmain_tab1.jsp'%>
-			<%@include file='/WEB-INF/jsp/comp/cmain_tab2.jsp'%>
-			<% if (offices.size() != 0 ){ %>
-			<div id="cTab3">
-				<div class="row">
-					<aside class="span3">
-						<section class="boxed-menu">
-							<h3>Offices</h3>
-							<div class="boxed-menu-inner">
-								<ul class="boxed-group-list standalone">
-									<%
-										int linkID = 0;
-										if (offices != null) {
-										for (Office office : offices) {
-											linkID++;
-									%>
-									<li><a href="#office-<%=linkID%>">Office <%=linkID%></a><br>
-										&bull; <%=office.toShortString()%></li>
-									<%
-										}
-																								}
-									%>
-								</ul>
+		String secArray = CategoryFactory.getInstance().getSecondayCatagoriesToJS(cata);%>
+		secArray[<%=i%>]="<%=secArray%>
+		";
+	<%i++;
+	}%>
+		
+	</script>
+	<div class="content" style="background: #D8D8D8; color: black;">
+		<div class="jumbotron home bg-img"></div>
+		<div class="det_container box_outset ">
+			<div id="profile" style="background-color: #EEEEEE">
+				<div class="section-title_h">
+					<h3 id="h3-name">
+						<%=comp.getName()%>
+					</h3>
+				</div>
+				<br>
+				<%
+					List<Office> offices = OfficeDao.INSTANCE.getOfficesByCompany(comp);
+				%>
+				<ul class="tabs" data-persist="true">
+					<li><a href="#cTab1">Company Information</a></li>
+					<li><a href="#cTab2">Office Information</a></li>
+					<%
+						if (offices.size() != 0) {
+					%>
+					<li><a href="#cTab3">Equipment</a></li>
+					<%
+						}
+					%>
+					<li><a href="#view4">Orders</a></li>
+					<li><a href="#view5">Members</a></li>
+				</ul>
+				<div class="control-group tabcontents profile_box_left">
+					<%@include file='/WEB-INF/jsp/comp/cmain_tab1.jsp'%>
+					<%@include file='/WEB-INF/jsp/comp/cmain_tab2.jsp'%>
+					<%
+						if (offices.size() != 0) {
+					%>
+					<div id="cTab3">
+						<div class="row">
+							<aside class="span3">
+								<section class="boxed-menu">
+									<h3>Offices</h3>
+									<div class="boxed-menu-inner">
+										<ul class="boxed-group-list standalone">
+											<%
+												int linkID = 0;
+													if (offices != null) {
+														for (Office office : offices) {
+															linkID++;
+											%>
+											<li><a href="#office-<%=linkID%>">Office <%=linkID%></a><br>
+												&bull; <%=office.toShortString()%></li>
+											<%
+												}
+													}
+											%>
+										</ul>
+									</div>
+								</section>
+							</aside>
+							<div class="strong">
+								<h5>Add rental equipment:</h5>
+								<div id="addEquipment">
+									<form class="form-horizontal" action="#" method="POST">
+									<div><label for="office" class="strong">Office:</label></div>
+										<div class="custom-select-container">
+											<select id="office" name="office" class="small">
+												<%
+													if (offices != null) {
+															for (Office office : offices) {
+												%>
+												<option value="<%=office.getId()%>"><%=office.toShortString()%></option>
+												<%
+													}
+														}
+												%>
+											</select> <select id="category1" name="category1" class="small"
+												onChange="populateSecCategory('category1', 'category2')">
+												<option value="">Select Category</option>
+												<%
+													for (Category cata : catagories) {
+												%>
+												<option value="<%=cata%>"><%=cata%></option>
+												<%
+													}
+												%>
+											</select> <select id="category2" name="category2" class="small">
+												<option value="">Select Category</option>
+											</select>
+											<button id="showEquipAdd" type="submit" class="btn">
+												Next</button>
+										</div>
+									</form>
+								</div>
 							</div>
-						</section>
-					</aside>
-					<div class="strong">
-						<h5>Add rental equipment:</h5>
-						<div id="addEquipment">
-						<form class="form-horizontal" action="#" method="POST">
-							<div class="custom-select-container">
-								<select id="office" name="office" class="small">
-									<%
-										if (offices != null) {
-										for (Office office : offices) {
-									%>
-									<option value="<%=office.getId()%>"><%=office.toShortString()%></option>
-									<%
-										}
-																								}
-									%>
-								</select> <select id="category1" name="category1"
-									class="small" onChange="populateSecCategory('category1', 'category2')">
-									<option value="">Select Category</option>
-									<%									
-										for (Category cata : catagories) {
-									%>
-									<option value="<%=cata%>"><%=cata%></option>
-									<%
-										}
-									%>
-								</select> <select id="category2" name="category2"
-									class="small">
-									<option value="">Select Category</option>
-								</select>
-								<button id="showEquipAdd" type="submit" class="btn">
-								Next</button>
+							<div class="boxed-group">
+								<h3>Equipment</h3>
+								<div class="boxed-group-inner">
+									<ul class="boxed-group-list standalone">
+										<%
+											linkID = 0;
+												if (offices != null) {
+													for (Office office : offices) {
+														linkID++;
+										%>
+										<li><a id="office-<%=linkID%>" class="more"
+											data-toggle="collapse" data-target="#table-<%=linkID%>">
+												<b>Office <%=linkID + ", " + office.toString()%> (7)
+											</b>
+										</a>
+											<div class="collapse" id="table-<%=linkID%>">
+												<table class="table small">
+													<tr>
+														<td class="clearfix">John Deere <a
+															class="btn btn-small minibutton"
+															data-confirm="Are you POSITIVE you want to delete this item?"
+															href="/delete/equipment?id=">Delete</a><a
+															class="btn btn-small minibutton"
+															href="/edit/equipment?id=">Edit</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="clearfix">John Deere2 <a
+															class="btn btn-small minibutton"
+															data-confirm="Are you POSITIVE you want to delete this item?"
+															href="/delete/equipment?id=">Delete</a>
+														</td>
+													</tr>
+												</table>
+											</div></li>
+										<%
+											}
+												}
+										%>
+									</ul>
+								</div>
 							</div>
-							</form>
 						</div>
 					</div>
-					<div class="boxed-group">
-						<h3>Equipment</h3>
-						<div class="boxed-group-inner">
-							<ul class="boxed-group-list standalone">
-								<%
-									linkID = 0;
-									if (offices != null) {
-										for (Office office : offices) {
-											linkID++;
-								%>
-								<li><a id="office-<%=linkID%>" class="more"
-									data-toggle="collapse" data-target="#table-<%=linkID%>"> <b>Office
-											<%=linkID + ", " + office.toString()%> (7)
-									</b></a>
-									<div class="collapse" id="table-<%=linkID%>">
-										<table class="table small">
-											<tr>
-												<td class="clearfix">John Deere <a
-													class="btn btn-small minibutton"
-													data-confirm="Are you POSITIVE you want to delete this item?"
-													href="/delete/equipment?id=">Delete</a><a
-													class="btn btn-small minibutton" href="/edit/equipment?id=">Edit</a>
-												</td>
-											</tr>
-											<tr>
-												<td class="clearfix">John Deere2 <a
-													class="btn btn-small minibutton"
-													data-confirm="Are you POSITIVE you want to delete this item?"
-													href="/delete/equipment?id=">Delete</a>
-												</td>
-											</tr>
-										</table>
-									</div></li>
-								<%
-									}
-									}
-								%>
-							</ul>
-						</div>
-					</div>
+					<%
+						}
+					%>
 				</div>
 			</div>
-			<%} %>
 		</div>
 	</div>
 	<%@include file='/WEB-INF/jsp/footer.jsp'%>

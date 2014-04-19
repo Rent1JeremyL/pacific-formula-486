@@ -12,12 +12,12 @@
 <title><%=prod.getWebTitle()%> | RENT1</title>
 <meta name="robots" content="follow, index" />
 <meta content="<%=prod.getWebTitle()%>"
-	about="/details/<%=prod.getId()%>/<%=prod.getWebTitle()%>"
+	about="/details/<%=prod.getId()%>/<%=prod.getWebPage()%>"
 	property="dc:title" />
 <meta name="description"
 	content="Rent a <%=prod.getWebTitle()%> for your project. Lowest Rate Guarantee on all longer term rentals" />
 <meta name="keywords"
-	content="rent a <%=prod.getCategory()%>, <%=prod.getCategory()%> rental rates,  rentals, construction equipment," />
+	content="rent a <%=prod.getCategory()%>, <%=prod.getCategory()%> rental rates,  <%=prod.getMake()%> rentals, <%=prod.getModelName()%> rentals, rentals, construction equipment," />
 
 <link rel="stylesheet" href="/webincludes/css/bootstrap.css">
 <link rel="stylesheet" href="/webincludes/css/style.css">
@@ -27,7 +27,11 @@
 <link rel="stylesheet" href="/webincludes/css/tabcontent3.css">
 <script src="/webincludes/js/tabcontent.js"></script>
 <!-- END Tab Content -->
-
+<!-- javascript load bootstrap elements =============== -->
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="/webincludes/js/bootstrap.min.js"></script>
+<!-- ================================================== -->
 <script src="/webincludes/js/rent1.js"></script>
 <link rel="icon" type="image/png" href="/favicon.ico">
 </head>
@@ -75,7 +79,8 @@
 										style="height: 214px; width: 310px; z-index: 9999;"
 										id="imgClickAndChange" />
 									<div id="gallery-thumbs">
-										<img class="img_border" src="/webincludes/img/brand/jdeere/320d-ss_1.jpg"
+										<img class="img_border"
+											src="/webincludes/img/brand/jdeere/320d-ss_1.jpg"
 											style="height: 75; width: 75; cursor: pointer;"
 											alt="<%=prod.getWebTitle()%>"
 											onclick="changeImage('imgClickAndChange','/webincludes/img/brand/jdeere/320d-ss_1_fs.jpg')" />
@@ -107,8 +112,11 @@
 											<tr>
 												<td colspan="4">
 													<div class="delivery">
-														+ Delivery Rate <div style="float: right;"><a href="#"
-															class="btn btn-primary btn-small">Rent Now</a></div>
+														+ Delivery Rate
+														<div style="float: right;">
+															<a href="#" class="btn btn-primary btn-small">Rent
+																Now</a>
+														</div>
 													</div>
 												</td>
 											</tr>
@@ -195,7 +203,7 @@
 					</div>
 				</div>
 			</div>
-			</div>
+		</div>
 	</section>
 
 	<%@include file='/WEB-INF/jsp/footer.jsp'%>
