@@ -40,6 +40,20 @@ ul.tabs li.selected a,ul.tabs li.selected a:hover {
 	border-bottom: 1px solid #f2f2f2;
 }
 
+.tab_select {
+	font: normal 16px Verdana;
+	top: 0px;
+	text-decoration: none;
+	position: relative;
+	padding: 7px 22px 0px 22px;
+	margin-bottom: 7px;
+	font-weight: normal;
+	background: #f2f2f2;	
+	color: #000;
+	border: 1px solid #CCC;
+	border-bottom: 1px solid #f2f2f2;
+}
+
 ul.tabs li.selected a:hover {
 	text-decoration: none;
 }

@@ -15,47 +15,40 @@ import com.googlecode.objectify.annotation.Id;
 @Entity
 @Cache
 @NoArgsConstructor
-public class PricePlan implements Serializable{
+public class PricePlan implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	public static final String HOUR = "Hourly";
 	public static final String DAY = "Daily";
 	public static final String WEEK = "Weekly";
 	public static final String MONTH = "Monthly";
 
-	@Id
-	@Getter
-	@Setter
-	private Long id;
+	@Id @Getter @Setter private Long id;
+	@Getter @Setter private int rateHourly = 0;
+	@Getter @Setter private int rateDaily;
+	@Getter @Setter private int rateWeekly;
+	@Getter @Setter private int rateMonthly;
+	@Getter @Setter private String regionTag;
+	@Getter @Setter private String languageTag;
 
-	@Getter
-	@Setter
-	private int rateHourly = 0;
-	@Getter
-	@Setter
-	private int rateDaily;
-	@Getter
-	@Setter
-	private int rateWeekly;
-	@Getter
-	@Setter
-	private int rateMonthly;
-	@Getter
-	@Setter
-	private String regionTag;
+	public PricePlan(String country_code, String languageTag) {
+		this.regionTag = country_code;
+		this.languageTag = languageTag;
+	}
 
-	public PricePlan(Locale region) {
-		this.regionTag = region.toLanguageTag();
+	public PricePlan(String country_code) {
+		this(country_code, "en");
 	}
 
 	public String getCurrencySymbol() {
-		return Currency.getInstance(Locale.forLanguageTag(regionTag))
-				.getSymbol();
+		Locale l = new Locale(languageTag, regionTag);
+		String symb = Currency.getInstance(l).getSymbol();
+		return symb;
 	}
 
 	public String getCurrencyCode() {
-		return Currency.getInstance(Locale.forLanguageTag(regionTag))
-				.getCurrencyCode();
+		Locale l = new Locale(languageTag, regionTag);
+		return Currency.getInstance(l).getCurrencyCode();
 	}
 
 	/**
@@ -63,7 +56,8 @@ public class PricePlan implements Serializable{
 	 * 
 	 * @param days
 	 * @return a String array that holds the default type and rate
-	 * <p> Example [0] Per Day, [1] 280
+	 *         <p>
+	 *         Example [0] Per Day, [1] 280
 	 */
 	public String[] getDefaultRateValues(int days) {
 		if (days == 0) {

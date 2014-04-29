@@ -33,23 +33,23 @@ public class PreLoadDataServlet extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		try {
 			out.println("Loading Surrey");
-			PlaceDao.INSTANCE.getPlaceByRegoin("Surrey", "BC", "Canada");
+			PlaceDao.INSTANCE.getPlaceByRegion("Surrey", "BC", "Canada");
 			Thread.currentThread().sleep(timeout);
 			
 			out.println("Loading Delta");
-			PlaceDao.INSTANCE.getPlaceByRegoin("Delta", "BC", "Canada");
+			PlaceDao.INSTANCE.getPlaceByRegion("Delta", "BC", "Canada");
 			Thread.currentThread().sleep(timeout);
 			
 			out.println("Loading Vancouver");
-			PlaceDao.INSTANCE.getPlaceByRegoin("Vancouver", "BC", "Canada");
+			PlaceDao.INSTANCE.getPlaceByRegion("Vancouver", "BC", "Canada");
 			Thread.currentThread().sleep(timeout);
 			
 			out.println("Loading Langley");
-			PlaceDao.INSTANCE.getPlaceByRegoin("Langley", "BC", "Canada");
+			PlaceDao.INSTANCE.getPlaceByRegion("Langley", "BC", "Canada");
 			Thread.currentThread().sleep(timeout);
 			
 			out.println("Loading Hope");
-			PlaceDao.INSTANCE.getPlaceByRegoin("Hope", "BC", "Canada");
+			PlaceDao.INSTANCE.getPlaceByRegion("Hope", "BC", "Canada");
 			out.println(System.currentTimeMillis());
 		} catch (Exception e) {
 			log.error("Error preloading Places", e);

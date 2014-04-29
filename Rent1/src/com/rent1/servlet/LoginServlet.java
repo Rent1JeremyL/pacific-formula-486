@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 			req.getRequestDispatcher(HTTP_MAIN).forward(req, resp);
 			return;
 		} else if (newUser.authenticatePassword(password)) {
-			// Logon success
+			// Login success
 			req.getSession().setAttribute("user", newUser);
 			resp.sendRedirect("/");
 			return;

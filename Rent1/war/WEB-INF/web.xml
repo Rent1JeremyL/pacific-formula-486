@@ -23,7 +23,7 @@
 		<servlet-name>doShowProduct</servlet-name>
 		<url-pattern>/product</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>register</servlet-name>
 		<jsp-file>/WEB-INF/jsp/usr/register.jsp</jsp-file>
@@ -52,12 +52,30 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>companytMain</servlet-name>
-		<jsp-file>/WEB-INF/jsp/comp/company_main.jsp</jsp-file>
+		<servlet-name>companyInfo</servlet-name>
+		<jsp-file>/WEB-INF/jsp/comp/company_info.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>companytMain</servlet-name>
+		<servlet-name>companyInfo</servlet-name>
 		<url-pattern>/company</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>officeInfo</servlet-name>
+		<jsp-file>/WEB-INF/jsp/comp/office_info.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>officeInfo</servlet-name>
+		<url-pattern>/company/offices</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>companyAddEquip</servlet-name>
+		<jsp-file>/WEB-INF/jsp/comp/company_equip_add.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>companyAddEquip</servlet-name>
+		<url-pattern>/company/equipment/add</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -90,7 +108,16 @@
 		<servlet-name>showProduct</servlet-name>
 		<url-pattern>/detail/*</url-pattern>
 	</servlet-mapping>
-	
+
+	<servlet>
+		<servlet-name>deleteOffice</servlet-name>
+		<servlet-class>com.rent1.servlet.DeleteOfficeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>deleteOffice</servlet-name>
+		<url-pattern>/delete/office</url-pattern>
+	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>search</servlet-name>
 		<servlet-class>com.rent1.servlet.SearchProductServlet</servlet-class>
@@ -181,7 +208,51 @@
 		<url-pattern>/company/check</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>searchOfficeProds</servlet-name>
+		<servlet-class>com.rent1.servlet.SearchOfficeProductServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>searchOfficeProds</servlet-name>
+		<url-pattern>/company/search/product</url-pattern>
+	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>addOfficeProds</servlet-name>
+		<servlet-class>com.rent1.servlet.AddOfficeProductServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>addOfficeProds</servlet-name>
+		<url-pattern>/company/add/product</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>companyEquip</servlet-name>
+		<servlet-class>com.rent1.servlet.ShowOfficeEquipmentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>companyEquip</servlet-name>
+		<url-pattern>/company/equipment</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>deleteEquipment</servlet-name>
+		<servlet-class>com.rent1.servlet.DeleteOfficeEquipmentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>deleteEquipment</servlet-name>
+		<url-pattern>/company/equipment/delete</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>updateEquipment</servlet-name>
+		<servlet-class>com.rent1.servlet.UpdateOfficeProductServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>updateEquipment</servlet-name>
+		<url-pattern>/company/update/product</url-pattern>
+	</servlet-mapping>
+			
 	<!-- ################# -->
 	<!-- ## Error Codes ## -->
 	<!-- ################# -->
@@ -207,6 +278,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<display-name>Rent1</display-name>
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

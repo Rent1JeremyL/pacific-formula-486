@@ -3,6 +3,7 @@ package com.rent1.entity;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,14 +19,12 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Index;
-import com.googlecode.objectify.annotation.Serialize;
 import com.rent1.dao.CompanyDao;
 import com.rent1.dao.NoticeDao;
 import com.rent1.dao.UserDao;
 import com.rent1.utils.EncryptUtils;
 
 @Entity
-@Serialize
 @NoArgsConstructor
 public class User implements Serializable {
 	private static final long serialVersionUID = 4569996182825475350L;
@@ -104,9 +103,11 @@ public class User implements Serializable {
 	 */
 	public List<Notice> getNotices(boolean refresh) {
 		if (this.notices == null || refresh) {
-			this.notices = NoticeDao.INSTANCE.getNoticesByUser(this);
-			for (Notice note : this.notices) {
+			List<Notice> noticeProxy = NoticeDao.INSTANCE.getNoticesByUser(this);
+			notices = new ArrayList<Notice>();
+			for (Notice note : noticeProxy) {
 				note.setUser(this);
+				notices.add(note);
 			}
 		}
 		return this.notices;

@@ -35,11 +35,11 @@ public class PlaceSearchTest {
 	public void setUp() throws InterruptedException {
 		helper.setUp();
 
-		surrey = PlaceDao.INSTANCE.getPlaceByRegoin("Surrey", "BC", "Canada");
+		surrey = PlaceDao.INSTANCE.getPlaceByRegion("Surrey", "BC", "Canada");
 		Thread.currentThread().sleep(1100);
-		delta = PlaceDao.INSTANCE.getPlaceByRegoin("Delta", "BC", "Canada");
+		delta = PlaceDao.INSTANCE.getPlaceByRegion("Delta", "BC", "Canada");
 		Thread.currentThread().sleep(1100);
-		whistler = PlaceDao.INSTANCE.getPlaceByRegoin("Whistler", "BC",
+		whistler = PlaceDao.INSTANCE.getPlaceByRegion("Whistler", "BC",
 				"Canada");
 	}
 

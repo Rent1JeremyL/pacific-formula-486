@@ -151,7 +151,7 @@
 										</div>
 										<div id=tabSpec>
 											<h3 class="title_green">Dimensions</h3>
-											<table width="100%" cellpadding="0" class="det_table_spec">
+											<table class="det_table_spec">
 												<tbody>
 													<tr>
 														<td class="rb-Name">A. Length with Bucket</td>

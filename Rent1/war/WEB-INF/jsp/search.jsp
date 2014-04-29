@@ -24,15 +24,15 @@
 <script src="//code.jquery.com/jquery-1.9.1.js"></script>
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <!-- END [Ajax Datepicker] -->
-<!-- javascript load bootstrap elements =============== -->
+<!-- ==== START [load bootstrap elements] ========== -->
 <script src="/webincludes/js/bootstrap.min.js"></script>
-<!-- ================================================== -->
-<!-- START [Gooogle Map Engine] -->
+<!-- ==== END ====================================== -->	
+<!-- START [Google Map Engine] -->
 <link type="text/css" rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
 <script
 	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
-<!-- END [Gooogle Map Engine] -->
+<!-- END [Google Map Engine] -->
 <script src="/webincludes/js/rent1.js"></script>
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -51,18 +51,31 @@
 			document.getElementById('location').value='<%=session.getAttribute("searchLoc")%>';
 			document.getElementById('rentstart').value='<%=session.getAttribute("searchStart")%>';
 			document.getElementById('rentend').value='<%=session.getAttribute("searchEnd")%>';
+			document.getElementById('rentdistance').value='<%=session.getAttribute("searchDist")%>';
 		});
 	</script>
+<script>
+<%
+String secCatas = CategoryFactory.getInstance().getAllSecondayCatagoriesToJSArray();
+%>
+$(function() {
+	var availableTags = [<%=secCatas%>];
+	$( "#rental" ).autocomplete({
+		source: availableTags
+	});
+});
+</script>	
 	<%
-		List<RentalProduct> prods = (ArrayList<RentalProduct>) session
+		List<RentalProduct> prods = (ArrayList<RentalProduct>) request
 				.getAttribute("products");
+		Integer noOfRecords = (Integer) request.getAttribute("noOfRecords");
 	%>
 	<%@include file='/WEB-INF/jsp/header.jsp'%>
 	<div class="content">
 		<div class="container">
 			<div class="row search-horizontal">
 				<div class="span12">
-					<form class="form-horizontal find-equipment gray-box" method='POST'
+					<form id="rentsearch" class="form-horizontal find-equipment gray-box" method='POST'
 						action='/search'>
 						<fieldset>
 							<div class="rental-wrap wrap span3">
@@ -78,11 +91,11 @@
 									style="display: none;">Please set location</p>
 								<span class="icon-map-marker"></span>
 							</div>
-							<div class="rentstart wrap span2">
+							<div class="wrap span2">
 								<input id="rentstart" name="rentstart" placeholder="Start Date"
 									type="text" required> <span class="icon-calendar"></span>
 							</div>
-							<div class="rentend wrap span2">
+							<div class="wrap span2">
 								<input id="rentend" name="rentend" placeholder="End Date"
 									type="text" required> <span class="icon-calendar"></span>
 							</div>
@@ -112,7 +125,7 @@
 						class="block block-block operators-for-hire-block block-7 block-block-7 even"
 						id="block-block-7">
 						<div class="block-inner clearfix">
-							<h4 class="block-title">Suport RENT1</h4>
+							<h4 class="block-title">Support RENT1</h4>
 							<div class="content clearfix">
 								<p style="text-align: center;">
 								(Scrolling ad window below)
@@ -124,9 +137,35 @@
 				</aside>
 
 				<div class="span9">
-					<div class="pad10 gray-box">
-						<%=prods.size()%>
-						results
+					<div class="pad10 gray-box" style="line-height: 50px;">
+						<div class="wrap"><%=noOfRecords%> results </div>
+						<div class="wrap"><table><tr>
+						<% 
+						if(noOfRecords > 0){
+							Integer pages = (Integer) request.getAttribute("noOfPages");
+							Integer curPage = (Integer) request.getAttribute("currentPage");
+							for(int i = 1; i <= pages; i++){
+								if(curPage==i){
+								%><td><%=i %></td>
+						<%
+								}else{ %>
+							<td><a href="/search?page=<%=i %>"><%=i %></a></td>
+						<%
+								}
+							}
+						}%></tr></table>
+						</div>
+						<div class="wrap pull-right pad15 span3" style="margin-top: -75px;">
+								<label>Select Distance</label>
+								<select id="rentdistance" name="rentdistance" form="rentsearch">
+									<option value="25">25</option>
+									<option value="50">50</option>
+									<option value="100">100</option>
+									<option value="250">250</option>
+									<option value="500">500</option>
+									<option value="unlimited">Unlimited</option>
+								</select>
+						</div>
 					</div>
 
 					<ul class="search-view">
@@ -147,9 +186,7 @@
 								</div>
 								<div class="location"><%=prd.getCity() + ", " + prd.getState()%></div>
 								<div class="brand">
-									<a class="brand-thumb pull-left"
-										href="<%=prd.getCompanyHref()%>" target="_blank"><img
-										src="<%=prd.getMakeImg()%>" /></a>
+									<img src="<%=prd.getMakeImg()%>" />
 									<div class="spec">
 										<strong><%=prd.getSpecs().getPrimarySpecType()%></strong>
 										<%=prd.getSpecs().getPrimarySpecValue()%><br> <strong><%=prd.getSpecs().getSecondarySpecType()%></strong>
@@ -161,8 +198,8 @@
 							<div class="pull-right info">
 								<div class="price">
 									<%
-										Integer days = (Integer) session.getAttribute("rentalDays");
-											String[] defRates = prd.getPricePlan().getDefaultRateValues(
+										Integer days = (Integer) request.getAttribute("rentalDays");
+										String[] defRates = prd.getPricePlan().getDefaultRateValues(
 													days.intValue());
 									%>
 									<sup class="symbol"><%=prd.getPricePlan().getCurrencySymbol()%></sup>

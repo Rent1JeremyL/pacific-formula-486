@@ -14,7 +14,7 @@ import com.rent1.entity.RentalProduct;
 
 public class ShowProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String HTTP_MAIN = "/";
+	private static final String HTTP_MAIN = "/product";
 	private static final Logger log = Logger
 			.getLogger(ShowProductServlet.class);
 
@@ -22,13 +22,13 @@ public class ShowProductServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		String[] parse = req.getPathInfo().split("/");
-		Long id = Long.valueOf(parse[1]);
+		String[] parse = req.getRequestURI().split("/");
+		Long id = Long.valueOf(parse[2]);
 
 		RentalProduct prod = RentalProductDao.INSTANCE.getProductById(id);
 
 		req.getSession().setAttribute("showProduct", prod);
-		req.getRequestDispatcher("/product").forward(req, resp);
+		req.getRequestDispatcher(HTTP_MAIN).forward(req, resp);
 		return;
 	}
 }

@@ -18,8 +18,9 @@ public class CreateOfficeServlet extends HttpServlet {
 	private static final Logger log = Logger
 			.getLogger(CreateOfficeServlet.class);
 
-	private static final String HTTP_MAIN = "/company/add/office";
-
+	private static final String HTTP_SRC = "/company/add/office";
+	private static final String HTTP_FORWARD = "/company/offices";
+	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
@@ -46,11 +47,11 @@ public class CreateOfficeServlet extends HttpServlet {
 					"We could not create the office at this time."
 							+ " If this persists please contact support.");
 
-			req.getRequestDispatcher(HTTP_MAIN).forward(req, resp);
+			req.getRequestDispatcher(HTTP_SRC).forward(req, resp);
 			return;
 		}
 
-		req.getRequestDispatcher("/company").forward(req, resp);
+		resp.sendRedirect(HTTP_FORWARD);
 		return;
 	}
 }

@@ -571,13 +571,13 @@ body.fb_hidden {
 
 .userprof_headers {
 	color: #3E3E3E;
-	background-color: #FECD08;
+	background-color: #FFCC00;
 	background-repeat: repeat;
 }
 
 .blocksubhead {
 	color: #282E22;
-	background: none repeat-x scroll 0% 0% #FECD08;
+	background: none repeat-x scroll 0% 0% #FFCC00;
 	padding: 4px 10px;
 	border-top: 1px solid #282E22;
 }
@@ -644,13 +644,13 @@ button,input,textarea {
 }
 
 .profile_box_inset {
-	-webkit-box-shadow: inset 75px 10px 10px 3px #FECD08;
-	box-shadow: inset 75px 10px 10px 3px #FECD08;
+	-webkit-box-shadow: inset 75px 10px 10px 3px #FFCC00;
+	box-shadow: inset 75px 10px 10px 3px #FFCC00;
 }
 
 .profile_box_left {
-	-webkit-box-shadow: inset 75px 10px 10px 0px #FECD08;
-	box-shadow: inset 75px 10px 10px 0px #FECD08;
+	-webkit-box-shadow: inset 75px 10px 10px 0px #FFCC00;
+	box-shadow: inset 75px 10px 10px 0px #FFCC00;
 }
 
 .section-title_h {
@@ -662,17 +662,16 @@ button,input,textarea {
 
 .boxed-group {
 	position: relative;
-	background: none repeat scroll 0% 0% #EFEFEF;
+	background: none repeat scroll 0% 0% #666666;
 	padding: 3px;
 	border-radius: 3px;
 	margin: 0px 0px 15px;
 	float: left;
-	width: 715px;
 }
 
 .boxed-group>h3,.boxed-group .heading {
 	background-color: #E0E0E0;
-	background-image: linear-gradient(#FAFAFA, #E0E0E0);
+	background-image: linear-gradient(#FFCC00, white);
 	background-repeat: repeat-x;
 	margin: 0px;
 	border-top-left-radius: 1px;
@@ -709,8 +708,8 @@ button,input,textarea {
 
 .boxed-menu {
 	position: relative;
-	background: none repeat scroll 0% 0% #EFEFEF;
-	padding: 6px;
+	background: none repeat scroll 0% 0% #666666;
+	padding: 3px;
 	border-radius: 3px;
 	margin: 10px 0px 0px 3px;
 	float: left;
@@ -737,7 +736,7 @@ button,input,textarea {
 
 .boxed-menu>h3,.boxed-menu .heading {
 	background-color: #E0E0E0;
-	background-image: linear-gradient(#FAFAFA, #E0E0E0);
+	background-image: linear-gradient(#FFCC00, white);
 	background-repeat: repeat-x;
 	margin: 0px;
 	border-top-left-radius: 1px;
@@ -808,7 +807,7 @@ button,input,textarea {
 	font-size: 16px;
 	font-weight: bold;
 	width: inherit;
-	font-family: Helvetica,Arial,sans-serif;
+	font-family: Helvetica, Arial, sans-serif;
 }
 
 .price_box {
@@ -816,7 +815,7 @@ button,input,textarea {
 }
 
 .det_table_price td {
-	color: #FECD08;
+	color: #FFCC00;
 	border: 1px solid #807057;
 	text-align: center;
 	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.35);
@@ -843,7 +842,10 @@ button,input,textarea {
 }
 
 .det_table_spec {
-	font-size: 14px;	
+	font-size: 14px;
+	border: 1px solid #D4D4D4;
+	cellpadding: 0px;
+	width: 100%;
 }
 
 .det_table_spec td {
@@ -883,6 +885,41 @@ button,input,textarea {
 	position: relative;
 	margin-left: 150px;
 }
-.img_border{
+
+.img_border {
 	border: 1px solid #D4D4D4;
+}
+
+.span14 {
+	width: 1096px;
+}
+
+.container14 {
+	width: 1096px;
+}
+
+.placeholder-label {
+	left: 11px;
+	color: #666;
+	user-select: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none
+}
+
+.table_small {
+	border-collapse: collapse;
+	border: none;
+	cellpadding: 0px;
+}
+
+.table_small td,tr {
+	border-collapse: collapse;
+	border: none;
+}
+
+.table_small th {
+	font-size: 12px;
 }

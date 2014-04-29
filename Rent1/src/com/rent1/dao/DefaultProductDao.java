@@ -89,7 +89,7 @@ public enum DefaultProductDao {
 		return prods;
 	}
 
-	public DefaultProduct getProductById(int id) {
+	public DefaultProduct getProductById(Long id) {
 		DefaultProduct p = ofy().load().type(DefaultProduct.class)
 				.filter("id", id).first().now();
 

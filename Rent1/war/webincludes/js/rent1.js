@@ -41,7 +41,7 @@ function fillInAddress() {
 	 * document.getElementById(addressType).value = val; } }
 	 */
 	// var address = '';
-	 if (place.address_components) {
+	if (place.address_components) {
 		var val = place.address_components[0];
 		document.getElementById("loc_city").value = 'Hellow W';
 	}
@@ -75,7 +75,7 @@ function servletPost(xx) {
 }
 // [END Web.xml Servlet re-direct]
 
-//[START Show/Hide by Id]
+// [START Show/Hide by Id]
 function toggle_visibility(id) {
 	var e = document.getElementById(id);
 	if (e.style.display == 'block')
@@ -83,28 +83,49 @@ function toggle_visibility(id) {
 	else
 		e.style.display = 'block';
 }
-//[END Show/Hide by Id]
+// [END Show/Hide by Id]
 
-//[START Link Primary and Secondary Categories]
-function populateSecCategory(priElemId, secElemId){
-	
-	var index = document.getElementById( priElemId ).selectedIndex;				
-	var stateElement = document.getElementById( secElemId );
-			
-	stateElement.length=0;
-	stateElement.options[0] = new Option('Select Category','');
-									
+// [START Link Primary and Secondary Categories]
+function populateSecCategory(priElemId, secElemId) {
+
+	var index = document.getElementById(priElemId).selectedIndex;
+	var stateElement = document.getElementById(secElemId);
+
+	stateElement.length = 0;
+	stateElement.options[0] = new Option('Select Category', '');
+
 	var state_arr = secArray[index].split("|");
 
-	for (var i=0; i<state_arr.length; i++) {
-		stateElement.options[stateElement.length] = new Option(state_arr[i],state_arr[i]);
+	for (var i = 0; i < state_arr.length; i++) {
+		stateElement.options[stateElement.length] = new Option(state_arr[i],
+				state_arr[i]);
 	}
 	stateElement.selectedIndex = 0;
 }
-//[END]
+// [END]
 
-//[START Change Image on Click]
+// [START Change Image on Click]
 function changeImage(elem, image) {
-    document.getElementById(elem).src = image;
+	document.getElementById(elem).src = image;
 }
+// [END]
+
+// [START Show/Hide Detail Group]
+function showDetailsGroup(elem, det, id, count) {
+	document.getElementById(elem).style.display = 'block';
+
+	for (var i = 1; i <= count; i++) {
+		document.getElementById(det+i).style.display = 'none';
+	}
+	document.getElementById(det+id).style.display = 'block';
+}
+// [END]
+
+//[START Confirm Delete]
+function deletechecked(message)
+{
+    var answer = confirm(message);
+    
+    return answer;  
+}  
 //[END]

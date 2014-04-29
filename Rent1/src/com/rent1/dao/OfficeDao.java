@@ -21,8 +21,8 @@ public enum OfficeDao {
 		return office;
 	}
 
-	public Office getOfficeById(Long userID) {
-		Office office = ofy().load().type(Office.class).filter("id", userID)
+	public Office getOfficeById(Long officeKey) {
+		Office office = ofy().load().type(Office.class).filter("id", officeKey)
 				.first().now();
 
 		return office;
@@ -37,11 +37,18 @@ public enum OfficeDao {
 		offices.values();
 		return (List<Office>) offices.values();
 	}
-	
-	public List<Office> getOfficesByCompany(Company company){
+
+	public List<Office> getOfficesByCompany(Company company) {
 		List<Office> offices = ofy().load().type(Office.class)
 				.filter("companyKey", company.getKey()).list();
-		
+
 		return offices;
+	}
+
+	public void deleteOfficeById(Long officeId) {
+		Office office = getOfficeById(officeId);
+		log.debug("Deleting office, " + office.toShortString() + " [Key="
+				+ office.getKey());
+		ofy().delete().entity(office).now();
 	}
 }

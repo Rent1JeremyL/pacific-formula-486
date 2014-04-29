@@ -1,5 +1,6 @@
 package com.rent1.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Getter;
@@ -20,30 +21,17 @@ import com.rent1.dao.UserDao;
 @Entity
 @Cache
 @NoArgsConstructor
-public class Notice {
+public class Notice implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(Notice.class);
 	private static final String COMPANY_ALERT = "You have been added to the company: ";
 
-	@Id
-	@Getter
-	@Setter
-	private Long id;
-	@Index
-	@Getter
-	@Setter
-	@Parent
-	private Key<User> userKey;
-	@Ignore
-	@Setter
-	private User user;
-	@Getter
-	@Setter
-	private String message;
-	@Getter
-	@Setter
-	private boolean read = false;
-	@Getter
-	private Date createDate = new Date();
+	@Id @Getter @Setter private Long id;
+	@Index @Getter @Setter @Parent private Key<User> userKey;
+	@Ignore @Setter private User user;
+	@Getter @Setter private String message;
+	@Getter @Setter private boolean read = false;
+	@Getter private Date createDate = new Date();
 
 	public static Notice newCompanyAlert(Company comp, User user) {
 		Notice note = new Notice();

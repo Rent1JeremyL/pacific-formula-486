@@ -1,5 +1,7 @@
 package com.rent1.entity;
 
+import java.util.Locale;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,15 +28,10 @@ public class Place {
 	@Index @Getter @Setter private String city;
 	@Index @Getter @Setter private String state;
 	@Index @Getter @Setter private String country;
+	@Getter @Setter private String country_code;
 
 	public Place(OpenStreetMap oSM) {
-		this.latitude = oSM.getLat();
-		this.longitude = oSM.getLon();
-		this.city = oSM.getAddress().getCity();
-		if (this.city == null)
-			this.city = oSM.getAddress().getTown();
-		this.state = oSM.getAddress().getState();
-		this.country = oSM.getAddress().getCountry();
+		this(oSM, oSM.getAddress().getState());
 	}
 
 	/**
@@ -51,6 +48,7 @@ public class Place {
 		if (this.city == null)
 			this.city = oSM.getAddress().getTown();
 		this.country = oSM.getAddress().getCountry();
+		this.country_code = oSM.getAddress().getCountry_code();
 
 		this.state = state;
 	}
@@ -68,4 +66,7 @@ public class Place {
 				&& getLongitude() < bb.getEast();
 	}
 
+	public Locale getLocale() {
+		return new Locale(country_code.toUpperCase());
+	}
 }

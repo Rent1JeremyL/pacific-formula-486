@@ -18,20 +18,20 @@
 <link rel="stylesheet" href="/webincludes/css/font-awesome.min.css">
 <link rel="stylesheet" href="/webincludes/css/rent1.css">
 
-<!-- START [Ajax Datepicker] -->
+<!-- ==== START [Ajax Datepicker] -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.9.1.js"></script>
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<!-- END [Ajax Datepicker] -->
-<!-- javascript load bootstrap elements =============== -->
+<!-- ==== END [Ajax Datepicker] -->
+<!-- ==== START [load bootstrap elements] ========== -->
 <script src="/webincludes/js/bootstrap.min.js"></script>
-<!-- ================================================== -->	
-<!-- START [Gooogle Map Engine] -->
+<!-- ==== END ====================================== -->	
+<!-- ==== START [Google Map Engine] -->
 <link type="text/css" rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
 <script
 	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
-<!-- END [Gooogle Map Engine] -->
+<!-- ==== END [Google Map Engine] -->
 <script src="/webincludes/js/rent1.js"></script>
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -64,6 +64,7 @@ $(function() {
 		<div class="container">
 			<h1>Find your equipment.</h1>
 			<h3>Rent from over 1,421 cities across North America.</h3>
+			<div style="color: #FF0000;">${errorMessage}</div>
 			<form class="form-horizontal well" method='POST'
 				action='/search'>
 				<fieldset>

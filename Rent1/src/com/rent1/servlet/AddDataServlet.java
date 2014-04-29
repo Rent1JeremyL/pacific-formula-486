@@ -32,7 +32,7 @@ public class AddDataServlet extends HttpServlet {
 		long time = System.currentTimeMillis();
 		List<DefaultProduct> prods = DefaultProductDao.INSTANCE.getProducts();
 
-		PricePlan pp = new PricePlan(Locale.CANADA);
+		PricePlan pp = new PricePlan("ca");
 		pp.setRateDaily(240);
 		pp.setRateWeekly(1200);
 		pp.setRateMonthly(3800);
@@ -40,21 +40,21 @@ public class AddDataServlet extends HttpServlet {
 		Place here = null;
 		switch (ValidationUtils.randInt(1, 5)) {
 		case 1:
-			here = PlaceDao.INSTANCE.getPlaceByRegoin("Surrey", "BC", "Canada");
+			here = PlaceDao.INSTANCE.getPlaceByRegion("Surrey", "BC", "Canada");
 			break;
 		case 2:
-			here = PlaceDao.INSTANCE.getPlaceByRegoin("Delta", "BC", "Canada");
+			here = PlaceDao.INSTANCE.getPlaceByRegion("Delta", "BC", "Canada");
 			break;
 		case 3:
-			here = PlaceDao.INSTANCE.getPlaceByRegoin("Vancouver", "BC",
+			here = PlaceDao.INSTANCE.getPlaceByRegion("Vancouver", "BC",
 					"Canada");
 			break;
 		case 4:
 			here = PlaceDao.INSTANCE
-					.getPlaceByRegoin("Langley", "BC", "Canada");
+					.getPlaceByRegion("Langley", "BC", "Canada");
 			break;
 		case 5:
-			here = PlaceDao.INSTANCE.getPlaceByRegoin("Hope", "BC", "Canada");
+			here = PlaceDao.INSTANCE.getPlaceByRegion("Hope", "BC", "Canada");
 			break;
 		}
 

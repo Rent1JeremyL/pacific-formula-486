@@ -20,44 +20,18 @@ import com.rent1.dao.PlaceDao;
 @Cache
 @NoArgsConstructor
 public class Office {
-	@Id
-	@Getter
-	@Setter
-	private Long id;
+	@Id @Getter @Setter private Long id;
 
-	@Index
-	@Getter
-	@Setter
-	private Key<Company> companyKey;
-	@Getter
-	@Setter
-	private String street1;
-	@Getter
-	@Setter
-	private String street2 = "";
-	@Getter
-	@Setter
-	private String city;
-	@Getter
-	@Setter
-	private String postCode;
-	@Getter
-	@Setter
-	private String country;
-	@Getter
-	@Setter
-	private String state;
-	@Getter
-	@Setter
-	private String phone = "";
-	@Getter
-	@Setter
-	private String fax = "";
-	@Load
-	private Set<Ref<RentalProduct>> equipment;
-	@Getter
-	@Setter
-	private Key<Place> placeKey;
+	@Index @Getter @Setter private Key<Company> companyKey;
+	@Getter @Setter private String street1;
+	@Getter @Setter private String street2 = "";
+	@Getter @Setter private String city;
+	@Getter @Setter private String postCode;
+	@Getter @Setter private String country;
+	@Getter @Setter private String state;
+	@Getter @Setter private String phone = "";
+	@Getter @Setter private String fax = "";
+	@Getter @Setter private Key<Place> placeKey;
 
 	public Key<Office> getKey() {
 		return Key.create(Office.class, id);
@@ -74,17 +48,20 @@ public class Office {
 
 	public static Office createOffice(Company comp, String street1,
 			String street2, String city, String postCode, String state,
-			String country, String phone, String fax) {
+			String country, String phone, String fax) throws Exception {
 
-		Place here = PlaceDao.INSTANCE.getPlaceByRegoin(city, state, country);
+		Place here = PlaceDao.INSTANCE.getPlaceByRegion(city, state, country);
 
+		if (!here.getCity().equals(city) && !here.getCity().contains(city)) {
+			throw new Exception("The office address does not exist.");
+		}
 		Office office = new Office();
 		office.setStreet1(street1);
 		office.setStreet2(street2);
-		office.setCity(city);
+		office.setCity(here.getCity());
 		office.setPostCode(postCode);
-		office.setState(state);
-		office.setCountry(country);
+		office.setState(here.getState());
+		office.setCountry(here.getCountry());
 		office.setPhone(phone);
 		office.setFax(fax);
 
