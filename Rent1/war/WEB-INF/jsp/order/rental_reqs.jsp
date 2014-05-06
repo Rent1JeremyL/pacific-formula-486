@@ -1,7 +1,7 @@
 <%@page contentType="text/html;charset=UTF-8" language="java"%>
 <head>
 <meta charset="utf-8">
-<title>RENT1 - template</title>
+<title>RENT1 - Rental Requirements</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="description">
 <meta content="" name="author">
@@ -29,10 +29,28 @@
 		<div class="det_container box_outset">
 			<div>
 				<div class="section-title_h">
-					<h3 class="title_green">Template</h3>
+					<h3 class="title_green">Rental Requirements</h3>
 				</div>
 				<br>
-				<div><p>the template</p>
+				<div style="margin-left: 30px; color: black;">
+					<p>The following are the Rent1 requirements for renting from
+						our site:</p>
+					<ul>
+						<li>You must have a Rent1 user account and be logged in</li>
+						<li>Your user account must be <a href="#">Rent1 Verified</a></li>
+						<li>You must have completed the address portion of your user
+							profile</li>
+					</ul>
+					<p>
+						Please ensure you have completed all of the above steps. If you
+						have fullfilled the requirements and are still having trouble
+						contact our <a href="#">Customer Support</a>.
+					</p>
+					<br>
+					<div class="section-title_h" style="padding: 10px 20px">
+						<a href="/"> back </a>
+					</div>
+					<br>
 				</div>
 			</div>
 		</div>

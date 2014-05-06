@@ -114,7 +114,7 @@
 													<div class="delivery">
 														+ Delivery Rate
 														<div style="float: right;">
-															<a href="#" class="btn btn-primary btn-small">Rent
+															<a href="/rent-now?prodId=<%=prod.getId()%>" class="btn btn-primary btn-small">Rent
 																Now</a>
 														</div>
 													</div>

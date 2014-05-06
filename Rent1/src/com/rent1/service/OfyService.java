@@ -9,6 +9,7 @@ import com.rent1.entity.Company;
 import com.rent1.entity.DefaultProduct;
 import com.rent1.entity.Notice;
 import com.rent1.entity.Office;
+import com.rent1.entity.Order;
 import com.rent1.entity.Place;
 import com.rent1.entity.PricePlan;
 import com.rent1.entity.ProductDetail;
@@ -31,6 +32,7 @@ public class OfyService {
 		factory().register(ProductDetail.class);
 		factory().register(RentalProduct.class);
 		factory().register(User.class);
+		factory().register(Order.class);
 
 		factory().register(CompanyGroup.class);
 

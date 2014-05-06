@@ -1,4 +1,4 @@
-package com.rent1.servlet;
+package com.rent1.servlet.comp;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -10,16 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.googlecode.objectify.Key;
-import com.rent1.dao.DefaultProductDao;
-import com.rent1.dao.OfficeDao;
-import com.rent1.dao.PlaceDao;
 import com.rent1.dao.RentalProductDao;
-import com.rent1.entity.Company;
-import com.rent1.entity.Office;
-import com.rent1.entity.Place;
 import com.rent1.entity.PricePlan;
-import com.rent1.entity.Product;
 import com.rent1.entity.RentalProduct;
 
 @SuppressWarnings("serial")
@@ -34,6 +26,7 @@ public class UpdateOfficeProductServlet extends HttpServlet {
 
 		req.getSession().setAttribute("errCompany", null);
 
+		@SuppressWarnings("unchecked")
 		Enumeration<String> paramNames = req.getParameterNames();
 		String id = null;
 		while (paramNames.hasMoreElements()) {

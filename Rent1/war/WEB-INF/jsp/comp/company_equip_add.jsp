@@ -68,7 +68,7 @@ $(function() {
 	<div class="content" style="background: #D8D8D8;">
 		<div class="jumbotron  home bg-img"></div>
 		<div class="det_container box_outset">
-			<div id="profile">
+			<div>
 				<div class="section-title_h">
 					<h3 class="title_green">
 						<%=comp.getName()%>

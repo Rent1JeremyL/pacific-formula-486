@@ -125,7 +125,7 @@
 												<input id="add-street1-<%=linkID%>"
 													class="placeholder-label data_input_right"
 													name="add-street1-<%=linkID%>"
-													value="<%=office.getStreet1() %>" disabled="disabled"
+													value="<%=office.getAddress().getStreet1() %>" disabled="disabled"
 													type="text" style="width: 210px;"
 													required>
 											</div>
@@ -134,7 +134,7 @@
 												<input id="add-street2-<%=linkID%>"
 													class="placeholder-label data_input_right"
 													name="add-street2-<%=linkID%>"
-													value="<%=office.getStreet2() %>" disabled="disabled"
+													value="<%=office.getAddress().getStreet2() %>" disabled="disabled"
 													type="text" style="width: 210px;"
 													required>
 											</div>
@@ -143,7 +143,7 @@
 												<input id="add-city-<%=linkID%>"
 													class="placeholder-label data_input_right"
 													name="add-city-<%=linkID%>"
-													value="<%=office.getCity() %>" disabled="disabled"
+													value="<%=office.getAddress().getCity() %>" disabled="disabled"
 													type="text" style="width: 210px;"
 													required>
 											</div>
@@ -152,7 +152,7 @@
 												<input id="add-zip-<%=linkID%>"
 													class="placeholder-label data_input_right"
 													name="add-zip-<%=linkID%>"
-													value="<%=office.getPostCode() %>" disabled="disabled"
+													value="<%=office.getAddress().getPostCode() %>" disabled="disabled"
 													type="text" style="width: 210px;"
 													required>
 											</div>
@@ -161,7 +161,7 @@
 												<input id="add-state-<%=linkID%>"
 													class="placeholder-label data_input_right"
 													name="add-state-<%=linkID%>"
-													value="<%=office.getState() %>" disabled="disabled"
+													value="<%=office.getAddress().getState() %>" disabled="disabled"
 													type="text" style="width: 210px;"
 													required>
 											</div>
@@ -170,7 +170,7 @@
 												<input id="add-country-<%=linkID%>"
 													class="placeholder-label data_input_right"
 													name="add-country-<%=linkID%>"
-													value="<%=office.getCountry() %>" disabled="disabled"
+													value="<%=office.getAddress().getCountry() %>" disabled="disabled"
 													type="text" style="width: 210px;"
 													required>
 											</div>

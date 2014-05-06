@@ -1,4 +1,4 @@
-package com.rent1.servlet;
+package com.rent1.servlet.comp;
 
 import java.io.IOException;
 
@@ -12,7 +12,6 @@ import org.apache.log4j.Logger;
 import com.rent1.dao.OfficeDao;
 import com.rent1.dao.RentalProductDao;
 import com.rent1.entity.Office;
-import com.rent1.entity.RentalProduct;
 import com.rent1.entity.User;
 
 @SuppressWarnings("serial")

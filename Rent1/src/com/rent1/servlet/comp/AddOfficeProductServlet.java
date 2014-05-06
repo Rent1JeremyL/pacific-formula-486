@@ -1,4 +1,4 @@
-package com.rent1.servlet;
+package com.rent1.servlet.comp;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -35,11 +35,12 @@ public class AddOfficeProductServlet extends HttpServlet {
 		req.getSession().setAttribute("errCompany", null);
 		req.getSession().setAttribute("resultMessage", null);
 
+		@SuppressWarnings("unchecked")
 		Enumeration<String> paramNames = req.getParameterNames();
 		String id = null;
 		while (paramNames.hasMoreElements()) {
 			// check for submit button id
-			String paramName = (String) paramNames.nextElement();
+			String paramName = paramNames.nextElement();
 			if (paramName.contains("submit")) {
 				String[] parse = paramName.split("-");
 				id = parse[1];

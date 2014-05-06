@@ -22,37 +22,26 @@ function initialize_sbar() {
 // The START and END in square brackets define a snippet for our
 // documentation:
 // [START region_fillform]
-function fillInAddress() {
-	// Get the place details from the autocomplete object.
-	var place = autocomplete.getPlace();
+function fillInAddress(componentForm, autocomplete) {
+	  // Get the place details from the autocomplete object.
+	  var place = autocomplete.getPlace();
 
-	for ( var component in locationArray) {
-		document.getElementById(component).value = '';
-		document.getElementById(component).disabled = false;
+	  for (var component in componentForm) {
+	    document.getElementById(component).value = '';
+	    document.getElementById(component).disabled = false;
+	  }
+
+	  // Get each component of the address from the place details
+	  // and fill the corresponding field on the form.
+	  for (var i = 0; i < place.address_components.length; i++) {
+	    var addressType = place.address_components[i].types[0];
+	    if (componentForm[addressType]) {
+	      var val = place.address_components[i][componentForm[addressType]];
+	      document.getElementById(addressType).value = val;
+	    }
+	  }
 	}
 
-	// Get each component of the address from the place details
-	// and fill the corresponding field on the form.
-	/**
-	 * for (var i = 0; i < place.address_components.length; i++) { var
-	 * addressType = place.address_components[i].types[0]; if
-	 * (componentForm[addressType]) { var val =
-	 * place.address_components[i][componentForm[addressType]];
-	 * document.getElementById(addressType).value = val; } }
-	 */
-	// var address = '';
-	if (place.address_components) {
-		var val = place.address_components[0];
-		document.getElementById("loc_city").value = 'Hellow W';
-	}
-	/**
-	 * address = [ (place.address_components[0] &&
-	 * place.address_components[0].short_name || ''),
-	 * (place.address_components[1] && place.address_components[1].short_name ||
-	 * ''), (place.address_components[2] &&
-	 * place.address_components[2].short_name || '') ].join(' ');
-	 */
-}
 // [END region_fillform]
 
 // [START region_geolocation]

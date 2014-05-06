@@ -116,7 +116,7 @@
 													<div class="collapse" id="table-<%=linkID%>">
 														<form id="frm-add-prod" action="/company/update/product"
 															method="post">
-															<div style="color: red;">${errCompany}</div>
+															<!--  div style="color: red;">${errCompany}</div -->
 															<table class="det_table_spec">
 																<%
 																	for (RentalProduct rp : rps) {

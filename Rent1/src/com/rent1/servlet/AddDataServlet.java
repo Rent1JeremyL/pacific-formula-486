@@ -3,7 +3,6 @@ package com.rent1.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.rent1.dao.PlaceDao;
 import com.rent1.dao.DefaultProductDao;
+import com.rent1.dao.PlaceDao;
 import com.rent1.dao.RentalProductDao;
 import com.rent1.entity.DefaultProduct;
 import com.rent1.entity.Place;

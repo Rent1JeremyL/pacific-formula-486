@@ -186,7 +186,7 @@ $(function() {
 								</div>
 								<div class="location"><%=prd.getCity() + ", " + prd.getState()%></div>
 								<div class="brand">
-									<img src="<%=prd.getMakeImg()%>" />
+									<img src="<%=prd.getMakeImg()%>" style="width: 49.3px; height: 49.3px;"/>
 									<div class="spec">
 										<strong><%=prd.getSpecs().getPrimarySpecType()%></strong>
 										<%=prd.getSpecs().getPrimarySpecValue()%><br> <strong><%=prd.getSpecs().getSecondarySpecType()%></strong>
@@ -221,7 +221,7 @@ $(function() {
 										<th>Monthly</th>
 										<td rowspan="2"
 											style="width: 160px; text-align: center; padding-top: 15px;">
-											<a href="#" class="btn btn-primary btn-large">Rent Now</a>
+											<a href="/rent-now?prodId=<%=prd.getId()%>" class="btn btn-primary btn-large">Rent Now</a>
 										</td>
 									</tr>
 									<tr>

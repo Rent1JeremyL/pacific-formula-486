@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.googlecode.objectify.Key;
@@ -22,6 +23,7 @@ import com.googlecode.objectify.annotation.Index;
 import com.rent1.dao.CompanyDao;
 import com.rent1.dao.NoticeDao;
 import com.rent1.dao.UserDao;
+import com.rent1.reference.Address;
 import com.rent1.utils.EncryptUtils;
 
 @Entity
@@ -39,11 +41,18 @@ public class User implements Serializable {
 	@Getter @Setter private byte[] salt;
 	@Getter @Setter private String firstName = "";
 	@Getter @Setter private String lastName = "";
+	// TODO activate user
 	@Index @Getter @Setter private boolean active = false;
 	@Index @Getter @Setter private Key<Company> companyKey;
 	@Ignore private List<Notice> notices;
 	@Ignore @Setter private Company company;
+	// TODO verify user
 	@Index @Getter @Setter private boolean verified = false;
+
+	@Getter @Setter private Address address;
+	@Getter @Setter private String phone = "";
+	@Getter @Setter private String fax = "";
+	@Getter @Setter private String lastUpdated;
 
 	public static User registerNewUser(String email, String pass)
 			throws Exception {
@@ -52,6 +61,8 @@ public class User implements Serializable {
 		u.email = email;
 		u.salt = EncryptUtils.generateSalt();
 		u.password = EncryptUtils.getEncryptedPassword(pass, u.getSalt());
+		Address addr = new Address();
+		u.setAddress(addr);
 		return UserDao.INSTANCE.addUser(u);
 	}
 
@@ -103,7 +114,8 @@ public class User implements Serializable {
 	 */
 	public List<Notice> getNotices(boolean refresh) {
 		if (this.notices == null || refresh) {
-			List<Notice> noticeProxy = NoticeDao.INSTANCE.getNoticesByUser(this);
+			List<Notice> noticeProxy = NoticeDao.INSTANCE
+					.getNoticesByUser(this);
 			notices = new ArrayList<Notice>();
 			for (Notice note : noticeProxy) {
 				note.setUser(this);
@@ -117,8 +129,24 @@ public class User implements Serializable {
 		if (getCompanyKey() == null) {
 			return null;
 		} else if (this.company == null) {
-			company = CompanyDao.INSTANCE.getCompanyByKey(getCompanyKey());
+			company = CompanyDao.INSTANCE.getCompanyByKey(this.companyKey);
 		}
 		return company;
+	}
+
+	public boolean isAddressComplete() {
+		try {
+			if (StringUtils.isNotBlank(this.address.getStreet1().trim())
+					&& StringUtils.isNotBlank(this.address.getCity().trim())
+					&& StringUtils.isNotBlank(this.address.getState().trim())
+					&& StringUtils.isNotBlank(this.address.getCountry().trim())
+					&& StringUtils.isNotBlank(this.address.getPostCode().trim()))
+				return true;
+		} catch (NullPointerException e) {
+			log.warn("Address not complete.");
+			return false;
+		}
+
+		return false;
 	}
 }

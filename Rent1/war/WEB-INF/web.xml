@@ -96,13 +96,40 @@
 		<url-pattern>/register/company</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>showReqs</servlet-name>
+		<jsp-file>/WEB-INF/jsp/order/rental_reqs.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showReqs</servlet-name>
+		<url-pattern>/rental/requirements</url-pattern>
+	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>startOrderReq</servlet-name>
+		<jsp-file>/WEB-INF/jsp/order/rental_request.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>startOrderReq</servlet-name>
+		<url-pattern>/rental/request</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>reviewOrderReq</servlet-name>
+		<jsp-file>/WEB-INF/jsp/order/rental_review.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>reviewOrderReq</servlet-name>
+		<url-pattern>/rental/review-order</url-pattern>
+	</servlet-mapping>
+	
+		
 	<!-- ################ -->
 	<!-- ## Servlets ## -->
 	<!-- ################ -->
 	<servlet>
 		<servlet-name>showProduct</servlet-name>
-		<servlet-class>com.rent1.servlet.ShowProductServlet</servlet-class>
+		<servlet-class>com.rent1.servlet.prod.ShowProductServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>showProduct</servlet-name>
@@ -111,7 +138,7 @@
 
 	<servlet>
 		<servlet-name>deleteOffice</servlet-name>
-		<servlet-class>com.rent1.servlet.DeleteOfficeServlet</servlet-class>
+		<servlet-class>com.rent1.servlet.comp.DeleteOfficeServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>deleteOffice</servlet-name>
@@ -120,7 +147,7 @@
 
 	<servlet>
 		<servlet-name>search</servlet-name>
-		<servlet-class>com.rent1.servlet.SearchProductServlet</servlet-class>
+		<servlet-class>com.rent1.servlet.prod.SearchProductServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>search</servlet-name>
@@ -129,7 +156,7 @@
 
 	<servlet>
 		<servlet-name>saveProfile</servlet-name>
-		<servlet-class>com.rent1.servlet.SaveProfileServlet</servlet-class>
+		<servlet-class>com.rent1.servlet.user.SaveProfileServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>saveProfile</servlet-name>
@@ -138,7 +165,7 @@
 
 	<servlet>
 		<servlet-name>doRegister</servlet-name>
-		<servlet-class>com.rent1.servlet.CreateAccountServlet</servlet-class>
+		<servlet-class>com.rent1.servlet.user.CreateAccountServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>doRegister</servlet-name>
@@ -147,7 +174,7 @@
 
 	<servlet>
 		<servlet-name>doRegisterCompany</servlet-name>
-		<servlet-class>com.rent1.servlet.CreateCompanyServlet</servlet-class>
+		<servlet-class>com.rent1.servlet.comp.CreateCompanyServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>doRegisterCompany</servlet-name>
@@ -156,7 +183,7 @@
 
 	<servlet>
 		<servlet-name>doRegisterOffice</servlet-name>
-		<servlet-class>com.rent1.servlet.CreateOfficeServlet</servlet-class>
+		<servlet-class>com.rent1.servlet.comp.CreateOfficeServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>doRegisterOffice</servlet-name>
@@ -165,7 +192,7 @@
 
 	<servlet>
 		<servlet-name>doLogin</servlet-name>
-		<servlet-class>com.rent1.servlet.LoginServlet</servlet-class>
+		<servlet-class>com.rent1.servlet.user.LoginServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>doLogin</servlet-name>
@@ -174,7 +201,7 @@
 
 	<servlet>
 		<servlet-name>logout</servlet-name>
-		<servlet-class>com.rent1.servlet.LogoutServlet</servlet-class>
+		<servlet-class>com.rent1.servlet.user.LogoutServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>logout</servlet-name>
@@ -201,7 +228,7 @@
 
 	<servlet>
 		<servlet-name>popupCompanyReg</servlet-name>
-		<servlet-class>com.rent1.servlet.PreCompanyRegServlet</servlet-class>
+		<servlet-class>com.rent1.servlet.comp.PreCompanyRegServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>popupCompanyReg</servlet-name>
@@ -210,7 +237,7 @@
 
 	<servlet>
 		<servlet-name>searchOfficeProds</servlet-name>
-		<servlet-class>com.rent1.servlet.SearchOfficeProductServlet</servlet-class>
+		<servlet-class>com.rent1.servlet.comp.SearchOfficeProductServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>searchOfficeProds</servlet-name>
@@ -219,7 +246,7 @@
 
 	<servlet>
 		<servlet-name>addOfficeProds</servlet-name>
-		<servlet-class>com.rent1.servlet.AddOfficeProductServlet</servlet-class>
+		<servlet-class>com.rent1.servlet.comp.AddOfficeProductServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>addOfficeProds</servlet-name>
@@ -228,7 +255,7 @@
 	
 	<servlet>
 		<servlet-name>companyEquip</servlet-name>
-		<servlet-class>com.rent1.servlet.ShowOfficeEquipmentServlet</servlet-class>
+		<servlet-class>com.rent1.servlet.comp.ShowOfficeEquipmentServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>companyEquip</servlet-name>
@@ -237,7 +264,7 @@
 	
 	<servlet>
 		<servlet-name>deleteEquipment</servlet-name>
-		<servlet-class>com.rent1.servlet.DeleteOfficeEquipmentServlet</servlet-class>
+		<servlet-class>com.rent1.servlet.comp.DeleteOfficeEquipmentServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>deleteEquipment</servlet-name>
@@ -246,13 +273,31 @@
 
 	<servlet>
 		<servlet-name>updateEquipment</servlet-name>
-		<servlet-class>com.rent1.servlet.UpdateOfficeProductServlet</servlet-class>
+		<servlet-class>com.rent1.servlet.comp.UpdateOfficeProductServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>updateEquipment</servlet-name>
 		<url-pattern>/company/update/product</url-pattern>
 	</servlet-mapping>
-			
+
+	<servlet>
+		<servlet-name>rentNow</servlet-name>
+		<servlet-class>com.rent1.servlet.order.StartRentalRequestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>rentNow</servlet-name>
+		<url-pattern>/rent-now</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>reviewRentalReq</servlet-name>
+		<servlet-class>com.rent1.servlet.order.ReviewRentalRequestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>reviewRentalReq</servlet-name>
+		<url-pattern>/rental/review</url-pattern>
+	</servlet-mapping>
+					
 	<!-- ################# -->
 	<!-- ## Error Codes ## -->
 	<!-- ################# -->

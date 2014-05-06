@@ -1,4 +1,4 @@
-package com.rent1.servlet;
+package com.rent1.servlet.user;
 
 import java.io.IOException;
 

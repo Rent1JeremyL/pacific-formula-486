@@ -2,6 +2,9 @@ package com.rent1.dao;
 
 import static com.rent1.service.OfyService.ofy;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,8 +20,13 @@ import com.rent1.entity.User;
 public enum UserDao {
 	INSTANCE;
 	private static final Logger log = Logger.getLogger(UserDao.class);
+	private static final String DATE_FROMAT = "yyyy/MM/dd HH:mm:ss";
 
 	public User addUser(User user) {
+		DateFormat dateFormat = new SimpleDateFormat(DATE_FROMAT);
+		Date now = new Date();
+		user.setLastUpdated(dateFormat.format(now));
+
 		ofy().save().entity(user).now();
 		return user;
 	}
@@ -44,6 +52,10 @@ public enum UserDao {
 	}
 
 	public User updateUser(User user) {
+		DateFormat dateFormat = new SimpleDateFormat(DATE_FROMAT);
+		Date now = new Date();
+		user.setLastUpdated(dateFormat.format(now));
+
 		ofy().save().entity(user).now();
 		return user;
 	}

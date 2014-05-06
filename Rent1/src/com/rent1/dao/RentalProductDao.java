@@ -69,7 +69,7 @@ public enum RentalProductDao {
 
 		List<RentalProduct> prods = ofy().load().type(RentalProduct.class)
 				.filter("geoCells in", cells).list();
-		// TODO filter using plase.isIn
+		// TODO filter using place.isIn
 		this.noOfRecords = prods.size();
 
 		return prods;
@@ -114,7 +114,7 @@ public enum RentalProductDao {
 		query = query.limit(RECORDS_PER_PAGE);
 
 		List<RentalProduct> prods = query.list();
-		// TODO filter using plase.isIn
+		// TODO filter using place.isIn
 		log.debug("Search returned [" + prods.size() + "] records");
 
 		return prods;

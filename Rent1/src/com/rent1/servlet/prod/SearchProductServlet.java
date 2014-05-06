@@ -1,4 +1,4 @@
-package com.rent1.servlet;
+package com.rent1.servlet.prod;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;

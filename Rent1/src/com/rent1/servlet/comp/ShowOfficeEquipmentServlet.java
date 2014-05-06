@@ -1,4 +1,4 @@
-package com.rent1.servlet;
+package com.rent1.servlet.comp;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.rent1.servlet;
+package com.rent1.servlet.comp;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,8 +13,6 @@ import org.apache.log4j.Logger;
 
 import com.rent1.dao.DefaultProductDao;
 import com.rent1.entity.DefaultProduct;
-import com.rent1.entity.RentalProduct;
-import com.rent1.entity.User;
 
 @SuppressWarnings("serial")
 public class SearchOfficeProductServlet extends HttpServlet {

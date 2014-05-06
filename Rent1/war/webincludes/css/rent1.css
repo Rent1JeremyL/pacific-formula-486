@@ -923,3 +923,39 @@ button,input,textarea {
 .table_small th {
 	font-size: 12px;
 }
+
+.srch_padding {
+	display: inline-block;
+	*display: inline;
+	padding: 4px 12px;
+	margin-bottom: 0;
+	*margin-left: .3em;
+	font-size: 14px;
+}
+
+.groove_border {
+	border-width: 5px;
+	border-style: groove;
+	border-color: #D4D4D4;
+	color: black;
+	margin-top: 10px;
+	margin-left: 25px;
+}
+
+.attach_box {
+	font-size: 12px;
+	font-weight: normal;
+	line-height: 20px;
+	height: 100px;
+	padding: 4px 6px;
+	width: 350px;
+}
+
+.attach_box_lbl {
+	display: block;
+	padding: 5px 10px;
+	float: left;
+	font-weight: bold;
+	font-size: 110%;
+	margin-left: 10px;
+}
