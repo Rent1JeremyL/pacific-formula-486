@@ -1,7 +1,9 @@
-package com.rent1.reference;
+package com.rent1.factory;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import com.rent1.reference.Specification;
 
 public class ProductDetailFactory {
 	private static ProductDetailFactory instance = null;

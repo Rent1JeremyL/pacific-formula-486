@@ -1,8 +1,6 @@
 package com.rent1.entity;
 
 import java.io.Serializable;
-import java.util.Currency;
-import java.util.Locale;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +9,7 @@ import lombok.Setter;
 import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.rent1.reference.Currency;
 
 @Entity
 @Cache
@@ -41,14 +40,11 @@ public class PricePlan implements Serializable {
 	}
 
 	public String getCurrencySymbol() {
-		Locale l = new Locale(languageTag, regionTag);
-		String symb = Currency.getInstance(l).getSymbol();
-		return symb;
+		return Currency.getCurrencySymbol(this.regionTag);
 	}
 
 	public String getCurrencyCode() {
-		Locale l = new Locale(languageTag, regionTag);
-		return Currency.getInstance(l).getCurrencyCode();
+		return Currency.getCurrencyCode(this.regionTag);
 	}
 
 	/**

@@ -1,4 +1,4 @@
-<%@page import="com.rent1.entity.Order"%>
+<%@page import="com.rent1.entity.RentalRequest"%>
 <%@page import="com.rent1.entity.RentalProduct"%>
 <%@page contentType="text/html;charset=UTF-8" language="java"%>
 <head>
@@ -28,17 +28,15 @@
 	<%@include file='/WEB-INF/jsp/header.jsp'%>
 	<div class="content" style="background: #D8D8D8;">
 		<%
-			Order order = (Order) request.getAttribute("rentalOrder");
+			RentalRequest order = (RentalRequest) request.getAttribute("rentalOrder");
 		%>
 		<div class="jumbotron home bg-img"></div>
 		<div class="det_container box_outset">
 			<div>
 				<div class="section-title_h">
-					<h3 class="title_green">
-						Rental - Review Order<img alt=""
-							src="/webincludes/img/order_status2.png">
-					</h3>
+					<h3 class="title_green">Review Order</h3>
 				</div>
+				<div class="text-center pad5"><img alt="" src="/webincludes/img/order_status2.png"></div>
 				<br>
 				<div class="row control-group">
 					<form method="post" action="/rental/place-order">

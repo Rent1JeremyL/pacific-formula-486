@@ -1,11 +1,11 @@
+<%@page import="com.rent1.factory.CategoryFactory"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="com.rent1.entity.User"%>
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="com.rent1.reference.CategoryFactory"%>
 <%@ page import="com.rent1.reference.Category"%>
 <%@ page import="java.util.List"%>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
-
+<script src="/webincludes/js/bootstrap-hover-dropdown.js"></script>
 	<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<%
@@ -26,7 +26,7 @@
 				<a href="/" class="logo"><img src="/webincludes/img/logo.png"></a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="dropdown"><a data-toggle="dropdown"
+						<li class="dropdown"><a data-hover="dropdown"
 							class="dropdown-toggle" href="#">BROWSE <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<%
@@ -56,9 +56,9 @@
 						<%
 							if (user != null) {
 						%>
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle"> WELCOME <%=user.getNickName()%>!, <b
-								class="caret"></b>
+						<li class="dropdown"><a data-hover="dropdown"
+							class="dropdown-toggle"> WELCOME <%=user.getNickName()%>!, 
+							<b class="caret"></b>
 						</a>
 							<ul class="dropdown-menu">
 <%if(user.getCompanyKey() != null) { %><li><a href="/company">Company</a></li><%} %>
@@ -67,10 +67,14 @@
 								<li><a href="/profile">Profile</a></li>
 							</ul>
 						</li>
-						<ul class="nav pull-right">
-							<li><a href="/notices"><i class="icon icon-envelope">
+					<ul class="nav pull-right">
+							<li><a href="/view-cart"><i class="icon icon-shopping-cart">
+							</i> <%=user.getShoppingCart().getTotal() %></a></li>
+					</ul>
+					<ul class="nav pull-right">
+						<li><a href="/notices"><i class="icon icon-envelope">
 							</i> <%=user.getMessageCount() %></a></li>
-						</ul>
+					</ul>
 						<%
 							} else {
 						%>
@@ -81,7 +85,7 @@
 						<%
 							}
 						%>
-						<li class="dropdown"><a data-toggle="dropdown"
+						<li class="dropdown"><a data-hover="dropdown"
 							class="dropdown-toggle" href="#">HELP <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="#">Frequently Asked Questions</a></li>

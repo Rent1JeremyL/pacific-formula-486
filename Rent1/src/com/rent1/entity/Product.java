@@ -39,5 +39,4 @@ public interface Product {
 	
 	public String getWebTitle();
 	public String getWebPage();
-	
 }

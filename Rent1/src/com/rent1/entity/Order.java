@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 import com.rent1.reference.Address;
 import com.rent1.utils.EncryptUtils;
 
@@ -36,17 +37,17 @@ public class Order implements Serializable {
 	@Getter @Setter private String startDate;
 	@Getter @Setter private String endDate;
 	@Getter @Setter private int rentalDays;
-	@Getter @Setter private Long customerUserID;
-	@Getter @Setter private Long productID;
-	@Getter @Setter private String customerFullname;
+	@Index @Getter @Setter private Long customerUserID;
+	@Index @Getter @Setter private Long productID;
+	@Index @Getter @Setter private String customerFullname;
 	@Getter @Setter private String customerCompanyName = "";
 	@Getter @Setter private Address customerAddress;
 	@Getter @Setter private Address deliveryAddress;
-	@Getter @Setter private String status;
+	@Index @Getter @Setter private String status;
 	@Getter @Setter private String additions;
 	@Getter @Setter private String notes;
-	@Getter @Setter private Long companyID;
-	@Getter @Setter private Long officeID;
+	@Index @Getter @Setter private Long companyID;
+	@Index @Getter @Setter private Long officeID;
 	
 	@Getter @Setter private String created;
 	@Getter @Setter private String lastUpdated;

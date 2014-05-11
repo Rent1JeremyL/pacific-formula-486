@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="com.rent1.entity.User"%>
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="com.rent1.reference.CategoryFactory"%>
+<%@ page import="com.rent1.factory.CategoryFactory"%>
 <%@ page import="com.rent1.reference.Category"%>
 <%@ page import="java.util.List"%>
 <%@ page import="org.apache.commons.lang.StringUtils"%>

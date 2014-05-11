@@ -43,6 +43,11 @@ public class RentalProduct implements Product, Serializable {
 	@Getter @Setter private Date bookingEnds;
 	@Index @Getter private Set<String> searchStrings;
 
+	@Override
+	public String toString(){
+		return getWebTitle()+"["+getId()+"]";
+	}
+	
 	public PricePlan getPricePlan() {
 		return pricePlan.get();
 	}

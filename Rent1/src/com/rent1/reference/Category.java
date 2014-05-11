@@ -12,7 +12,7 @@ public class Category implements Comparable<Category> {
 	public static final String PC_COMPACTION = "Compaction Equipment";
 	public static final String PC_CONSTRUCTION = "Construction Equipment";
 
-	protected static final Category[] PRIMARY_CATAGORIES = {
+	public static final Category[] PRIMARY_CATAGORIES = {
 			new Category(PC_AERIAL_LIFT), new Category(PC_COMPACTION),
 			new Category(PC_CONCRETE), new Category(PC_CONSTRUCTION),
 			new Category(Category.PC_EARTHMOVING) };
@@ -25,7 +25,7 @@ public class Category implements Comparable<Category> {
 	public static final String TRACK_LOADER_MINI = "Mini Track Loader";
 	public static final String BACKHOE = "Backhoe";
 
-	protected static final Category[] SC_EARTHMOVING = {
+	public static final Category[] SC_EARTHMOVING = {
 			new Category(SKID_STEER), new Category(EXCAVATOR),
 			new Category(EXCAVATOR_MINI), new Category(TRACK_LOADER),
 			new Category(TRACK_LOADER_MINI), new Category(BACKHOE) };
@@ -36,7 +36,7 @@ public class Category implements Comparable<Category> {
 	public static final String SCISSOR_LIFT = "Scissor Lift";
 	public static final String TELEHANDLER = "Telehandler";
 
-	protected static final Category[] SC_AERIAL = { new Category(BOOM_LIFT),
+	public static final Category[] SC_AERIAL = { new Category(BOOM_LIFT),
 			new Category(PERSONNEL_LIFT), new Category(SCISSOR_LIFT),
 			new Category(TELEHANDLER) };
 
@@ -49,7 +49,7 @@ public class Category implements Comparable<Category> {
 	public static final String GRINDER = "Grinder";
 	public static final String REBAR_CUTTER = "Rebar Cutter";
 
-	protected static final Category[] SC_CONCRETE = { new Category(BREAKER),
+	public static final Category[] SC_CONCRETE = { new Category(BREAKER),
 			new Category(BRICK_CUTTER), new Category(BUSHING_TOOL),
 			new Category(CEMENT_MIXER), new Category(CORE_BIT),
 			new Category(GRINDER), new Category(REBAR_CUTTER) };
@@ -59,7 +59,7 @@ public class Category implements Comparable<Category> {
 	public static final String RAMMER = "Rammer";
 	public static final String ROLLER = "Roller";
 
-	protected static final Category[] SC_COMPACTION = {
+	public static final Category[] SC_COMPACTION = {
 			new Category(PLATE_TAMPER), new Category(RAMMER),
 			new Category(ROLLER) };
 
@@ -69,7 +69,7 @@ public class Category implements Comparable<Category> {
 	public static final String COMPRESSOR = "Compressor";
 	public static final String FAN = "Fan";
 
-	protected static final Category[] SC_CONSTRUCTION = {
+	public static final Category[] SC_CONSTRUCTION = {
 			new Category(AIR_SCRUBBER), new Category(BARRICADE),
 			new Category(COMPRESSOR), new Category(FAN) };
 

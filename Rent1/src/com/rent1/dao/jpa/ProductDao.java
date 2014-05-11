@@ -7,7 +7,7 @@ import javax.persistence.Query;
 
 import com.rent1.entity.DefaultProduct;
 import com.rent1.service.EMFService;
-
+@Deprecated
 public enum ProductDao {
 	INSTANCE;
 	private static final String LIST_PRODUCTS = "select p from Product p";

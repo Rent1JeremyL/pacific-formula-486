@@ -1,4 +1,4 @@
-<%@page import="com.rent1.reference.CategoryFactory"%>
+<%@page import="com.rent1.factory.CategoryFactory"%>
 <%@page import="com.rent1.reference.Category"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="java.util.List"%>
@@ -174,14 +174,12 @@ $(function() {
 							for (RentalProduct prd : prods) {
 								prodId++;
 						%>
-						<li class="product-<%=prodId%>"><a href="#"
-							class="thumb pull-left"><img src="<%=prd.getThumbImg()%>" /></a>
-
+						<li id="product-<%=prodId%>">
+						    <a class="thumb pull-left"><img src="<%=prd.getThumbImg()%>" /></a>
 							<div class="pull-left summary">
 								<div class="title">
 									<a href="<%=prd.getCompanyHref()%>">
-										<h4><%=prd.getMake() + " " + prd.getModelName() + " "
-						+ prd.getCategory()%></h4>
+										<h4><%=prd.getWebTitle()%></h4>
 									</a>
 								</div>
 								<div class="location"><%=prd.getCity() + ", " + prd.getState()%></div>

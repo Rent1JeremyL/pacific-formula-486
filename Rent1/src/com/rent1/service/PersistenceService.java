@@ -9,7 +9,7 @@ import javax.jdo.PersistenceManagerFactory;
  * NOT IN USE
  * 
  * @author Jeremy Leeder
- *
+ * @deprecated
  */
 public class PersistenceService {
 	//For JAVAX Persistence META-INF/persistence.xml

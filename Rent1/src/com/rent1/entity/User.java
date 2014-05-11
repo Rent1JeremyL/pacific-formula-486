@@ -24,6 +24,7 @@ import com.rent1.dao.CompanyDao;
 import com.rent1.dao.NoticeDao;
 import com.rent1.dao.UserDao;
 import com.rent1.reference.Address;
+import com.rent1.shop.ShoppingCart;
 import com.rent1.utils.EncryptUtils;
 
 @Entity
@@ -46,6 +47,8 @@ public class User implements Serializable {
 	@Index @Getter @Setter private Key<Company> companyKey;
 	@Ignore private List<Notice> notices;
 	@Ignore @Setter private Company company;
+	@Ignore private ShoppingCart shoppingCart;
+	@Ignore @Getter @Setter private RentalRequest rentalRequest;
 	// TODO verify user
 	@Index @Getter @Setter private boolean verified = false;
 
@@ -140,7 +143,8 @@ public class User implements Serializable {
 					&& StringUtils.isNotBlank(this.address.getCity().trim())
 					&& StringUtils.isNotBlank(this.address.getState().trim())
 					&& StringUtils.isNotBlank(this.address.getCountry().trim())
-					&& StringUtils.isNotBlank(this.address.getPostCode().trim()))
+					&& StringUtils
+							.isNotBlank(this.address.getPostCode().trim()))
 				return true;
 		} catch (NullPointerException e) {
 			log.warn("Address not complete.");
@@ -148,5 +152,17 @@ public class User implements Serializable {
 		}
 
 		return false;
+	}
+
+	public ShoppingCart getShoppingCart() {
+		if (shoppingCart == null) {
+			shoppingCart = new ShoppingCart();
+		}
+		return shoppingCart;
+	}
+
+	@Override
+	public String toString() {
+		return "Email: " + this.email + ", Nickname:" + this.getNickName();
 	}
 }

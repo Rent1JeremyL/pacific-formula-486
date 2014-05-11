@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
  * JPA NOT IN USE
  * 
  * @author Jeremy Leeder
- * 
+ * @deprecated
  */
 public class EMFService {
 	private static final EntityManagerFactory emfInstance = Persistence

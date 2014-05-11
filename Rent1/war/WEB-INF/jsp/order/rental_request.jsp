@@ -1,4 +1,3 @@
-<%@page import="com.rent1.entity.RentalProduct"%>
 <%@page contentType="text/html;charset=UTF-8" language="java"%>
 <head>
 <meta charset="utf-8">
@@ -42,149 +41,129 @@
 			var street2 = document.getElementById('rent-strt2').value;
 			var city = document.getElementById('rent-city').value;
 			var prov = document.getElementById('rent-prov').value;
+			var cntry = document.getElementById('rent-country').value;
 
 			document.getElementById('rent-del-strt1').value = street1;
 			document.getElementById('rent-del-strt2').value = street2;
 			document.getElementById('rent-del-city').value = city;
 			document.getElementById('rent-del-prov').value = prov;
+			document.getElementById('rent-del-country').value = cntry;
 		}
 	</script>
 	<%@include file='/WEB-INF/jsp/header.jsp'%>
 	<div class="content" style="background: #D8D8D8;">
-		<%
-			RentalProduct prod = (RentalProduct) request
-					.getAttribute("rentalProd");
-		%>
 		<div class="jumbotron home bg-img"></div>
 		<div class="det_container box_outset">
 			<div>
 				<div class="section-title_h">
-					<h3 class="title_green">Rental - Request<img alt="" src="/webincludes/img/order_status1.png"></h3>
+					<h3 class="title_green">Rental Request</h3>
+				</div>
+				<div class="text-center pad5">
+					<img alt="" src="/webincludes/img/order_status1.png">
 				</div>
 				<br>
 				<div class="row control-group">
 					<form method="post" action="/rental/review">
-						<div class="groove_border span11 pad5">
-							<h3 class="pad5">Rental Period</h3>
-							<div class="wrap span5">
-								<p class="prof_h1_left">Start Date:</p>
-								<input id="rentstart" name="rentstart"
-									class="placeholder-input has-text" placeholder="Start Date"
-									type="text" required>
-							</div>
-							<div class="wrap span5">
-								<p class="prof_h1_left">End Date:</p>
-								<input id="rentend" name="rentend"
-									class="placeholder-input has-text" placeholder="End Date"
-									type="text" required>
-							</div>
-						</div>
-						<aside id="rentalbox" class="groove_border span5">
-							<h3 class="pad5">Customer</h3>
-							<div>
+						<div id="rentalbox" class="groove_border span11">
+							<h3 class="pad5">Bill to:</h3>
+							<div class="wrap span7">
 								<p class="prof_h1_left">Driver's Lic. #:</p>
 								<input id="rent-dlnum" class="placeholder-input has-text"
 									name="rent-dlnum" value="" type="number" required>
 							</div>
-							<div>
-								<p class="prof_h1_left">Company Name:</p>
-								<input id="rent-comp" class="placeholder-input has-text"
-									name="rent-comp" value="" type="number">
-							</div>
-							<div>
+							<div class="wrap span5">
 								<p class="prof_h1_left">Full Name:</p>
 								<input id="rent-fname" class="placeholder-input has-text"
 									name="rent-fname"
 									value="<%=user.getFirstName() + " " + user.getLastName()%>"
-									type="number" required>
+									type="text" required>
 							</div>
-							<div>
+							<div class="wrap span5">
+								<p class="prof_h1_left">Company Name:</p>
+								<input id="rent-comp" class="placeholder-input has-text"
+									name="rent-comp" value="" type="text">
+							</div>
+							<div class="wrap span5">
 								<p class="prof_h1_left">Street 1:</p>
 								<input id="rent-strt1" class="placeholder-input has-text"
-									name="rent-strt1" value="<%=user.getAddress().getStreet1()%>" type="number"
-									required>
+									name="rent-strt1" value="<%=user.getAddress().getStreet1()%>"
+									type="text" required>
 							</div>
-							<div>
+							<div class="wrap span5">
 								<p class="prof_h1_left">Street 2:</p>
 								<input id="rent-strt2" class="placeholder-input has-text"
-									name="rent-strt2" value="<%=user.getAddress().getStreet2()%>" type="number">
+									name="rent-strt2" value="<%=user.getAddress().getStreet2()%>"
+									type="text">
 							</div>
-							<div>
+							<div class="wrap span5">
 								<p class="prof_h1_left">City:</p>
 								<input id="rent-city" class="placeholder-input has-text"
-									name="rent-city" value="<%=user.getAddress().getCity()%>" type="number"
-									required>
+									name="rent-city" value="<%=user.getAddress().getCity()%>"
+									type="text" required>
 							</div>
-							<div>
+							<div class="wrap span5">
 								<p class="prof_h1_left">State/Province:</p>
 								<input id="rent-prov" class="placeholder-input has-text"
-									name="rent-prov" value="<%=user.getAddress().getState()%>" type="number"
-									required>
+									name="rent-prov" value="<%=user.getAddress().getState()%>"
+									type="text" required>
 							</div>
-						</aside>
-						<div class="span6">
-							<div id="rentalbox" class="groove_border">
-								<h3 class="pad5">Equipment</h3>
-								<div>
-									<p class="prof_h1_left">Type:</p>
-									<input id="rent-ptype" class="placeholder-input has-text"
-										disabled="disabled" name="rent-ptype"
-										value="<%=prod.getCategory()%>" type="number" required>
-								</div>
-								<div>
-									<p class="prof_h1_left">Make:</p>
-									<input id="rent-pmake" class="placeholder-input has-text"
-										disabled="disabled" name="rent-pmake"
-										value="<%=prod.getMake()%>" type="number" required>
-								</div>
-								<div>
-									<p class="prof_h1_left">Model:</p>
-									<input id="rent-pmodel" class="placeholder-input has-text"
-										disabled="disabled" name="rent-pmodel"
-										value="<%=prod.getModelName()%>" type="number" required>
-									<input id="rent-prd-id" class="placeholder-input has-text"
-										name="rent-prd-id" value="<%=prod.getId()%>" type="hidden">
-								</div>
+							<div class="wrap span5">
+								<p class="prof_h1_left">Zip/Post Code:</p>
+								<input id="rent-zip" class="placeholder-input has-text"
+									name="rent-zip" value="<%=user.getAddress().getPostCode()%>"
+									type="text" required>
 							</div>
-							<div id="rentalbox" class="groove_border">
-								<h3 class="pad5">Delivery</h3>
-								<div>
-									<div style="margin-left: 30px;">
-										<input type="checkbox" id="confirm" name="confirm"
-											onClick="copyAddress()" value="confirm"><i> Same
-											as customer</i>
-									</div>
-									<div>
-										<p class="prof_h1_left">Street 1:</p>
-										<input id="rent-del-strt1" class="placeholder-input has-text"
-											name="rent-del-strt1" value="" type="number" required>
-									</div>
-									<div>
-										<p class="prof_h1_left">Street 2:</p>
-										<input id="rent-del-strt2" class="placeholder-input has-text"
-											name="rent-del-strt2" value="" type="number">
-									</div>
-									<div>
-										<p class="prof_h1_left">City:</p>
-										<input id="rent-del-city" class="placeholder-input has-text"
-											name="rent-del-city" value="" type="number" required>
-									</div>
-									<div>
-										<p class="prof_h1_left">State/Province:</p>
-										<input id="rent-del-prov" class="placeholder-input has-text"
-											name="rent-del-prov" value="" type="number" required>
-									</div>
+							<div class="wrap span5">
+								<p class="prof_h1_left">Country:</p>
+								<input id="rent-country" class="placeholder-input has-text"
+									name="rent-country" value="<%=user.getAddress().getCountry()%>"
+									type="text" required>
+							</div>
+						</div>
+						<div id="rentalbox" class="groove_border span11">
+							<h3 class="pad5">Deliver to:</h3>
+							<div>
+								<div style="margin-left: 30px;">
+									<input type="checkbox" id="confirm" name="confirm"
+										onClick="copyAddress()" value="confirm"><i> Same
+										as billing</i>
+								</div>
+								<div class="wrap span5">
+									<p class="prof_h1_left">Street 1:</p>
+									<input id="rent-del-strt1" class="placeholder-input has-text"
+										name="rent-del-strt1" value="" type="text" required>
+								</div>
+								<div class="wrap span5">
+									<p class="prof_h1_left">Street 2:</p>
+									<input id="rent-del-strt2" class="placeholder-input has-text"
+										name="rent-del-strt2" value="" type="text">
+								</div>
+								<div class="wrap span5">
+									<p class="prof_h1_left">City:</p>
+									<input id="rent-del-city" class="placeholder-input has-text"
+										name="rent-del-city" value="" type="text" required>
+								</div>
+								<div class="wrap span5">
+									<p class="prof_h1_left">State/Province:</p>
+									<input id="rent-del-prov" class="placeholder-input has-text"
+										name="rent-del-prov" value="" type="text" required>
+								</div>
+								<div class="wrap span5">
+									<p class="prof_h1_left">Country:</p>
+									<input id="rent-del-country" class="placeholder-input has-text"
+										name="rent-del-country" value="" type="text" required>
 								</div>
 							</div>
 						</div>
-						<div class="span11 groove_border pad10">
+						<div class="span11 groove_border">
+							<!-- 
 							<aside class="span5">
 								<label class="attach_box_lbl">Extra Attachments:</label>
 								<textarea class="attach_box" title="Attachments"
 									name="additions" cols="25" rows="10"
 									placeholder="Enter additional attachments here..."></textarea>
-							</aside>
-							<div class="span4">
+							</aside> -->
+							<div class="pad10">
 								<label class="attach_box_lbl">Notes:</label>
 								<textarea class="attach_box" title="Notes" name="notes"
 									cols="25" rows="10" placeholder="Enter notes here..."></textarea>
@@ -192,7 +171,7 @@
 						</div>
 						<div class="pad10 pull-right" style="margin-right: 70px;">
 							<button id="saveBtn" class="btn btn-primary" type="submit">
-								<i class="icon icon-pencil"></i> Submit
+								<i class="icon icon-arrow-right"></i> Next
 							</button>
 						</div>
 					</form>

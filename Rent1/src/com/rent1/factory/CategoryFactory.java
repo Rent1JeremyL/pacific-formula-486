@@ -1,10 +1,12 @@
-package com.rent1.reference;
+package com.rent1.factory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.rent1.reference.Category;
 
 import lombok.Getter;
 

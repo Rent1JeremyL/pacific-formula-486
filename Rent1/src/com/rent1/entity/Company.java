@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Cache;
@@ -29,6 +30,11 @@ public class Company {
 	@Getter @Setter private String faxNumber = "";
 	@Ignore private List<Notice> notices;
 	@Getter @Setter private Address address;
+
+	@Override
+	public String toString() {
+		return this.name + "[" + this.email + "]";
+	}
 
 	public static Company registerCompany(String name, String email,
 			String phone, User user) {

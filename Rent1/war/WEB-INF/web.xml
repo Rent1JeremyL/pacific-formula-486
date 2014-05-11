@@ -123,7 +123,15 @@
 		<url-pattern>/rental/review-order</url-pattern>
 	</servlet-mapping>
 	
-		
+	<servlet>
+		<servlet-name>showCart</servlet-name>
+		<jsp-file>/WEB-INF/jsp/order/view_cart.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showCart</servlet-name>
+		<url-pattern>/view-cart</url-pattern>
+	</servlet-mapping>
+			
 	<!-- ################ -->
 	<!-- ## Servlets ## -->
 	<!-- ################ -->
@@ -282,7 +290,7 @@
 
 	<servlet>
 		<servlet-name>rentNow</servlet-name>
-		<servlet-class>com.rent1.servlet.order.StartRentalRequestServlet</servlet-class>
+		<servlet-class>com.rent1.servlet.order.AddToCartServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>rentNow</servlet-name>
@@ -297,7 +305,16 @@
 		<servlet-name>reviewRentalReq</servlet-name>
 		<url-pattern>/rental/review</url-pattern>
 	</servlet-mapping>
-					
+
+	<servlet>
+		<servlet-name>removeItem</servlet-name>
+		<servlet-class>com.rent1.servlet.order.RemoveFromCartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>removeItem</servlet-name>
+		<url-pattern>/remove-cart</url-pattern>
+	</servlet-mapping>
+						
 	<!-- ################# -->
 	<!-- ## Error Codes ## -->
 	<!-- ################# -->

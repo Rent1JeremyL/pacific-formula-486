@@ -7,7 +7,7 @@ import javax.jdo.Query;
 
 import com.rent1.entity.DefaultProduct;
 import com.rent1.service.PersistenceService;
-
+@Deprecated
 public enum ProductDao {
 	INSTANCE;
 
