@@ -48,6 +48,7 @@ public class LoginServlet extends HttpServlet {
 		} else if (newUser.authenticatePassword(password)) {
 			// Login success
 			req.getSession().setAttribute("user", newUser);
+			//String referer = req.getHeader("Referer");
 			resp.sendRedirect("/");
 			return;
 		} else {

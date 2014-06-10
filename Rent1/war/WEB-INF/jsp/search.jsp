@@ -55,9 +55,7 @@
 		});
 	</script>
 <script>
-<%
-String secCatas = CategoryFactory.getInstance().getAllSecondayCatagoriesToJSArray();
-%>
+<%String secCatas = CategoryFactory.getInstance().getAllSecondayCategoriesToJSArray();%>
 $(function() {
 	var availableTags = [<%=secCatas%>];
 	$( "#rental" ).autocomplete({

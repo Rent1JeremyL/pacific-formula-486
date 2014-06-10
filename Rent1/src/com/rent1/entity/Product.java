@@ -39,4 +39,7 @@ public interface Product {
 	
 	public String getWebTitle();
 	public String getWebPage();
+	
+	public boolean isAttachment();
+	public Set<String> getCompatibleMakeModel();
 }

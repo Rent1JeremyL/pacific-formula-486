@@ -40,9 +40,7 @@
 <body>
 	<!-- ======== javascript create AutoComplete by Categories ======== -->
 <script>
-<%
-String secCatas = CategoryFactory.getInstance().getAllSecondayCatagoriesToJSArray();
-%>
+<%String secCatas = CategoryFactory.getInstance().getAllSecondayCategoriesToJSArray();%>
 $(function() {
 	<% String searchVal = (String)request.getAttribute("searchString");
 		if(searchVal == null)

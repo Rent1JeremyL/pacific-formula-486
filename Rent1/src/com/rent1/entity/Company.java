@@ -1,11 +1,11 @@
 package com.rent1.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Cache;
@@ -21,7 +21,9 @@ import com.rent1.reference.Address;
 @Entity
 @Cache
 @NoArgsConstructor
-public class Company {
+public class Company implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id @Getter @Setter private Long id;
 	@Getter @Setter @Index private String name;
 	@Getter @Setter @Index private String email;

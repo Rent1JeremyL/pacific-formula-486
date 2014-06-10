@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
 <head>
+<title>RENT1 - Login</title>
 <link rel="stylesheet" href="/webincludes/css/style.css">
 <link rel="stylesheet" href="/webincludes/css/font-awesome.min.css">
 <link rel="stylesheet" href="/webincludes/css/rent1.css">
@@ -12,7 +13,7 @@
 	<div id="fb-root"></div>
 	<div id="alt-content"></div>
 	<div id="main" class="jumbotron masthead home">
-		<div id="lightbox-outer" class="">
+		<div id="lightbox-outer">
 			<div id="lightbox" class="lightbox-signup" style="width: 320px;">
 				<a id="lightbox-close"
 					class="close btn btn-rounded btn-icon-only btn-dark" href="/"><i
@@ -23,12 +24,12 @@
 							<h2 class="title">Welcome back to RENT1</h2>
 						</div>
 						<form action="/login/user" method="POST">
-						<div id="lightbox-content" style="max-height: 350px;">
-							<div class="lightbox-content-block">
-								<div id="signup-stage-signup" class="signup-stage">
-									<div class="section-title">
-										<h3>Connect With</h3>
-									</div>
+							<div id="lightbox-content" style="max-height: 400px;">
+								<div class="lightbox-content-block">
+									<div id="signup-stage-signup" class="signup-stage">
+										<div class="section-title">
+											<h3>Connect With</h3>
+										</div>
 										<div id="login-third-party"
 											style="text-align: center; width: 50%; margin: 10 auto;">
 											<a id="lb-google-login"
@@ -37,9 +38,9 @@
 												class="text"> Google </span>
 											</a>
 										</div>
-									<div class="section-title">
-										<h3>or</h3>
-									</div>							
+										<div class="section-title">
+											<h3>or</h3>
+										</div>
 										<div class="control-group">
 											<div style="color: #FF0000;">${errorMessage}</div>
 											<div class="controls">
@@ -59,14 +60,14 @@
 										<p>
 											<a href="#">Reset your password</a>
 										</p>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div id="lightbox-footer">
-							<button id="sign-on"
-								class="btn btn-large btn-primary btn-fullwidth" type="submit">Sign
-								In</button>
-						</div>
+							<div id="lightbox-footer"><span class="pull-left">No Account? <a href="/register">Create Account </a></span>
+								<button id="sign-on"
+									class="btn btn-large btn-primary" style="float: right;" type="submit">Sign
+									In</button>
+							</div>
 						</form>
 					</div>
 				</div>

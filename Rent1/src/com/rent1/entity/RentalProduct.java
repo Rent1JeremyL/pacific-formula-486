@@ -18,13 +18,14 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Load;
+import com.rent1.reference.Category;
 import com.rent1.reference.Specification;
 import com.rent1.utils.GeoUtils;
 
 @Entity
 @NoArgsConstructor
 @Cache
-public class RentalProduct implements Product, Serializable {
+public class RentalProduct implements Product, Serializable, Comparable<RentalProduct> {
 	private static final long serialVersionUID = 1L;
 
 	@Id @Getter @Setter private Long id;
@@ -38,14 +39,21 @@ public class RentalProduct implements Product, Serializable {
 	@Index @Getter @Setter private Key<Office> office;
 	@Index @Getter @Setter private Key<Company> company;
 	@Load private Ref<PricePlan> pricePlan;
-	@Getter @Setter private String attachments = "";
 	@Index @Getter @Setter private boolean available = true;
 	@Getter @Setter private Date bookingEnds;
 	@Index @Getter private Set<String> searchStrings;
-
+	
+	@Index @Getter private boolean attachment = false;
+	@Index @Getter Set<String> compatibleMakeModel;
+	
 	@Override
 	public String toString(){
 		return getWebTitle()+"["+getId()+"]";
+	}
+
+	@Override
+	public int compareTo(RentalProduct other) {
+		return this.getWebTitle().compareTo(other.getWebTitle());
 	}
 	
 	public PricePlan getPricePlan() {
@@ -65,6 +73,8 @@ public class RentalProduct implements Product, Serializable {
 		this.product = Ref.create(prod);
 		this.category = prod.getCategory();
 		this.searchStrings = prod.getSearchStrings();
+		this.attachment = prod.isAttachment();
+		this.compatibleMakeModel = prod.getCompatibleMakeModel();
 	}
 
 	public RentalProduct(Product prod) {

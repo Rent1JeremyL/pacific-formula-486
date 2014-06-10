@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import org.apache.log4j.Logger;
 
+import com.google.common.collect.Sets;
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
@@ -21,7 +22,8 @@ import com.rent1.utils.StringUtils2;
 @Entity
 @Cache
 @NoArgsConstructor
-public class DefaultProduct implements Product, Serializable, Comparable<DefaultProduct> {
+public class DefaultProduct implements Product, Serializable,
+		Comparable<DefaultProduct> {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(DefaultProduct.class);
 
@@ -33,10 +35,12 @@ public class DefaultProduct implements Product, Serializable, Comparable<Default
 	@Index @Getter @Setter private String modelName = "";
 	@Getter @Setter private String productImg = "";
 	@Getter @Setter private String thumbImg = "";
-	//private String companyHref = "";
+	// private String companyHref = "";
 	@Getter @Setter private Specification specs;
 	@Load private Ref<ProductDetail> productDetail;
 	@Index @Getter private Set<String> searchStrings;
+	@Index @Getter @Setter private boolean attachment = false;
+	@Index @Getter Set<String> compatibleMakeModel;
 
 	public ProductDetail getProductDetail() {
 		return productDetail.get();
@@ -68,16 +72,17 @@ public class DefaultProduct implements Product, Serializable, Comparable<Default
 			searchStrings = StringUtils2.tokenize(desc);
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			log.error("Failed to create searchable product. Id["+getId()+"]");
+			log.error("Failed to create searchable product. Id[" + getId()
+					+ "]");
 		}
 		searchStrings = StringUtils2.breakdownFragments(searchStrings);
 	}
-	
+
 	public String getCompanyHref() {
 		String page = getWebPage();
 		return "/preview/" + id + "/" + page;
 	}
-	
+
 	public String getWebTitle() {
 		return getMake() + " " + getModelName() + " " + getCategory();
 	}
@@ -86,5 +91,27 @@ public class DefaultProduct implements Product, Serializable, Comparable<Default
 		String page = getMake() + "-" + getModelName();
 		page = page.replace(" ", "-");
 		return page;
+	}
+
+	public void addCompatibleMakeModel(String make, String[] models) {
+		// Only for Attachments
+		if (!this.attachment)
+			return;
+
+		if (this.compatibleMakeModel == null)
+			this.compatibleMakeModel = Sets.newHashSet();
+
+		String lwrMake = make.toLowerCase();
+		// Add only once
+		if (!this.compatibleMakeModel.contains(lwrMake))
+			this.compatibleMakeModel.add(lwrMake);
+
+		// Add only once
+		for (int x = 0; x < models.length; x++) {
+			if (!this.compatibleMakeModel.contains(lwrMake + " "
+					+ models[x].toLowerCase()))
+				this.compatibleMakeModel.add(lwrMake + " "
+						+ models[x].toLowerCase());
+		}
 	}
 }

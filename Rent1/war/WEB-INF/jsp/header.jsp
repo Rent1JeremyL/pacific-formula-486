@@ -10,7 +10,7 @@
 		<div class="navbar-inner">
 			<%
 				CategoryFactory cf = CategoryFactory.getInstance();
-				ArrayList<Category> catagories = cf.getPrimaryCatagories();
+				ArrayList<Category> catagories = cf.getPrimaryCategories();
 				User user = null;
 				user = User.getUserSession(request);
 				if (user != null) {
@@ -63,7 +63,7 @@
 							<ul class="dropdown-menu">
 <%if(user.getCompanyKey() != null) { %><li><a href="/company">Company</a></li><%} %>
 								<li><a href="/">Home</a></li>
-								<li><a href="#">Orders</a></li>
+								<li><a href="#">My Orders</a></li>
 								<li><a href="/profile">Profile</a></li>
 							</ul>
 						</li>

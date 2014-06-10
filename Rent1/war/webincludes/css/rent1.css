@@ -862,6 +862,36 @@ button,input,textarea {
 	background-color: #FFFFFF;
 }
 
+.ord_table {
+	font-size: 14px;
+	border: solid #D4D4D4;
+	border-left: 1px;
+	border-right: 1px;
+	cellpadding: 0px;
+	width: 100%;
+}
+
+.ord_table th {
+	text-align: left;
+	background-color: #F2F2F2;
+}
+
+.ord_table td {
+	background-color: #FFFFFF;
+	border: solid #D4D4D4;
+	border-left: 1px;
+	border-right: 1px;
+}
+
+.ord_table td,th {
+	padding: 4px 8px;
+	vertical-align: middle;
+}
+
+.ord_table tr.subt td {
+	background-color: #F2F2F2;
+}
+
 .delivery {
 	color: #FFFFFF;
 	text-align: left;
@@ -958,4 +988,19 @@ button,input,textarea {
 	font-weight: bold;
 	font-size: 110%;
 	margin-left: 10px;
+}
+
+.image-btn {
+	position: relative;
+	width: 100%; /* for IE 6 */
+}
+
+.image-btn h2 {
+	position: absolute;
+	top: 18px;
+	left: 48px;
+	width: 100%;
+	color: blue;
+	font: bold 15px/30px Helvetica, Sans-Serif;
+	cursor: pointer;
 }

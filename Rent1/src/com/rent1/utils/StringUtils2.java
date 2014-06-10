@@ -3,6 +3,7 @@ package com.rent1.utils;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -174,5 +175,10 @@ public class StringUtils2 {
 	 */
 	public static String makeFilterTail(String input) {
 		return input + "\ufffd";
+	}
+
+	public static String priceToString(Double price) {
+		DecimalFormat formatter = new DecimalFormat("###,###,###.00");
+		return formatter.format(price);
 	}
 }

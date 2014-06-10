@@ -29,12 +29,19 @@ public class SearchProductServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		int page = 1;
+		// For search type 1,2,3
 		String searchString = "";
 		String geoLoc = "";
 		String start = "";
 		String end = "";
 		String dist = null;
+		// For search type 3
+		Long prodID = Long.valueOf("0");
+		boolean attachment = false;
 
+		/*
+		 * Setup the base search criteria
+		 */
 		if (req.getParameter("page") != null) {
 			page = Integer.parseInt(req.getParameter("page"));
 			// Set for Form
@@ -44,6 +51,16 @@ public class SearchProductServlet extends HttpServlet {
 			start = (String) req.getSession().getAttribute("searchStart");
 			end = (String) req.getSession().getAttribute("searchEnd");
 			dist = (String) req.getSession().getAttribute("searchDist");
+		} else if (req.getParameter("location") == null) {
+			// Search from attachments
+			searchString = (String) req.getSession().getAttribute(
+					"searchString");
+			geoLoc = (String) req.getSession().getAttribute("searchLoc");
+			start = (String) req.getSession().getAttribute("searchStart");
+			end = (String) req.getSession().getAttribute("searchEnd");
+			dist = (String) req.getSession().getAttribute("searchDist");
+			prodID = Long.valueOf(req.getParameter("productId"));
+			attachment = Boolean.parseBoolean(req.getParameter("attachment"));
 		} else {
 			searchString = req.getParameter("rental");
 			geoLoc = req.getParameter("location");
@@ -51,6 +68,7 @@ public class SearchProductServlet extends HttpServlet {
 			end = req.getParameter("rentend");
 			dist = req.getParameter("rentdistance");
 		}
+
 		int offset = (page - 1) * RentalProductDao.RECORDS_PER_PAGE;
 		double radius = 0;
 		if (dist == null) {
@@ -97,13 +115,19 @@ public class SearchProductServlet extends HttpServlet {
 		}
 
 		List<RentalProduct> prods = null;
-		if (radius != 0) {
+		if (radius != 0 && !attachment) {
 			prods = RentalProductDao.INSTANCE
 					.getProductsBySearchStringAndGeoCells(searchString, place,
 							radius, offset);
-		} else {
+		} else if (!attachment) {
 			prods = RentalProductDao.INSTANCE.getProductsBySearchString(
 					searchString, offset);
+		} else if (radius != 0 && attachment) {
+			prods = RentalProductDao.INSTANCE.getAttachmentsForProduct(prodID,
+					place, radius, offset);
+		} else if (attachment) {
+			prods = RentalProductDao.INSTANCE.getAttachmentsForProduct(prodID,
+					offset);
 		}
 
 		int noOfRecords = RentalProductDao.INSTANCE.getNoOfRecords();

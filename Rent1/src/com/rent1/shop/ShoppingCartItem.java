@@ -11,6 +11,7 @@ import lombok.Setter;
 import org.apache.log4j.Logger;
 
 import com.rent1.entity.RentalProduct;
+import com.rent1.utils.OrderUtils;
 
 @NoArgsConstructor
 public class ShoppingCartItem implements Serializable {
@@ -25,6 +26,8 @@ public class ShoppingCartItem implements Serializable {
 	@Getter @Setter private String rate;
 	@Getter @Setter private String url;
 	@Getter @Setter private String thumbImg;
+	@Getter @Setter private boolean attachment;
+	@Getter @Setter private double rentalEstimate;
 
 	public ShoppingCartItem(RentalProduct prod, String start, String end) {
 		this.productID = prod.getId();
@@ -47,6 +50,8 @@ public class ShoppingCartItem implements Serializable {
 				+ rateArray[0];
 		this.url = prod.getCompanyHref();
 		this.thumbImg = prod.getThumbImg();
+		this.attachment = prod.isAttachment();
+		this.rentalEstimate = OrderUtils.calculateRentalEstimate(prod, rentalDays);
 	}
 
 	@Override

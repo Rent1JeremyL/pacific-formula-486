@@ -50,9 +50,7 @@
 <%@include file='/WEB-INF/jsp/header.jsp' %>
 <!-- ======== javascript create AutoComplete by Categories ======== -->
 <script>
-<%
-String secCatas = CategoryFactory.getInstance().getAllSecondayCatagoriesToJSArray();
-%>
+<%String secCatas = CategoryFactory.getInstance().getAllSecondayCategoriesToJSArray();%>
 $(function() {
 	var availableTags = [<%=secCatas%>];
 	$( "#rental" ).autocomplete({

@@ -69,7 +69,7 @@
 							<div class="wrap span7">
 								<p class="prof_h1_left">Driver's Lic. #:</p>
 								<input id="rent-dlnum" class="placeholder-input has-text"
-									name="rent-dlnum" value="" type="number" required>
+									name="rent-dlnum" value="" type="text" required>
 							</div>
 							<div class="wrap span5">
 								<p class="prof_h1_left">Full Name:</p>

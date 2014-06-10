@@ -136,18 +136,7 @@
 									</ul>
 									<div class="control-group tabcontents">
 										<div id=tabDesc>
-											<p>Need to rent a Skid Steer for a commercial or
-												residential project that can carry more weight than a John
-												Deere 318D skidsteer? If tight spaces are not an issue, then
-												the increased power and load capacity of a John Deere 320D
-												Skid Steer Rental might be the way to go.</p>
-											<p>
-												<b>Powerful:</b> The 320D Skid Steer's Turbocharged 2.4L
-												diesel engine delivers 69 HP (vs. 61 for the John Deere 318D
-												Skid Steer Rental), and allows you to carry loads of up to
-												2000 lbs (vs. 1850 lbs. for the 318D). (And the 320D's
-												Tipping Load is 4000 lbs. vs. 3,800 lbs. for the 318D.)
-											</p>
+											<%=prod.getProductDetail().getDescription() %>
 										</div>
 										<div id=tabSpec>
 											<h3 class="title_green">Dimensions</h3>
@@ -198,6 +187,12 @@
 										</div>
 									</div>
 								</div>
+							</div>
+							<div class="pad10 pull-right">
+								<button id="backBtn" class="btn btn-primary"
+									onClick="history.go(-1);return true;">
+									<i class="icon icon-arrow-left"></i> Back
+								</button>
 							</div>
 						</div>
 					</div>

@@ -49,7 +49,7 @@
 	</script>
 	<script>
 		
-	<%String secCatas = CategoryFactory.getInstance().getAllSecondayCatagoriesToJSArray();%>
+	<%String secCatas = CategoryFactory.getInstance().getAllSecondayCategoriesToJSArray();%>
 		$(function() {
 			var availableTags = [
 	<%=secCatas%>
@@ -154,7 +154,13 @@
 								</div>
 							</div>
 							<div class="pull-right info">
-								<div class="price">
+							<% if(!item.isAttachment()){ %>
+								<div class="price pad5">
+								<a class="btn btn-primary" href="/search?attachment=true&productId=<%=item.getProductID() %>">
+										Add Attachment(s)</a>
+								</div>
+							<%} %>
+								<div class="price pad5 pull-right">
 									<a class="btn btn-small" href="/remove-cart?item=<%=prodId%>">
 										Remove</a>
 								</div>

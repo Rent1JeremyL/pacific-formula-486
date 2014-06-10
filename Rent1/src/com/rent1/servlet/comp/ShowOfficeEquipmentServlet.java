@@ -2,6 +2,7 @@ package com.rent1.servlet.comp;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +44,7 @@ public class ShowOfficeEquipmentServlet extends HttpServlet {
 					if (rp != null)
 						rps.add(rp);
 				}
+				Collections.sort(rps);
 				offices.put(off, rps);
 			}
 

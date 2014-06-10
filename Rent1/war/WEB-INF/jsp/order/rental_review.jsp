@@ -1,3 +1,6 @@
+<%@page import="com.rent1.utils.StringUtils2"%>
+<%@page import="java.util.Vector"%>
+<%@page import="com.rent1.shop.ShoppingCartItem"%>
 <%@page import="com.rent1.entity.RentalRequest"%>
 <%@page import="com.rent1.entity.RentalProduct"%>
 <%@page contentType="text/html;charset=UTF-8" language="java"%>
@@ -28,7 +31,7 @@
 	<%@include file='/WEB-INF/jsp/header.jsp'%>
 	<div class="content" style="background: #D8D8D8;">
 		<%
-			RentalRequest order = (RentalRequest) request.getAttribute("rentalOrder");
+			RentalRequest order = (RentalRequest) user.getRentalRequest();
 		%>
 		<div class="jumbotron home bg-img"></div>
 		<div class="det_container box_outset">
@@ -36,23 +39,98 @@
 				<div class="section-title_h">
 					<h3 class="title_green">Review Order</h3>
 				</div>
-				<div class="text-center pad5"><img alt="" src="/webincludes/img/order_status2.png"></div>
+				<div class="text-center pad5">
+					<img alt="" src="/webincludes/img/order_status2.png">
+				</div>
 				<br>
 				<div class="row control-group">
 					<form method="post" action="/rental/place-order">
 						<div class="groove_border span11 pad5">
-							<h3 class="pad5">Rental Period</h3>
 							<div class="wrap span5">
-								<p class="prof_h1_left">Start Date:</p>
-								<input id="rentstart" name="rentstart"
-									class="placeholder-input has-text" placeholder="Start Date"
-									type="text" required>
+								<div class="span5">
+									<p class="prof_h1_left">Delivery Address</p>
+								</div>
+								<div style="margin-left: 40px;">
+									<%=order.getCustomerFullname()%><br>
+									<%=order.getDeliveryAddress().getStreet1()%><br>
+									<%
+										if (StringUtils.isNotBlank(order.getDeliveryAddress().getStreet2())) {
+									%>
+									<%=order.getDeliveryAddress().getStreet2()%><br>
+									<%
+										}
+									%>
+									<%=order.getDeliveryAddress().getCity()%><br>
+									<%=order.getDeliveryAddress().getState()%>,
+									<%=order.getDeliveryAddress().getCountry()%><br>
+									<%=order.getDeliveryAddress().getPostCode()%><br>
+								</div>
 							</div>
-							<div class="wrap span5">
-								<p class="prof_h1_left">End Date:</p>
-								<input id="rentend" name="rentend"
-									class="placeholder-input has-text" placeholder="End Date"
-									type="text" required>
+							<aside class="wrap span5">
+								<div class="span5">
+									<p class="prof_h1_left">Billing Address</p>
+								</div>
+								<div style="margin-left: 40px;">
+									<%=order.getCustomerCompanyName()%><br>
+									<%=order.getCustomerFullname()%><br>
+									<%=order.getCustomerAddress().getStreet1()%><br>
+									<%
+										if (StringUtils.isNotBlank(order.getCustomerAddress().getStreet2())) {
+									%>
+									<%=order.getCustomerAddress().getStreet2()%><br>
+									<%
+										}
+									%>
+									<%=order.getCustomerAddress().getCity()%><br>
+									<%=order.getCustomerAddress().getState()%>,
+									<%=order.getDeliveryAddress().getCountry()%><br>
+									<%=order.getCustomerAddress().getPostCode()%><br>
+								</div>
+							</aside>
+						</div>
+						<div class="groove_border span11 pad5">
+							<h4 class="pad5">Order Summary</h4>
+							<p>* The following is only intended as an estimate and is not a final invoice.</p>
+							<div class="wrap span10">
+								<table class="ord_table">
+									<tbody>
+										<tr>
+											<th>Description</th>
+											<th>Rental Dates</th>
+											<th>Est. Price</th>
+										</tr>
+										<%
+											int prodId = 0;
+											List<ShoppingCartItem> items = order.getItems();
+											for (ShoppingCartItem item : items) {
+												prodId++;
+										%>
+										<tr id="item-<%=prodId%>">
+											<td class="span4"><%=item.getName()%></td>
+											<td class="span3"><%=item.getStartDate() + " to " + item.getEndDate()%><br> <%="Period (days): " + item.getRentalDays()%></td>
+											<td class="span2"><%=StringUtils2.priceToString(item.getRentalEstimate())%></td>
+										</tr>
+										<%
+											}
+										%>
+										<tr class="subt">
+											<td></td>
+											<td><strong>SubTotal</strong></td>
+											<td><%=StringUtils2.priceToString(order.getSubTotalEstimate())%></td>
+										<tr>
+										<tr class="subt">
+											<td></td>
+											<td></td>
+											<td>+ Delivery Charge(s)</td>
+										<tr>
+										<tr class="subt">
+											<td></td>
+											<td></td>
+											<td>+ Applicable Taxes</td>
+										</tr>
+									<tbody>
+								</table>
+								<p class="pad10"><strong>Notes:</strong> <%=order.getNotes() %></p>
 							</div>
 						</div>
 						<div>
@@ -62,10 +140,10 @@
 								</button>
 							</div>
 							<div class="pad10 pull-right">
-								<button id="backBtn" class="btn btn-primary"
-									onClick="history.go(-1);return true;">
-									<i class="icon icon-arrow-left"></i> Back
-								</button>
+								<a id="backBtn" class="btn btn-primary"
+									href="/view-cart">
+									<i class="icon icon-shopping-cart"></i> Back to Cart
+								</a>
 							</div>
 						</div>
 					</form>

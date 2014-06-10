@@ -11,11 +11,12 @@ public class Category implements Comparable<Category> {
 	public static final String PC_CONCRETE = "Concrete Equipment";
 	public static final String PC_COMPACTION = "Compaction Equipment";
 	public static final String PC_CONSTRUCTION = "Construction Equipment";
+	public static final String PC_ATTACHMENTS = "Attachments";
 
 	public static final Category[] PRIMARY_CATAGORIES = {
 			new Category(PC_AERIAL_LIFT), new Category(PC_COMPACTION),
 			new Category(PC_CONCRETE), new Category(PC_CONSTRUCTION),
-			new Category(Category.PC_EARTHMOVING) };
+			new Category(Category.PC_EARTHMOVING), new Category(PC_ATTACHMENTS) };
 
 	// Secondary Categories for EARTHMOVING
 	public static final String SKID_STEER = "Skid Steer";
@@ -25,10 +26,10 @@ public class Category implements Comparable<Category> {
 	public static final String TRACK_LOADER_MINI = "Mini Track Loader";
 	public static final String BACKHOE = "Backhoe";
 
-	public static final Category[] SC_EARTHMOVING = {
-			new Category(SKID_STEER), new Category(EXCAVATOR),
-			new Category(EXCAVATOR_MINI), new Category(TRACK_LOADER),
-			new Category(TRACK_LOADER_MINI), new Category(BACKHOE) };
+	public static final Category[] SC_EARTHMOVING = { new Category(SKID_STEER),
+			new Category(EXCAVATOR), new Category(EXCAVATOR_MINI),
+			new Category(TRACK_LOADER), new Category(TRACK_LOADER_MINI),
+			new Category(BACKHOE) };
 
 	// Secondary Categories for AERIAL
 	public static final String BOOM_LIFT = "Boom Lift";
@@ -73,9 +74,12 @@ public class Category implements Comparable<Category> {
 			new Category(AIR_SCRUBBER), new Category(BARRICADE),
 			new Category(COMPRESSOR), new Category(FAN) };
 
-	@Getter
-	@Setter
-	private String name;
+	// Attachments
+	public static final String AUGER = "Auger";
+
+	public static final Category[] SC_ATTACHMENTS = { new Category(AUGER) };
+
+	@Getter @Setter private String name;
 
 	public Category(String category) {
 		this.name = category;

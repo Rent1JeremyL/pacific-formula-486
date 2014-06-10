@@ -1,11 +1,14 @@
 package com.rent1.shop;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import lombok.Getter;
 import lombok.Setter;
 
-public class ShoppingCart {
+public class ShoppingCart implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	@Getter @Setter protected Vector<ShoppingCartItem> items;
 	@Getter @Setter protected int total;
 

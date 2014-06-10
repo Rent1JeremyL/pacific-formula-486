@@ -7,6 +7,7 @@
 
 <link rel="stylesheet" href="/webincludes/css/production-uri.css">
 <link rel="stylesheet" href="/webincludes/css/lightboxes-uri.css">
+<title>RENT1 - Register</title>
 </head>
 <body>
 	<div id="fb-root"></div>
@@ -73,7 +74,7 @@
 							</div>
 							<div id="lightbox-footer">
 								<button id="createAcct"
-									class="btn btn-large btn-primary btn-fullwidth" type="submit">Create
+									class="btn btn-large btn-primary btn-full" style="width: 92%;" type="submit">Create
 									Account</button>
 							</div>
 						</form>

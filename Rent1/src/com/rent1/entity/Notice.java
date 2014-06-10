@@ -41,6 +41,16 @@ public class Notice implements Serializable {
 		return note;
 	}
 
+	public static Notice newOrderNotice(Long requestId, User user) {
+		Notice note = new Notice();
+		note.setUserKey(user.getKey());
+		note.setUser(user);
+		note.setMessage("Your <a href='/rental/order-request?id=" + requestId
+				+ "'>Rental Request " + requestId
+				+ "</a> has been submitted for processing.");
+		return note;
+	}
+
 	public User getUser() {
 		if (this.user == null) {
 			this.user = UserDao.INSTANCE.getUserByKey(userKey);

@@ -131,7 +131,16 @@
 		<servlet-name>showCart</servlet-name>
 		<url-pattern>/view-cart</url-pattern>
 	</servlet-mapping>
-			
+
+	<servlet>
+		<servlet-name>orderPlaced</servlet-name>
+		<jsp-file>/WEB-INF/jsp/order/order_submitted.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>orderPlaced</servlet-name>
+		<url-pattern>/rental/order-placed</url-pattern>
+	</servlet-mapping>
+				
 	<!-- ################ -->
 	<!-- ## Servlets ## -->
 	<!-- ################ -->
@@ -314,7 +323,16 @@
 		<servlet-name>removeItem</servlet-name>
 		<url-pattern>/remove-cart</url-pattern>
 	</servlet-mapping>
-						
+
+	<servlet>
+		<servlet-name>placeOrder</servlet-name>
+		<servlet-class>com.rent1.servlet.order.PlaceOrderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>placeOrder</servlet-name>
+		<url-pattern>/rental/place-order</url-pattern>
+	</servlet-mapping>
+							
 	<!-- ################# -->
 	<!-- ## Error Codes ## -->
 	<!-- ################# -->

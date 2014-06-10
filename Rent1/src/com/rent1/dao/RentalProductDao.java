@@ -64,11 +64,11 @@ public enum RentalProductDao {
 	}
 
 	public List<RentalProduct> getProductsByGeoCells(Place place, double radius) {
-		BoundingBox bb = GeoUtils.generateBoundingBox(place, radius);
-		List<String> cells = GeocellManager.bestBboxSearchCells(bb, null);
 
-		List<RentalProduct> prods = ofy().load().type(RentalProduct.class)
-				.filter("geoCells in", cells).list();
+		Query<RentalProduct> query = ofy().load().type(RentalProduct.class);
+		query = addGeoCellsToQuery(query, place, radius);
+
+		List<RentalProduct> prods = query.list();
 		// TODO filter using place.isIn
 		this.noOfRecords = prods.size();
 
@@ -87,26 +87,11 @@ public enum RentalProductDao {
 	 */
 	public List<RentalProduct> getProductsBySearchStringAndGeoCells(
 			String search, Place place, double radius, int offset) {
-		Set<String> words;
-		try {
-			words = StringUtils2.tokenize(search);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-			log.error("Failed to tokenize search string. [ " + search + " ]");
-			log.fatal("Search will return null");
-			return null;
-		}
-
 		Query<RentalProduct> query = ofy().load().type(RentalProduct.class);
 
-		for (String word : words) {
-			query = query.filter("searchStrings", word);
-		}
+		query = addSearchStringToQuery(query, search);
+		query = addGeoCellsToQuery(query, place, radius);
 
-		BoundingBox bb = GeoUtils.generateBoundingBox(place, radius);
-		List<String> cells = GeocellManager.bestBboxSearchCells(bb, null);
-
-		query = query.filter("geoCells in", cells);
 		Query<RentalProduct> counter = query;
 		this.noOfRecords = counter.count();
 
@@ -120,9 +105,17 @@ public enum RentalProductDao {
 		return prods;
 	}
 
+	private Query<RentalProduct> addGeoCellsToQuery(Query<RentalProduct> query,
+			Place place, double radius) {
+		BoundingBox bb = GeoUtils.generateBoundingBox(place, radius);
+		List<String> cells = GeocellManager.bestBboxSearchCells(bb, null);
+
+		query = query.filter("geoCells in", cells);
+		return query;
+	}
+
 	public List<RentalProduct> getProductsBySearchStringAndGeoCells(
 			String search, Place place, double radius) {
-
 		return getProductsBySearchStringAndGeoCells(search, place, radius, 0);
 	}
 
@@ -133,8 +126,8 @@ public enum RentalProductDao {
 		return p;
 	}
 
-	public List<RentalProduct> getProductsBySearchString(String search,
-			int offset) {
+	private Query<RentalProduct> addSearchStringToQuery(
+			Query<RentalProduct> query, String search) {
 		Set<String> words;
 		try {
 			words = StringUtils2.tokenize(search);
@@ -144,12 +137,23 @@ public enum RentalProductDao {
 			log.fatal("Search will return null");
 			return null;
 		}
-
-		Query<RentalProduct> query = ofy().load().type(RentalProduct.class);
-
 		for (String word : words) {
 			query = query.filter("searchStrings", word);
 		}
+		return query;
+	}
+
+	private Query<RentalProduct> addMakeModelToQuery(
+			Query<RentalProduct> query, String search) {
+		query = query.filter("compatibleMakeModel", search.toLowerCase());
+		return query;
+	}
+
+	public List<RentalProduct> getProductsBySearchString(String search,
+			int offset) {
+		Query<RentalProduct> query = ofy().load().type(RentalProduct.class);
+
+		query = addSearchStringToQuery(query, search);
 
 		Query<RentalProduct> counter = query;
 		this.noOfRecords = counter.count();
@@ -182,5 +186,49 @@ public enum RentalProductDao {
 	public void deleteProductById(Long prodId) {
 		RentalProduct prod = getProductById(prodId);
 		ofy().delete().entity(prod).now();
+	}
+
+	public List<RentalProduct> getAttachmentsForProduct(Long prodID,
+			Place place, double radius, int offset) {
+		RentalProduct prod = this.getProductById(prodID);
+		String makeModel = prod.getMake() + " " + prod.getModelName();
+
+		Query<RentalProduct> query = ofy().load().type(RentalProduct.class);
+		query = addGeoCellsToQuery(query, place, radius);
+		query = query.filter("attachment", true);
+		query = addMakeModelToQuery(query, makeModel);
+
+		Query<RentalProduct> counter = query;
+		this.noOfRecords = counter.count();
+
+		query = query.offset(offset);
+		query = query.limit(RECORDS_PER_PAGE);
+
+		List<RentalProduct> prods = query.list();
+		log.debug("Search returned [" + prods.size()
+				+ "] records from a total of " + noOfRecords);
+
+		return prods;
+	}
+
+	public List<RentalProduct> getAttachmentsForProduct(Long prodID, int offset) {
+		RentalProduct prod = this.getProductById(prodID);
+		String makeModel = prod.getMake() + " " + prod.getModelName();
+
+		Query<RentalProduct> query = ofy().load().type(RentalProduct.class);
+		query = query.filter("attachment", true);
+		query = addMakeModelToQuery(query, makeModel);
+
+		Query<RentalProduct> counter = query;
+		this.noOfRecords = counter.count();
+
+		query = query.offset(offset);
+		query = query.limit(RECORDS_PER_PAGE);
+
+		List<RentalProduct> prods = query.list();
+		log.debug("Search returned [" + prods.size()
+				+ "] records from a total of " + noOfRecords);
+
+		return prods;
 	}
 }

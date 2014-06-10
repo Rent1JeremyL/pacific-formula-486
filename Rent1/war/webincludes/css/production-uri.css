@@ -2731,7 +2731,7 @@ body {
 
 a {
 	cursor: pointer;
-	color: #f77f00;
+	color: #15AF95;
 	text-decoration: none
 }
 
@@ -2740,7 +2740,7 @@ button {
 }
 
 a:hover {
-	color: #f77f00;
+	color: #15AF95;
 	text-decoration: underline
 }
 

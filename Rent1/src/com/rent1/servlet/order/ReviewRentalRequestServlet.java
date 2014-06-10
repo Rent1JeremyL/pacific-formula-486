@@ -38,6 +38,12 @@ public class ReviewRentalRequestServlet extends HttpServlet {
 
 		rentalRequest.setCustomerFullname(req.getParameter("rent-fname"));
 		rentalRequest.setCustomerCompanyName(req.getParameter("rent-comp"));
+		try {
+			rentalRequest.setDriversLicense(req.getParameter("rent-dlnum"));
+		} catch (Exception e) {
+			log.error("Unable to encrypt driver's license while creating Order ojbect.");
+			log.error(e.getMessage());
+		}
 		rentalRequest.setNotes(req.getParameter("notes"));
 
 		Address custAddr = new Address();

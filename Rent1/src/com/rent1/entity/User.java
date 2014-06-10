@@ -161,6 +161,10 @@ public class User implements Serializable {
 		return shoppingCart;
 	}
 
+	public void clearShoppingCart(){
+		shoppingCart = new ShoppingCart();
+	}
+	
 	@Override
 	public String toString() {
 		return "Email: " + this.email + ", Nickname:" + this.getNickName();
